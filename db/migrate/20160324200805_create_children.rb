@@ -1,14 +1,14 @@
 class CreateChildren < ActiveRecord::Migration
   def change
     create_table :children do |t|
-      t.integer :parentid
+      t.integer :parent_id
       t.string :firstname
       t.string :lastname
       t.string :gender
       t.integer :age
       t.string :school
       t.string :grade
-      t.string :timeslot
+      t.string :time_slot
       t.string :competitions, array: true, default: []
       t.text :description
       t.boolean :visible

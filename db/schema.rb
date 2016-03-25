@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324223248) do
+ActiveRecord::Schema.define(version: 20160325011612) do
 
   create_table "children", force: :cascade do |t|
-    t.integer  "parentid"
+    t.integer  "parent_id"
     t.string   "firstname"
     t.string   "lastname"
     t.string   "gender"
     t.integer  "age"
     t.string   "school"
     t.string   "grade"
-    t.string   "timeslot"
+    t.string   "time_slot"
     t.string   "competitions", default: "--- []\n"
     t.text     "description"
     t.boolean  "visible"
@@ -31,9 +31,10 @@ ActiveRecord::Schema.define(version: 20160324223248) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "title"
-    t.integer  "adminId"
-    t.integer  "mentorId"
-    t.integer  "childrenId"
+    t.integer  "admin_id"
+    t.integer  "mentor_id"
+    t.integer  "children_id"
+    t.string   "time_slot"
     t.string   "competitions", default: "--- []\n"
     t.text     "description"
     t.boolean  "visible"
@@ -42,20 +43,21 @@ ActiveRecord::Schema.define(version: 20160324223248) do
   end
 
   create_table "invitations", force: :cascade do |t|
-    t.integer  "groupId"
-    t.integer  "senderId"
-    t.integer  "receiverId"
+    t.integer  "group_id"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
     t.string   "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "mentors", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "gender"
     t.integer  "age"
     t.string   "school"
     t.string   "grade"
-    t.string   "timeslot"
+    t.string   "time_slot"
     t.string   "competitions", default: "--- []\n"
     t.text     "description"
     t.boolean  "visible"
@@ -63,7 +65,7 @@ ActiveRecord::Schema.define(version: 20160324223248) do
     t.datetime "updated_at",                        null: false
   end
 
-  create_table "parents", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "password"
     t.string   "role"
@@ -71,8 +73,9 @@ ActiveRecord::Schema.define(version: 20160324223248) do
     t.string   "lastname"
     t.string   "phone"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "last_login_time"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end
