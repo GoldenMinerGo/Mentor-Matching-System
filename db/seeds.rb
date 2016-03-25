@@ -13,15 +13,15 @@ users = [
 ]
 
 children = [
-	{:parent_id => 1, :firstname =>'', :lastname => '', :gender => 'male', :age => 5, :school => 'School 1', :grade => 'G1', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST', 'FIRST'], :description => '...', :visible => true},
+	{:parent_id => 1, :firstname =>'Alei', :lastname => 'Lei', :gender => 'male', :age => 5, :school => 'School 1', :grade => 'G1', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST', 'FIRST'], :description => '...', :visible => true},
 	
-	{:parent_id => 1, :firstname =>'', :lastname => '', :gender => 'female', :age => 7, :school => 'School 2', :grade => 'G1', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST'], :description => '...', :visible => true},
+	{:parent_id => 1, :firstname =>'Haha', :lastname => 'Oh', :gender => 'female', :age => 7, :school => 'School 2', :grade => 'G1', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST'], :description => '...', :visible => true},
 	
-	{:parent_id => 1, :firstname =>'', :lastname => '', :gender => 'male', :age => 3, :school => 'School 1', :grade => 'G2', :time_slot => '12:00 - 13:00 Mon', :competitions => ['FIRST'], :description => '...', :visible => false},
+	{:parent_id => 1, :firstname =>'Yeh', :lastname => 'Yeh', :gender => 'male', :age => 3, :school => 'School 1', :grade => 'G2', :time_slot => '12:00 - 13:00 Mon', :competitions => ['FIRST'], :description => '...', :visible => false},
 	
-	{:parent_id => 5, :firstname =>'', :lastname => '', :gender => 'female', :age => 5, :school => 'School 2', :grade => 'G2', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST', 'FIRST'], :description => '...', :visible => true},
+	{:parent_id => 5, :firstname =>'Heihei', :lastname => 'Hei', :gender => 'female', :age => 5, :school => 'School 2', :grade => 'G2', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST', 'FIRST'], :description => '...', :visible => true},
 	
-	{:parent_id => 5, :firstname =>'', :lastname => '', :gender => 'male', :age => 7, :school => 'School 1', :grade => 'G2', :time_slot => '12:00 - 13:00 Mon', :competitions => [], :description => '...', :visible => false}
+	{:parent_id => 5, :firstname =>'Hehe', :lastname => 'Le', :gender => 'male', :age => 7, :school => 'School 1', :grade => 'G2', :time_slot => '12:00 - 13:00 Mon', :competitions => [], :description => '...', :visible => false}
 ]
 
 
