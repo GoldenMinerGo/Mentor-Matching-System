@@ -1,7 +1,10 @@
 class CreateMentors < ActiveRecord::Migration
   def change
     create_table :mentors do |t|
-      t.integer :user_id
+      t.string :firstname
+      t.string :lastname
+      t.string :phone
+      t.string :email
       t.string :gender
       t.integer :age
       t.string :school
@@ -11,6 +14,8 @@ class CreateMentors < ActiveRecord::Migration
       t.text :description
       t.boolean :visible
       t.timestamps null: false
+      
+      t.references :user
     end
   end
 end

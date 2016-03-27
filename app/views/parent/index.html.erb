@@ -1,0 +1,68 @@
+<h1>Parent Dashboard</h1>
+
+<h2>Children</h2>
+<table>
+  <tr>
+    <th>id</th>
+    <th>Name</th>
+    <th>Group</th>
+    <th>Mentor</th>
+  </tr>
+  <% @children.each do |child| %>
+  <tr>
+    <td><%= child.id %></td>
+    <td><%= child.firstname %> <%= child.lastname %></td>
+    <td><%= child.group.title %></td>
+    <td><%= child.group.mentor.firstname %> <%= child.group.mentor.lastname %></td>
+  </tr>
+  <% end %>
+</table>
+
+<h2>Inbox</h2>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Sender</th>
+    <th>Mentor</th>
+    <th>Member</th>
+    <th>Status</th>
+  </tr>
+  <% @rinv.each do |inv| %>
+  <tr>
+    <td><%= inv.group.title %></td>
+    <td><%= inv.sender_id %></td>
+    <td><%= inv.group.mentor.firstname %> <%= inv.group.mentor.lastname %></td>
+    <td>
+      <% inv.group.children.each do |child| %>
+         <%= child.firstname %> <%= child.lastname %>;
+      <% end %>
+    </td>
+    <td><%= inv.status %></td>
+  </tr>
+  <% end %>
+</table>
+
+
+<h2>Sent out</h2>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Receiver</th>
+    <th>Mentor</th>
+    <th>Member</th>
+    <th>Status</th>
+  </tr>
+  <% @sinv.each do |inv| %>
+  <tr>
+    <td><%= inv.group.title %></td>
+    <td><%= inv.receiver_id %></td>
+    <td><%= inv.group.mentor.firstname %> <%= inv.group.mentor.lastname %></td>
+    <td>
+      <% inv.group.children.each do |child| %>
+         <%= child.firstname %> <%= child.lastname %>;
+      <% end %>
+    </td>
+    <td><%= inv.status %></td>
+  </tr>
+  <% end %>
+</table>

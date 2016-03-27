@@ -6,6 +6,10 @@ class CreateInvitations < ActiveRecord::Migration
       t.integer :receiver_id
       t.string :status
       t.timestamps null: false
+      
+      t.references :sender
+      t.references :receiver
+      t.references :group
     end
   end
 end

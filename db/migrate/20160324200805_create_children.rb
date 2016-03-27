@@ -13,6 +13,9 @@ class CreateChildren < ActiveRecord::Migration
       t.text :description
       t.boolean :visible
       t.timestamps null: false
+      
+      t.references :parent
+      t.references :group
     end
   end
 end
