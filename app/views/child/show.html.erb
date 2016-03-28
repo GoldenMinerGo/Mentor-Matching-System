@@ -1,0 +1,27 @@
+<h1>Child Panel</h1>
+
+ID: <%= @child.id %><br />
+Name: <%= @child.name %><br />
+Gender: <%= @child.gender %><br />
+Age: <%= @child.age %><br />
+School: <%= @child.school %><br />
+Grade: <%= @child.grade %><br />
+Time: <%= @child.time_slot %><br />
+Competitions: <%= @child.competitions %><br />
+Description: <%= @child.description %><br />
+<% if @mychild %>
+ Visible: <%= @child.visible %><br />
+<% else %>
+ <br />
+ Parent: <%= @child.parent.name %><br />
+ Phone: <%= @child.parent.phone %><br />
+ Email: <%= @child.parent.email %><br />
+<% end %> 
+<br />
+Group: <%= @group %><br />
+Mentor: <%= @mentor %><br />
+<br />
+<% if @mychild %>
+ <%= link_to "Edit", edit_child_path(@child) %><br />
+<% end %>
+<%= link_to "Back", parent_path %>

@@ -1,19 +1,46 @@
 <h1>Parent Dashboard</h1>
 
+ID: <%= @parent.user_id %><br />
+Name: <%= @parent.name %><br />
+Phone: <%= @parent.phone %><br />
+Email: <%= @parent.email %><br />
+<%= link_to "Update Personal Information", parent_edit_path %>
+
 <h2>Children</h2>
 <table>
   <tr>
-    <th>id</th>
+    <th>ID</th>
     <th>Name</th>
     <th>Group</th>
     <th>Mentor</th>
+    <th></th>
   </tr>
   <% @children.each do |child| %>
   <tr>
     <td><%= child.id %></td>
-    <td><%= child.firstname %> <%= child.lastname %></td>
+    <td><%= child.name %></td>
     <td><%= child.group.title %></td>
-    <td><%= child.group.mentor.firstname %> <%= child.group.mentor.lastname %></td>
+    <td><%= child.group.mentor.name %></td>
+    <td><%= link_to "More", child_path(child) %></td>
+  </tr>
+  <% end %>
+</table>
+<%= link_to "Add child", new_child_path %>
+
+<h2>Groups</h2>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Mentor</th>
+    <th>Menbers</th>
+  </tr>
+  <% @groups.each do |group| %>
+  <tr>
+    <td><%= group.id %></td>
+    <td><%= group.title %></td>
+    <td><%= group.mentor.name %></td>
+    <td><%= group.members %></td>
   </tr>
   <% end %>
 </table>
@@ -30,13 +57,9 @@
   <% @rinv.each do |inv| %>
   <tr>
     <td><%= inv.group.title %></td>
-    <td><%= inv.sender_id %></td>
-    <td><%= inv.group.mentor.firstname %> <%= inv.group.mentor.lastname %></td>
-    <td>
-      <% inv.group.children.each do |child| %>
-         <%= child.firstname %> <%= child.lastname %>;
-      <% end %>
-    </td>
+    <td><%= link_to "#{inv.sender.name}", child_path(inv.sender) %></td>
+    <td><%= inv.group.mentor.name %></td>
+    <td><%= inv.group.members %></td>
     <td><%= inv.status %></td>
   </tr>
   <% end %>
@@ -55,13 +78,9 @@
   <% @sinv.each do |inv| %>
   <tr>
     <td><%= inv.group.title %></td>
-    <td><%= inv.receiver_id %></td>
-    <td><%= inv.group.mentor.firstname %> <%= inv.group.mentor.lastname %></td>
-    <td>
-      <% inv.group.children.each do |child| %>
-         <%= child.firstname %> <%= child.lastname %>;
-      <% end %>
-    </td>
+    <td><%= inv.receiver.name %></td>
+    <td><%= inv.group.mentor.name %></td>
+    <td><%= inv.group.members %></td>
     <td><%= inv.status %></td>
   </tr>
   <% end %>
