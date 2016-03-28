@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  get "parent" => "parent#index" 
+  get "parent" => "parent#index"
+  get "parent/edit" => "parent#edit"
+  put "parent" => "parent#update"
+  get "child/:id" => "child#show"
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 

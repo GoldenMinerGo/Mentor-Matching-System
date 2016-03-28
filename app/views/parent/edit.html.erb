@@ -1,0 +1,9 @@
+<h1>Parent Update Panel</h1>
+
+<%= form_for @parent , :method => :put do |f| %>
+  First Name: <%= f.text_field :firstname %><br />
+  Last Name: <%= f.text_field :lastname %><br />
+  Phone: <%= f.text_field :phone %><br />
+  Email: <%= f.text_field :email %><br />
+  <%= f.submit "Update"%>
+<% end %>

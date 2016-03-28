@@ -1,12 +1,19 @@
 <h1>Parent Dashboard</h1>
 
+ID: <%= @parent.user_id %><br />
+Name: <%= @parent.firstname %> <%= @parent.lastname %><br />
+Phone: <%= @parent.phone %><br />
+Email: <%= @parent.email %><br />
+<%= link_to "Update Personal Information", parent_edit_path %>
+
 <h2>Children</h2>
 <table>
   <tr>
-    <th>id</th>
+    <th>ID</th>
     <th>Name</th>
     <th>Group</th>
     <th>Mentor</th>
+    <th></th>
   </tr>
   <% @children.each do |child| %>
   <tr>
@@ -14,6 +21,7 @@
     <td><%= child.firstname %> <%= child.lastname %></td>
     <td><%= child.group.title %></td>
     <td><%= child.group.mentor.firstname %> <%= child.group.mentor.lastname %></td>
+    <td><a href="child/<%= child.id %>">More</a></td>
   </tr>
   <% end %>
 </table>
@@ -30,7 +38,7 @@
   <% @rinv.each do |inv| %>
   <tr>
     <td><%= inv.group.title %></td>
-    <td><%= inv.sender_id %></td>
+    <td><a href="child/<%= inv.sender_id %>"><%= inv.sender.firstname %> <%= inv.sender.lastname %></a></td>
     <td><%= inv.group.mentor.firstname %> <%= inv.group.mentor.lastname %></td>
     <td>
       <% inv.group.children.each do |child| %>
@@ -55,7 +63,7 @@
   <% @sinv.each do |inv| %>
   <tr>
     <td><%= inv.group.title %></td>
-    <td><%= inv.receiver_id %></td>
+    <td><%= inv.receiver.firstname %> <%= inv.receiver.lastname %></td>
     <td><%= inv.group.mentor.firstname %> <%= inv.group.mentor.lastname %></td>
     <td>
       <% inv.group.children.each do |child| %>
