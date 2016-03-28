@@ -2,8 +2,9 @@ class ParentController < ApplicationController
     def index
         # @user=User.whois(session)
         # redirect_to root_path and return if @user.nil?
-        @parent=Parent.where(:user_id => 1).first
-        @children=Child.where(:parent_id => @parent)
+        user=User.find(1)
+        @parent=user.parent
+        @children=@parent.children
         @groups=Group.where(:admin_id => @parent)
         @rinv=Invitation.where(:receiver_id => @children)
         @sinv=Invitation.where(:sender_id => @children)
@@ -12,13 +13,15 @@ class ParentController < ApplicationController
     def edit
         # @user=User.whois(session)
         # redirect_to root_path and return if @user.nil?
-        @parent=Parent.where(:user_id => 1).first
+        user=User.find(1)
+        @parent=user.parent
     end
 
     def update
         # @user=User.whois(session)
         # redirect_to root_path and return if @user.nil?
-        @parent = Parent.where(:user_id => 1).first
+        user=User.find(1)
+        @parent=user.parent
         if @parent.update_attributes!(parent_params)
             redirect_to parent_path
         else
