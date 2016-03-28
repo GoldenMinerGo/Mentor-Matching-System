@@ -1,0 +1,26 @@
+<h1>Children List</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Gender</th>
+    <th>Age</th>
+    <th>School</th>
+    <th>Grade</th>
+    <th>Time</th>
+    <th>Competitions</th>
+    <th>Description</th>
+  </tr>
+  <% @children.each do |child| %>
+  <tr>
+    <td><%= child.id %></td>
+    <td><%= child.gender %></td>
+    <td><%= child.age %></td>
+    <td><%= child.school %></td>
+    <td><%= child.grade %></td>
+    <td><%= child.time_slot %></td>
+    <td><%= child.competitions %></td>
+    <td><%= child.description %></td>
+  </tr>
+  <% end %>
+</table>

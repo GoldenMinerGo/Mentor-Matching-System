@@ -1,0 +1,20 @@
+<h1>Child Update Panel</h1>
+
+<%= form_for @child, :method => :put do |f| %>
+  First Name: <%= f.text_field :firstname %><br />
+  Last Name: <%= f.text_field :lastname %><br />
+  Gender:
+    <%= f.radio_button :gender, 'male', :checked => (@child.gender == 'male') %> 
+    <%= label :gender_male, 'Male' %>
+    <%= f.radio_button :gender, 'female', :checked => (@child.gender == 'female') %>
+    <%= label :gender_female, 'Female' %><br />
+  Age: <%= f.number_field :age , in: 0.0..20.0, step: 0.5 %><br />
+  School: <%= f.text_field :school %><br />
+  Grade: <%= f.text_field :grade %><br />
+  Time: <%= f.text_field :time_slot %><br />
+  Competitions: <%= f.text_field :competitions %><br />
+  Description: <%= f.text_area :description %><br />
+  Visible: <%= f.check_box :visible %><br />
+  <%= f.submit "Update"%>
+<% end %>
+<%= link_to "Back", child_path(@child) %>

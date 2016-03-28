@@ -1,10 +1,15 @@
 class ChildController < ApplicationController
+    def index
+        # @user=User.whois(session)
+        # redirect_to root_path and return if @user.nil?
+        parent=Parent.where(:user_id => 1).first
+        @children=Child.where(:visible => true).where.not(:parent_id => parent)
+    end
+    
     def show
-        # if session.key?(:id)==false
-        #     redirect_to root_path
-        # end
-        # @user=User.find(session[:id]) 
-        parent=Parent.where(:user_id => 1)[0]
+        # @user=User.whois(session)
+        # redirect_to root_path and return if @user.nil?
+        parent=Parent.where(:user_id => 1).first
         children=Child.where(:parent_id => parent)
         rinv = Invitation.where(:sender_id => params[:id], :receiver_id => children) #session[:id]
         
@@ -12,7 +17,7 @@ class ChildController < ApplicationController
         if (@child.nil? || (rinv.empty? && @child.parent.user_id != 1)) #session[:id]
             redirect_to parent_path and return
         end
-        
+        @mychild = @child.parent.user_id == 1 #session[:id]
         if @child.group_id.nil?
             @group = ''
             @mentor = ''
@@ -23,5 +28,52 @@ class ChildController < ApplicationController
             @group = @child.group.title
             @mentor = @child.group.mentor.firstname + ' ' + @child.group.mentor.lastname 
         end
+    end
+    
+    def edit
+        # @user=User.whois(session)
+        # redirect_to root_path and return if @user.nil?
+        @child = Child.find(params[:id])
+        if (@child.nil? ||  @child.parent.user_id != 1) #session[:id]
+            redirect_to parent_path and return
+        end
+    end
+    
+    def update
+        # @user=User.whois(session)
+        # redirect_to root_path and return if @user.nil?
+        @child = Child.find(params[:id])
+        if (@child.nil? ||  @child.parent.user_id != 1) #session[:id]
+            redirect_to parent_path and return
+        end
+        if @child.update_attributes!(child_params)
+            redirect_to child_path(@child.id)
+        else
+            redirect_to edit_child_path(@child)
+        end
+    end
+    
+    def new
+        # @user=User.whois(session)
+        # redirect_to root_path and return if @user.nil?
+        
+    end
+    
+    def create
+        # @user=User.whois(session)
+        # redirect_to root_path and return if @user.nil?
+        
+    end
+    
+    def destroy
+        # @user=User.whois(session)
+        # redirect_to root_path and return if @user.nil?
+        
+    end
+    
+    private
+    
+    def child_params
+        params.require(:child).permit(:firstname, :lastname, :gender, :school, :grade, :time_slot, :competitions, :description, :visible)
     end
 end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "parent" => "parent#index"
   get "parent/edit" => "parent#edit"
   put "parent" => "parent#update"
-  get "child/:id" => "child#show"
+  resources :child
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
