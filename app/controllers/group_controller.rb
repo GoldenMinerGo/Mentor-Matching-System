@@ -1,15 +1,20 @@
 class GroupController < ApplicationController
     def index
-        user = User.find(4)
+        user = User.find(1)
         @parent = user.parent
         @groups = Group.where(:admin_id => @parent)[0]
         #@groups = Group.all
         #@members = @groups.members
     end
     
+    def show
+        
+        
+    end
+    
     def edit
         #group 
-        user = User.find(4)
+        user = User.find(1)
         @parent = user.parent
         #@children=@parent.children
         #if you use where, @groups is an array, like [group1,group2],then
@@ -18,7 +23,7 @@ class GroupController < ApplicationController
     end
     
     def update
-        user=User.find(4)
+        user=User.find(1)
         @parent=user.parent
         @groups=Group.where(:admin_id => @parent)[0]
         if @groups.update_attributes!(group_params)
@@ -28,13 +33,19 @@ class GroupController < ApplicationController
         end
     end
     
+    def create
+        
+    end
+    
     def destroy
-        user=User.find(4)
+        user=User.find(1)
         @parent=user.parent
         @groups=Group.where(:admin_id => @parent)[0]
         @groups.destroy
-        #flash[:notice] = "Your group '#{@groups.title}' closed."
-        redirect_to group_path
+       
+        #redirect_to group_path 
+        redirect_to child_path(2) #should be group_path
+        flash[:notice] = "Movie deleted."
     end
     
     private
