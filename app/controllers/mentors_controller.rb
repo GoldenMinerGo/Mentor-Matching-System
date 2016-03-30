@@ -4,14 +4,14 @@ class MentorsController < ApplicationController
        @mentor = Mentor.new
    end
    
-   def create 
+  def create 
        @mentor = Mentor.new(mentor_params)
        @mentor.user_id = session[:user_id]
        @mentor.visible = true
     if @mentor.save
       flash[:notice] = "You have successfully filled your mentor file"
       flash[:color]= "valid"
-      redirect_to mentor_path and return
+      redirect_to mentor_path(@mentor) and return
     else
       flash[:notice] = "Form is invalid"
       flash[:color]= "invalid"
