@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "welcome/forget_password" => "welcome#forget_password"
   get "users/new" => "users#new"
   get "welcome/index" => "welcome#index"
+  get "welcome/logout" => "welcome#logout"
   get "mentors_new" => "mentors#new"
   
   # The priority is based upon order of creation: first created -> highest priority.

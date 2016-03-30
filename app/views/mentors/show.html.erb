@@ -1,0 +1,9 @@
+<h1>Mentor Dashboard</h1>
+
+ID: <%= @mentor.user_id %><br />
+Name: <%= @mentor.name %><br />
+Phone: <%= @mentor.phone %><br />
+Email: <%= @mentor.email %><br />
+Description: <%= @mentor.description %><br />
+<%= link_to "Update Personal Information", edit_mentor_path(@mentor) %>
+<%= link_to "Log out", welcome_logout_path(@mentor) %>
