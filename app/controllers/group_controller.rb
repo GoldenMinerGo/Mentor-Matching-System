@@ -44,8 +44,8 @@ class GroupController < ApplicationController
         @groups.destroy
        
         #redirect_to group_path 
-        redirect_to child_path(2) #should be group_path
-        flash[:notice] = "Movie deleted."
+        redirect_to parent_path
+        flash[:notice] = "Your group deleted."
     end
     
     private

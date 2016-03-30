@@ -8,6 +8,7 @@ class ParentController < ApplicationController
         @groups=Group.where(:admin_id => @parent)
         @rinv=Invitation.where(:receiver_id => @children)
         @sinv=Invitation.where(:sender_id => @children)
+        @groupnil= !@groups.empty?
     end
     
     def edit

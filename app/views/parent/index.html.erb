@@ -19,8 +19,13 @@ Email: <%= @parent.email %><br />
   <tr>
     <td><%= child.id %></td>
     <td><%= child.name %></td>
-    <td><%= child.group.title %></td>
-    <td><%= child.group.mentor.name %></td>
+    <% if @groupnil %>
+      <td><%= child.group.title %></td>
+      <td><%= child.group.mentor.name %></td>
+    <% else %>
+      <td>No group</td>
+      <td>Of course no mentor</td>
+    <% end %>
     <td><%= link_to "More", child_path(child) %></td>
   </tr>
   <% end %>
@@ -35,13 +40,15 @@ Email: <%= @parent.email %><br />
     <th>Mentor</th>
     <th>Menbers</th>
   </tr>
-  <% @groups.each do |group| %>
-  <tr>
-    <td><%= group.id %></td>
-    <td><%= group.title %></td>
-    <td><%= group.mentor.name %></td>
-    <td><%= group.members %></td>
-  </tr>
+  <% if @groupnil %>
+    <% @groups.each do |group| %>
+    <tr>
+      <td><%= group.id %></td>
+      <td><%= group.title %></td>
+      <td><%= group.mentor.name %></td>
+      <td><%= group.members %></td>
+    </tr>
+    <% end %>
   <% end %>
 </table>
 
@@ -54,6 +61,7 @@ Email: <%= @parent.email %><br />
     <th>Member</th>
     <th>Status</th>
   </tr>
+<% if @groupnil %>
   <% @rinv.each do |inv| %>
   <tr>
     <td><%= inv.group.title %></td>
@@ -63,6 +71,7 @@ Email: <%= @parent.email %><br />
     <td><%= inv.status %></td>
   </tr>
   <% end %>
+<% end %>
 </table>
 
 
@@ -75,6 +84,7 @@ Email: <%= @parent.email %><br />
     <th>Member</th>
     <th>Status</th>
   </tr>
+<% if @groupnil %>
   <% @sinv.each do |inv| %>
   <tr>
     <td><%= inv.group.title %></td>
@@ -84,6 +94,7 @@ Email: <%= @parent.email %><br />
     <td><%= inv.status %></td>
   </tr>
   <% end %>
+<% end %>
 </table>
 
 <%= link_to "Log out", welcome_logout_path %>
