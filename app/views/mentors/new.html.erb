@@ -1,0 +1,26 @@
+<% @page_title = "Mentor | Signup" %>
+<div class="Sign_Form">
+  <h1>Fill In Information</h1>
+  <%= form_for(:mentor, :url => {:controller => 'mentors', :action => 'create'}) do |f| %>
+    <p> Firstname:</br> <%= f.text_field :firstname%> </p>
+    <p> Lastname:</br> <%= f.text_field :lastname%></p>
+    <p> Phone:</br> <%= f.telephone_field :phone%></p>
+    <p> Email:</br> <%= f.email_field :email%></p>
+    <p> Gender:</br> <%= f.select :gender, ['Male' , 'Female' , 'Unknown']%></p>
+    <p> Age:</br> <%= f.number_field :age , in: 15..100 , step: 1%></p>
+    <p> School:</br> <%= f.text_field :school%></p>
+    <p> Grade:</br> <%= f.select :grade, ['Freshman' , 'Sophomore' , 'Junior' , 'Senior' , 'Graduate' , 'Teacher']%></p>
+    <p> Time_slot:</br> <%= f.text_field :time_slot%></p>
+    <p> Competitions:</br> <%= f.text_field :competitions%></p>
+    <p> More About Yourself:</br> <%= f.text_field :description%></p>
+    <%= f.submit "Create" %>
+  <% end %>
+  <%= link_to "Log out", welcome_logout_path(@mentor) %>
+  <% if @mentor.errors.any? %>
+    <ul class="Signup_Errors">
+    <% for message_error in @mentor.errors.full_messages %>
+      <li>* <%= message_error %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>

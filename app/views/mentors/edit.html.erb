@@ -1,0 +1,15 @@
+<h1>Mentor Update Panel</h1>
+
+<%= form_for @mentor, :method => :put do |f| %>
+  First Name: <%= f.text_field :firstname %><br />
+  Last Name: <%= f.text_field :lastname %><br />
+  Phone: <%= f.telephone_field :phone %><br />
+  Email: <%= f.email_field :email %><br />
+  Age: <%= f.number_field :age %><br />
+  School: <%= f.text_field :school %><br />
+  grade: <%= f.text_field :grade %><br />
+  Time Slot: <%= f.text_field :time_slot %><br />
+  Description: <%= f.text_field :description %><br />
+  <%= f.submit "Update"%>
+<% end %>
+<%= link_to "Back", mentor_path %>

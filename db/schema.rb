@@ -82,10 +82,12 @@ ActiveRecord::Schema.define(version: 20160327032023) do
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "password"
+    t.string   "encrypted_password"
     t.string   "role"
     t.datetime "last_login_time"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "salt"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
 end
