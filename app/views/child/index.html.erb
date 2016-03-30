@@ -10,6 +10,8 @@
     <th>Time</th>
     <th>Competitions</th>
     <th>Description</th>
+    <th>group_id</th>
+    <th>title</th>
   </tr>
   <% @children.each do |child| %>
   <tr>
@@ -21,6 +23,8 @@
     <td><%= child.time_slot %></td>
     <td><%= child.competitions %></td>
     <td><%= child.description %></td>
+    <td><%= child.group_id %></td>
+    <td><%= child.group.title %></td>
   </tr>
   <% end %>
 </table>

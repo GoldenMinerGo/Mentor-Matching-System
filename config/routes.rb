@@ -15,7 +15,13 @@ Rails.application.routes.draw do
   get "parent" => "parent#index"
   get "parent/edit" => "parent#edit"
   put "parent" => "parent#update"
+  
+  get "group" => "group#index"
+  get "group/edit" => "group#edit"
+  put "group" => "group#update"
+  delete "group" => "group#destroy"
   resources :child
+  #resources :group
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   # Example of regular route:
