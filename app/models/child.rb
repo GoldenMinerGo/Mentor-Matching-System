@@ -8,4 +8,3 @@ class Child < ActiveRecord::Base
         self.firstname+' '+self.lastname
     end
 end
-
