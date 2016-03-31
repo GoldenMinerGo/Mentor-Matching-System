@@ -4,7 +4,7 @@ class MentorsController < ApplicationController
        @mentor = Mentor.new
    end
    
-   def create 
+  def create 
        @mentor = Mentor.new(mentor_params)
        @mentor.user_id = session[:user_id]
        @mentor.visible = true

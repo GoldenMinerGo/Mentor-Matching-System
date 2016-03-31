@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20160327032023) do
     t.string   "phone"
     t.string   "email"
     t.string   "gender"
-    t.integer  "age"
+    t.integer  "age",          default: 20
     t.string   "school"
     t.string   "grade"
     t.string   "time_slot"

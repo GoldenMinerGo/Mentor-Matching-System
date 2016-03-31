@@ -17,6 +17,13 @@ group :development, :test do
 	gem 'byebug', '3.4.0'
 	gem 'web-console', '2.0.0.beta3'
 	gem 'spring', '1.1.3'
+    gem 'cucumber-rails', :require => false
+    gem 'cucumber-rails-training-wheels'
+    gem 'database_cleaner'
+    gem 'capybara'
+    gem 'launchy'
+    gem 'rspec-rails'
+    gem 'simplecov'
 end
 
 group :test do
@@ -31,5 +38,4 @@ group :production do
 	gem 'puma', '3.1.0'
 end
 
-
-
+gem 'haml', '4.0.7'
