@@ -30,6 +30,8 @@ class ParentController < ApplicationController
         end
     end
     
+    
+    
     private
     
     def parent_params
