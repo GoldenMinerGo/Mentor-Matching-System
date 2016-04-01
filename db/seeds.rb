@@ -1,15 +1,15 @@
 users = [
-	{:username => 'user1', :password => '1q2w3e', :encrypted_password => 'GSetrdVGt', :role => 'parent', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
+	{:username => 'user1', :password => 'indfj3jfkd', :encrypted_password => 'GSetrdVGt', :role => 'Parent', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
 	
-	{:username => 'user2', :password => '1q2w3e', :encrypted_password => 'g3fw4f43rf', :role => 'mentor', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
+	{:username => 'user2', :password => 'indfj3jfkd', :encrypted_password => 'g3fw4f43rf', :role => 'Mentor', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
 	
-	{:username => 'user3', :password => '1q2w3e', :encrypted_password => 'TrrtVDttv', :role => 'mentor', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")},
+	{:username => 'user3', :password => 'indfj3jfkd', :encrypted_password => 'TrrtVDttv', :role => 'Mentor', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")},
 	
-	{:username => 'user4', :password => 'indfj3jfkd', :encrypted_password => 'TbRSTVStf', :role => 'parent', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
+	{:username => 'user4', :password => 'indfj3jfkd', :encrypted_password => 'TbRSTVStf', :role => 'Parent', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
 	
-	{:username => 'user5', :password => 'indfj3jfkd', :encrypted_password => 'g3fw4f43rf', :role => 'parent', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
+	{:username => 'user5', :password => 'indfj3jfkd', :encrypted_password => 'g3fw4f43rf', :role => 'Parent', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
 	
-	{:username => 'user6', :password => 'indfj3jfkd', :encrypted_password => 'TrrtVDttv', :role => 'parent', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")}
+	{:username => 'user6', :password => 'indfj3jfkd', :encrypted_password => 'TrrtVDttv', :role => 'Parent', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")}
 ]
 
 users.each do |user|

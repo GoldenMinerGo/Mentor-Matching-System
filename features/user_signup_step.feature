@@ -12,12 +12,13 @@ Feature: User Signup
       | Limeimei|19930618as|Parent|
     Given I am on the home page of Mentor Matching System
     When I follow "Sign Up"
+    Then I should be on the Signup page
     
 Scenario: Successful signup
-  When I fill in "username" with "wangpanda"
-  And I fill in "password" with "19930618as"
-  And I fill in "password Confirmation" with "19930618as"
-  And I select "Parent" from "role"
+  When I fill in "user[username]" with "wangpanda"
+  And I fill in "user[password]" with "19930618as"
+  And I fill in "user[password_confirmation]" with "19930618as"
+  And I select "Parent" from "user[role]"
   And I press "Signup"
   Then I should be on the home page of Mentor Matching System
   And I should see "You signed up successfully"
