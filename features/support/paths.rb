@@ -16,18 +16,20 @@ module NavigationHelpers
     when /^the home\s?page$/
       '/'
 
-    when /^the parentsample page$/
+    when /^the parent dashboard page$/
       parent_path
       
+    when /^the parent page$/
+      '/parent'
+    
+    when /^the parent edit page$/
+      '/parent/edit'
+
     when /^the home page of Mentor Matching System$/
       '/welcome/index'
     
     when /^the New Mentor page$/
       '/mentors/new'
-      
-    when /^the Parent page$/
-      '/parent'
-
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

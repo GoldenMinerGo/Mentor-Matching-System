@@ -29,8 +29,8 @@ Background: users, parents, children, groups, invitations, mentors in database
     
   Given the following Invitation exist:
     | group_id | sender_id | receiver_id| status  |
-    | 2        | 1         | 4          | pending |
-    | 1        | 5         | 2          | declined|
+    | 2        | 1         | 3          | pending |
+    | 1        | 2         | 1          | declined|
     
   Given the following Mentor exist:
     |user_id| firstname| lastname| phone       | email          | gender  | age | school | grade |time_slot         | competitions | description | visible |
@@ -38,8 +38,14 @@ Background: users, parents, children, groups, invitations, mentors in database
     |3      | Yibi     | keng    | 9796734502  | yibi@tamu.edu  | female  | 20  | ecnu   | U2    |12:00 - 13:00 Mon | ['FIRST']    | heiheihei   | true    |
 
 
-Scenario: show all parents' children
-  When I go to the parentsample page 
-  Then I should see "Lei Alei"
-  Then I should see "Xiao Ming"
-  Then I should see "Ni Ma"
+Scenario: show parent dashboard
+  When I go to the parent dashboard page 
+  Then I should see "Alei Lei"
+  Then I should see "Bi Dou"
+  Then I should see "Ma Ni"
+  
+Scenario: edit parent's information
+  When I go to the parent edit page
+  And I fill in "parent_firstname" with "Jiang"
+  And I press "Update"
+  Then I should see "Jiang"
