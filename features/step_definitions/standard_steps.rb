@@ -1,3 +1,5 @@
+##parent step
+
 Given (/^the following (.*) exist:$/) do |type, table| 
     if type == "User"
         table.hashes.each do |element|
@@ -52,4 +54,13 @@ end
 
 When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
+end
+
+
+
+##mentor steps
+
+
+Then(/^I will nullify my session hash$/) do
+  session[:user_id] = nil
 end
