@@ -24,6 +24,9 @@ module NavigationHelpers
       
     when /^the Parent page$/
       '/parent'
+      
+    when /^the Signup page$/
+      '/users/new'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
