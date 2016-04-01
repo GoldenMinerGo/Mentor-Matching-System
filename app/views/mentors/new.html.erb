@@ -15,7 +15,7 @@
     <p> More About Yourself:</br> <%= f.text_field :description%></p>
     <%= f.submit "Create" %>
   <% end %>
-  <%= link_to "Log out", welcome_logout_path(@mentor) %>
+  <%= link_to "Log out", welcome_logout_path%>
   <% if @mentor.errors.any? %>
     <ul class="Signup_Errors">
     <% for message_error in @mentor.errors.full_messages %>

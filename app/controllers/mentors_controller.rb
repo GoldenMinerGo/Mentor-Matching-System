@@ -48,7 +48,7 @@ class MentorsController < ApplicationController
     if !session[:user_id].nil?
       @mentor = Mentor.find_by_user_id(session[:user_id])
       if @mentor.update_attributes!(mentor_params)
-        redirect_to mentor_path
+        redirect_to mentor_path(@mentor)
       else
         redirect_to edit_mentor_path
       end
