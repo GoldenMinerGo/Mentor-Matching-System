@@ -1,10 +1,10 @@
 <h1>Group Update Panel</h1>
 
-<% @groups.each do |group| %>
-  <%= form_for group, :method => :put do |f| %>
-    Title: <%= f.text_field :title %><br />
+<%# @groups.each do |group| %>
+<%= form_for @group, :method => :put do |f| %>
+  Title: <%= f.text_field :title %><br />
   
-    <%= f.submit "Update"%>
-  <% end %>
+  <%= f.submit "Update"%>
+  <%# end %>
 <% end %>
-<%= link_to "Back", group_path %>
+<%= link_to "Back", group_path(@group) %>
