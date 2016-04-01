@@ -8,28 +8,30 @@ class GroupController < ApplicationController
     end
     
     def show
-        
+        @group = Group.find_by_id(params[:id])
         
     end
     
     def edit
         #group 
-        user = User.find(1)
-        @parent = user.parent
+        #user = User.find(1)
+        #@parent = user.parent
+        @group = Group.find_by_id(params[:id])
         #@children=@parent.children
         #if you use where, @groups is an array, like [group1,group2],then
         #you use @groups directly, it's not a group instance, so report error.
-        @groups = Group.where(:admin_id => @parent)
+        #@groups = Group.where(:admin_id => @parent)
     end
     
     def update
         user=User.find(1)
         @parent=user.parent
-        @groups=Group.where(:admin_id => @parent)[0]
-        if @groups.update_attributes!(group_params)
+        #@groups=Group.where(:admin_id => @parent)[0]
+        @group = Group.find_by_id(params[:id])
+        if @group.update_attributes!(group_params)
             redirect_to group_path
         else
-            redirect_to group_edit_path
+            redirect_to parent_path
         end
     end
     
@@ -38,10 +40,10 @@ class GroupController < ApplicationController
     end
     
     def destroy
-        user=User.find(1)
-        @parent=user.parent
-        @groups=Group.where(:admin_id => @parent)[0]
-        @groups.destroy
+        #user=User.find(1)
+        #@parent=user.parent
+        @group = Group.find_by_id(params[:id])
+        @group.destroy
        
         #redirect_to group_path 
         redirect_to parent_path

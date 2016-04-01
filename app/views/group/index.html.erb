@@ -7,7 +7,7 @@
     <th>Title</th>
     <th>Mentor</th>
     <th>Members</th>
-    <th>Delete</th>
+    
   </tr>
  <% @groups.children.each do |child| %>
   <tr>
@@ -15,13 +15,7 @@
     <td><%= @groups.title %></td>
     <td><%= @groups.mentor.name %></td>
     <td><%= child.name %></td>
-    <td><%= link_to "Delete", group_path,data: {:confirm => 'Are you sure?'} %></td>
-    <%#add child#delete%>
+
   </tr>
   <% end %>
 </table>
-<br />
-<%= link_to "Update Group Information", group_edit_path %><br /><br />
-<%= link_to "Close this group", group_path,data: {:confirm => 'Are you sure?'}, method: :delete %><br />
-<%#<%= link_to 'Destroy',  group_path, method: :delete, data: { confirm: 'Are you sure?' } %>
-<%#<%= link_to 'Destroy',group_path,  action: :destroy, method: :delete, data: { confirm: 'Are you sure?' } %>

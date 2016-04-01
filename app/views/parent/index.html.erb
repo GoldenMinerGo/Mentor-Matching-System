@@ -38,7 +38,8 @@ Email: <%= @parent.email %><br />
     <th>ID</th>
     <th>Title</th>
     <th>Mentor</th>
-    <th>Menbers</th>
+    <th>Members</th>
+    <th></th>
   </tr>
   <% if @groupnil %>
     <% @groups.each do |group| %>
@@ -47,6 +48,7 @@ Email: <%= @parent.email %><br />
       <td><%= group.title %></td>
       <td><%= group.mentor.name %></td>
       <td><%= group.members %></td>
+      <td><%= link_to "More", group_path(group) %></td>
     </tr>
     <% end %>
   <% end %>
