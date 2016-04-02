@@ -7,15 +7,18 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = "You signed up successfully"
-      flash[:color]= "valid"
+      flash[:success] = "You signed up successfully"
       redirect_to welcome_index_path and return
     else
-      flash[:notice] = "Form is invalid"
-      flash[:color]= "invalid"
+      flash[:success] = "Form is invalid"
       redirect_to users_new_path and return
     end
   end
+  
+  def edit
+    
+  
+  def update
   
   private
   

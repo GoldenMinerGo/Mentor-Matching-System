@@ -10,6 +10,7 @@
   grade: <%= f.text_field :grade %><br />
   Time Slot: <%= f.text_field :time_slot %><br />
   Description: <%= f.text_field :description %><br />
+  Visible: <%= f.check_box :visible %><br />
   <%= f.submit "Update"%>
 <% end %>
 <%= link_to "Back", mentor_path %>
