@@ -8,12 +8,29 @@
 </head>
 <body>
   <div class="container">
+    <div class='row'>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <i class="fa fa-users"></i> Mentor Matching System
+          </a>
+        </div>
+      </div>
+    </nav>  
+    </div>
+  </div>
+  <div class="container">
     <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <div class="row alert alert-<%= message_type %>">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <%= message %>
+      </div>
     <% end %>
     <%= yield %>
     <!--<%= debug(params) if Rails.env.development? %>-->
   </div>
-
 </body>
 </html>

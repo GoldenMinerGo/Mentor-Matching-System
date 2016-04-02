@@ -1,8 +1,9 @@
 <h1>Children List</h1>
 
-<table>
+<table class='table table-hover'>
+  <thead>
   <tr>
-    <th>ID</th>
+    <th>#</th>
     <th>Gender</th>
     <th>Age</th>
     <th>School</th>
@@ -10,21 +11,29 @@
     <th>Time</th>
     <th>Competitions</th>
     <th>Description</th>
-    <th>group_id</th>
-    <th>title</th>
+    <th>Group #</th>
+    <th>Title</th>
   </tr>
+  </thead>
+  <tbody>
   <% @children.each do |child| %>
   <tr>
     <td><%= child.id %></td>
-    <td><%= child.gender %></td>
+    <td><i class="fa fa-<%= child.gender %>"></i></td>
     <td><%= child.age %></td>
     <td><%= child.school %></td>
     <td><%= child.grade %></td>
     <td><%= child.time_slot %></td>
     <td><%= child.competitions %></td>
     <td><%= child.description %></td>
+    <% if child.group.nil? %>
+    <td></td>
+    <td></td>
+    <% else %>
     <td><%= child.group_id %></td>
     <td><%= child.group.title %></td>
+    <% end %>
   </tr>
   <% end %>
+  </tbody>
 </table>

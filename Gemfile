@@ -11,6 +11,8 @@ gem 'jquery-rails','4.0.3'
 gem 'turbolinks', '2.3.0'
 gem 'jbuilder', '2.2.3'
 gem 'sdoc','0.4.0', group: :doc
+gem 'sprockets-rails'
+gem 'font-awesome-sass'
 
 group :development, :test do 
 	gem 'sqlite3', '1.3.9'

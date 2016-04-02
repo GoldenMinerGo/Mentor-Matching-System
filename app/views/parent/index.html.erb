@@ -1,47 +1,82 @@
+<div class='row'>
 <h1>Parent Dashboard</h1>
-
-ID: <%= @parent.user_id %><br />
-Name: <%= @parent.name %><br />
-Phone: <%= @parent.phone %><br />
-Email: <%= @parent.email %><br />
-<%= link_to "Update Personal Information", parent_edit_path %>
-
-<h2>Children</h2>
-<table>
+<table class='table'>
+  <thead>
+    <tr>
+      <td>#</td>
+      <td>Name</td>
+      <td>Phone</td>
+      <td>Email</td>
+    </tr>
+  </thead>
+  <tbody>
   <tr>
-    <th>ID</th>
+    <td><%= @parent.user_id %></td>
+    <td><%= @parent.name %></td>
+    <td><%= @parent.phone %></td>
+    <td><%= @parent.email %></td>
+  </tr>
+  </tbody>
+</table>
+<%= link_to "Update Personal Information", parent_edit_path , :class => 'btn btn-primary'%>
+</div>
+
+<div class='row'>
+<h2>Children</h2>
+<% if @children.empty? %>
+  <p>None</p>
+<% else %>
+<table class='table table-hover'>
+  <thead>
+  <tr>
+    <th>#</th>
     <th>Name</th>
     <th>Group</th>
     <th>Mentor</th>
     <th></th>
   </tr>
+  </thead>
+  <tbody>
   <% @children.each do |child| %>
   <tr>
     <td><%= child.id %></td>
     <td><%= child.name %></td>
-    <% if @groupnil %>
-      <td><%= child.group.title %></td>
-      <td><%= child.group.mentor.name %></td>
+    <% if child.group_id.nil? %>
+      <td></td>
+      <td></td>
     <% else %>
-      <td>No group</td>
-      <td>Of course no mentor</td>
+      <td><%= child.group.title %></td>
+      <% if child.group.mentor_id.nil? %>
+        <td></td>
+      <% else %>
+        <td><%= child.group.mentor.name %></td>
+      <% end %>
     <% end %>
     <td><%= link_to "More", child_path(child) %></td>
   </tr>
   <% end %>
+  </tbody>
 </table>
-<%= link_to "Add child", new_child_path %>
+<% end %>
+<%= link_to "Add child", new_child_path , :class => 'btn btn-primary'%>
+</div>
 
+<div class='row'>
 <h2>Groups</h2>
-<table>
+<% if @groups.empty? %>
+  <p>None</p>
+<% else %>
+<table class='table table-hover'>
+  <thead>
   <tr>
-    <th>ID</th>
+    <th>#</th>
     <th>Title</th>
     <th>Mentor</th>
     <th>Members</th>
     <th></th>
   </tr>
-  <% if @groupnil %>
+  </thead>
+  <tbody>
     <% @groups.each do |group| %>
     <tr>
       <td><%= group.id %></td>
@@ -51,11 +86,18 @@ Email: <%= @parent.email %><br />
       <td><%= link_to "More", group_path(group) %></td>
     </tr>
     <% end %>
-  <% end %>
+  </tbody>
 </table>
+<% end %>
+</div>
 
+<div class='row'>
 <h2>Inbox</h2>
-<table>
+<% if @rinv.empty? %>
+  <p>None</p>
+<% else %>
+<table class='table table-hover'>
+  <thead>
   <tr>
     <th>Title</th>
     <th>Sender</th>
@@ -63,7 +105,8 @@ Email: <%= @parent.email %><br />
     <th>Member</th>
     <th>Status</th>
   </tr>
-<% if @groupnil %>
+  </thead>
+  <tbody>
   <% @rinv.each do |inv| %>
   <tr>
     <td><%= inv.group.title %></td>
@@ -73,12 +116,18 @@ Email: <%= @parent.email %><br />
     <td><%= inv.status %></td>
   </tr>
   <% end %>
-<% end %>
+  </tbody>
 </table>
+<% end %>
+</div>
 
-
+<div class='row'>
 <h2>Sent out</h2>
-<table>
+<% if @sinv.empty? %>
+  <p>None</p>
+<% else %>
+<table class='table table-hover'>
+  <thead>
   <tr>
     <th>Title</th>
     <th>Receiver</th>
@@ -86,7 +135,8 @@ Email: <%= @parent.email %><br />
     <th>Member</th>
     <th>Status</th>
   </tr>
-<% if @groupnil %>
+  </thead>
+  <tbody>
   <% @sinv.each do |inv| %>
   <tr>
     <td><%= inv.group.title %></td>
@@ -96,7 +146,10 @@ Email: <%= @parent.email %><br />
     <td><%= inv.status %></td>
   </tr>
   <% end %>
-<% end %>
+  </tbody>
 </table>
-
-<%= link_to "Log out", welcome_logout_path %>
+<% end %>
+</div>
+<div class='row'>
+<%= link_to "Log out", welcome_logout_path , :class => 'btn btn-warning'%>
+</div>

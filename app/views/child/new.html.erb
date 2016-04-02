@@ -1,7 +1,7 @@
-<h1>Child Update Panel</h1>
-
-<%= form_for @child, :method => :put , :html => {:class => "form-horizontal"} do |f| %>
-  <div class="form-group">
+<h1>New Child</h1>
+<div class="Sign_Form">
+  <%= form_for(:child, :url => {:controller => 'child', :action => 'create'}, :html => {:class => "form-horizontal"}) do |f| %>
+    <div class="form-group">
     <label for="inputFirstName" class="col-sm-2 control-label">First Name:</label>
     <div class="col-sm-4"><%= f.text_field :firstname, :class => 'form-control'%></div>
     </div>
@@ -14,8 +14,8 @@
     <div class="form-group">
     <label for="inputGender" class="col-sm-2 control-label">Gender:</label>
     <div class="col-sm-4">
-      <label class="radio-inline"><%= f.radio_button :gender, 'male', :checked => (@child.gender == 'male')%> Male</label>
-      <label class="radio-inline"><%= f.radio_button :gender, 'female', :checked => (@child.gender == 'female')%> Female</label>
+      <label class="radio-inline"><%= f.radio_button :gender, 'male'%> Male</label>
+      <label class="radio-inline"><%= f.radio_button :gender, 'female'%> Female</label>
     </div>
     </div>
       
@@ -52,13 +52,20 @@
     <div class="form-group">
     <div class="col-sm-offset-2 col-sm-2 checkbox">
       <label class="checkbox-inline">
-        <%= f.check_box :visible , :checked => (@child.visible)%> Visible
+        <%= f.check_box :visible%> Visible
       </label>
     </div>
     </div>
-    
     <div class="col-sm-6">
-    <%= f.submit "Update" , :class => 'btn btn-primary btn-block'%>
-    <%= link_to "Back", child_path(@child) , :class => 'btn btn-default btn-block'%>
+    <%= f.submit "Create" , :class => 'btn btn-primary btn-block'%>
     </div>
-<% end %>
+  <% end %>
+</div>
+
+<% if @child.errors.any? %>
+    <ul class="Signup_Errors">
+    <% for message_error in @child.errors.full_messages %>
+      <li>* <%= message_error %></li>
+    <% end %>
+    </ul>
+  <% end %>

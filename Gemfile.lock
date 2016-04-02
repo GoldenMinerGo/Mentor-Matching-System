@@ -93,6 +93,8 @@ GEM
     erubis (2.7.0)
     execjs (2.6.0)
     ffi (1.9.10)
+    font-awesome-sass (4.5.0)
+      sass (>= 3.2)
     formatador (0.2.5)
     gherkin (3.2.0)
     globalid (0.3.6)
@@ -270,6 +272,7 @@ DEPENDENCIES
   cucumber-rails
   cucumber-rails-training-wheels
   database_cleaner
+  font-awesome-sass
   guard-minitest (= 2.3.1)
   haml (= 4.0.7)
   jbuilder (= 2.2.3)
@@ -286,6 +289,7 @@ DEPENDENCIES
   sdoc (= 0.4.0)
   simplecov
   spring (= 1.1.3)
+  sprockets-rails
   sqlite3 (= 1.3.9)
   turbolinks (= 2.3.0)
   uglifier (= 2.5.3)
