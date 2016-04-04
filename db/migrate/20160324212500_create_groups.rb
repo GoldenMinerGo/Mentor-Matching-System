@@ -3,7 +3,7 @@ class CreateGroups < ActiveRecord::Migration
     create_table :groups do |t|
       t.string :title
       t.string :time_slot
-      t.string :competitions, array: true, default: []
+      t.text :competitions, array: true, default: []
       t.text :description
       t.boolean :visible
       t.timestamps null: false

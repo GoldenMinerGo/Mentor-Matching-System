@@ -3,27 +3,43 @@
 <table class='table'>
 <tr><td>#</td><td><%= @child.id %></td></tr>
 <tr><td>Name</td><td><%= @child.name %></td></tr>
-<tr><td>Gender</td><td><%= @child.gender %></td></tr>
+<tr><td>Gender</td><td><i class='fa fa-<%= @child.gender %>'></i></td></tr>
 <tr><td>Age</td><td><%= @child.age %></td></tr>
 <tr><td>School</td><td><%= @child.school %></td></tr>
 <tr><td>Grade</td><td><%= @child.grade %></td></tr>
 <tr><td>Time</td><td><%= @child.time_slot %></td></tr>
-<tr><td>Competitions</td><td><%= @child.competitions %></td></tr>
+<tr><td>Competitions</td><td>
+     <% @child.competitions.each do |competition| %>
+     <span class="label label-primary"><%= competition %></span>
+     <% end %>
+</td></tr>
 <tr><td>Description</td><td><%= @child.description %></td></tr>
 <% if @mychild %>
- <tr><td>Visible</td><td><%= @child.visible %></td></tr>
+ <tr><td>Visible</td><td><i class='fa fa-eye<%= "-slash" if !@child.visible %>'></i></td></tr>
 <% else %>
  <tr><td>Parent</td><td><%= @child.parent.name %></td></tr>
  <tr><td>Phone</td><td><%= @child.parent.phone %></td></tr>
  <tr><td>Email</td><td><%= @child.parent.email %></td></tr>
 <% end %> 
- <tr><td>Group</td><td><%= @group %></td></tr>
- <tr><td>Mentor</td><td><%= @mentor %></td></tr>
+
+    <% if @child.group_id.nil? %>
+      <tr><td>Group</td><td></td></tr>
+      <tr><td>Mentor</td><td></td></tr>
+    <% else %>
+      <tr><td>Group</td><td><%= @child.group.title %></td></tr>
+      <tr><td>Mentor</td>
+      <% if @child.group.mentor_id.nil? %>
+        <td></td>
+      <% else %>
+        <td><%= @child.group.mentor.name %></td>
+      <% end %>
+      </tr>
+    <% end %>
 </table>
 
 <% if @mychild %>
  <%= link_to "Edit", edit_child_path(@child) , :class => 'btn btn-block btn-primary'%>
 <% end %>
-<%= link_to "Delete this child", child_path(@child), :class => 'btn btn-block btn-danger', data: {:confirm => 'Are you sure?'}, method: :delete %>
+<%= link_to "Delete", child_path(@child), :class => 'btn btn-block btn-danger', data: {:confirm => 'Are you sure?'}, method: :delete %>
 <%= link_to "Back", parent_path , :class => 'btn btn-block btn-default'%>
 </div>

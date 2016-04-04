@@ -12,19 +12,10 @@ class ChildController < ApplicationController
         
         @child = Child.find_by_id(params[:id])
         if (@child.nil? || (rinv.empty? && @child.parent.user_id != @user.id))
+            flash[:warning] = "Sorry, your user account is not allowed to access this information."
             redirect_to parent_path and return
         end
         @mychild = @child.parent.user_id == @user.id
-        if @child.group_id.nil?
-            @group = ''
-            @mentor = ''
-        elsif @child.group.mentor_id.nil?
-            @group = @child.group.title
-            @mentor = ''
-        else
-            @group = @child.group.title
-            @mentor = @child.group.mentor.firstname + ' ' + @child.group.mentor.lastname 
-        end
     end
     
     def edit
@@ -32,6 +23,7 @@ class ChildController < ApplicationController
         redirect_to root_path and return if @user.nil?
         @child = Child.find_by_id(params[:id])
         if (@child.nil? ||  @child.parent.user_id != @user.id)
+            flash[:warning] = "Sorry, your user account is not allowed to access this information."
             redirect_to parent_path and return
         end
     end
@@ -41,16 +33,21 @@ class ChildController < ApplicationController
         redirect_to root_path and return if @user.nil?
         @child = Child.find_by_id(params[:id])
         if (@child.nil? ||  @child.parent.user_id != @user.id)
+            flash[:warning] = "Sorry, your user account is not allowed to access this information."
             redirect_to parent_path and return
         end
-        if @child.update_attributes!(child_params)
-            redirect_to child_path(@child.id)
+        if @child.update_attributes(child_params)
+            flash[:success] = "Your child Information has been updated successfully"
+            redirect_to child_path(@child.id) and return
         else
-            redirect_to edit_child_path(@child)
+            flash[:danger] = "The information you put is invalid"
+            redirect_to edit_child_path(@child) and return
         end
     end
     
     def new
+        @user=User.whois(session)
+        redirect_to root_path and return if @user.nil?
         @child=Child.new
     end
     
@@ -76,12 +73,11 @@ class ChildController < ApplicationController
         @child.destroy
         flash[:success]="You have deleted a child information"
         redirect_to parent_path
-        
     end
     
     private
     
     def child_params
-        params.require(:child).permit(:firstname, :lastname, :gender, :age, :school, :grade, :time_slot, :competitions, :description, :visible)
+        params.require(:child).permit(:firstname, :lastname, :gender, :age, :school, :grade, :time_slot, :competitions, :str_com, :description, :visible)
     end
 end
