@@ -25,7 +25,11 @@
             <td><%= child.school %></td>
             <td><%= child.grade %></td>
             <td><%= child.time_slot %></td>
-            <td><%= child.competitions %></td>
+            <td>
+              <% child.competitions.each do |competition| %>
+                <span class="label label-primary"><%= competition %></span>
+              <% end %>
+            </td>
             <td><%= child.description %></td>
             <% if child.group.nil? %>
               <td></td>
