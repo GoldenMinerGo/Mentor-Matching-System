@@ -1,34 +1,37 @@
-<h1>New Parent</h1>
-<div class="Sign_Form">
-<%= form_for(:parent, :url => {:controller => 'parent', :action => 'create'}, :html => {:class => "form-horizontal"}) do |f| %>
-  <div class="form-group">
-    <label for="inputFirstName" class="col-sm-2 control-label">First Name:</label>
-    <div class="col-sm-4"><%= f.text_field :firstname, :class => 'form-control'%></div>
-  </div>
-  
-  <div class="form-group">
-    <label for="inputLastName" class="col-sm-2 control-label">Last Name:</label>
-    <div class="col-sm-4"><%= f.text_field :lastname, :class => 'form-control' %></div>
-  </div>
-  
-  <div class="form-group">
-    <label for="inputPhone" class="col-sm-2 control-label">Phone:</label>
-    <div class="col-sm-4"><%= f.telephone_field :phone, :class => 'form-control'%></div>
-  </div>
-  
-  <div class="form-group">
-    <label for="inputEmail" class="col-sm-2 control-label">Email:</label>
-    <div class="col-sm-4"><%= f.email_field :email, :class => 'form-control'%></div>
-  </div>
-  <div class="col-sm-6">
-    <%= f.submit "Create" , :class => 'btn btn-block btn-primary'%>
-  </div>
-<% end %>
-</div>
-<% if @parent.errors.any? %>
-    <ul class="Signup_Errors">
-    <% for message_error in @parent.errors.full_messages %>
-      <li>* <%= message_error %></li>
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+    <h1>New Parent</h1>
+    <div class="Sign_Form">
+      <%= form_for(:parent, :url => {:controller => 'parent', :action => 'create'}, :html => {:class => "form-horizontal"}) do |f| %>
+        <div class="form-group">
+          <label for="inputFirstName" class="col-sm-4 control-label">First Name:</label>
+          <div class="col-sm-8"><%= f.text_field :firstname, :class => 'form-control'%></div>
+        </div>
+        <div class="form-group">
+          <label for="inputLastName" class="col-sm-4 control-label">Last Name:</label>
+          <div class="col-sm-8"><%= f.text_field :lastname, :class => 'form-control' %></div>
+        </div>
+        <div class="form-group">
+          <label for="inputPhone" class="col-sm-4 control-label">Phone:</label>
+          <div class="col-sm-8"><%= f.telephone_field :phone, :class => 'form-control'%></div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail" class="col-sm-4 control-label">Email:</label>
+          <div class="col-sm-8"><%= f.email_field :email, :class => 'form-control'%></div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <%= f.submit "Create" , :class => 'btn btn-block btn-primary'%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% if @parent.errors.any? %>
+      <ul class="Signup_Errors">
+        <% for message_error in @parent.errors.full_messages %>
+          <li>* <%= message_error %></li>
+        <% end %>
+      </ul>
     <% end %>
-    </ul>
-  <% end %>
+  </div>
+</div>

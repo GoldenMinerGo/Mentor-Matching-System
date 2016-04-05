@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MentorMatchingSystem</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <title>Mentor Matching System</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 </head>
 <body>
   <div class="container">
     <div class='row'>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
             <i class="fa fa-users"></i> Mentor Matching System
           </a>
         </div>
+        <% if !session[:user_id].nil? %>
+        <div class="nav navbar-nav navbar-right hidden-xs">
+          <%= link_to "Log out", welcome_logout_path , :class => 'btn btn-warning navbar-btn'%>
+        </div>
+        <% end %>
       </div>
     </nav>  
     </div>
@@ -31,6 +38,19 @@
     <%= yield %>
     <!--<%= debug(params) if Rails.env.development? %>-->
   </div>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
+  <footer class="row-footer">
+        <div class="container">
+            <div class="row row-content">
+              <div class="col-xs-12">
+                <p style="padding:10px;"></p>
+                <p align=center>Copyright &copy; 2016 TAMU Honors Program</p>
+              </div>
+            </div>
+        </div>
+    </footer>
+  
+  
+  <%= javascript_include_tag 'application_body', 'data-turbolinks-track' => true %>
 </body>
 </html>
