@@ -35,6 +35,15 @@ class User < ActiveRecord::Base
         encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
     end
     
+    def name
+        if self.role == 'Parent'
+            return self.parent.name if !self.parent.nil?
+        else
+            return self.mentor.name if !self.mentor.nil?
+        end
+        return "new user"
+    end
+    
     validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
     validates :password, :confirmation => true #password_confirmation attr
     validates_length_of :password, :in => 6..20, :on => :create
