@@ -15,11 +15,15 @@
     <td><%= @group.title %></td>
     <td><%= @group.mentor.name %></td>
     <td><%= child.name %></td>
-    <td><%= link_to "Delete", group_path(@group),data: {:confirm => 'Are you sure?'} %></td>
+    <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
+    <!--<td><%#= link_to (group_path(@group))do %></td>-->
+    <%#= child.group_id = nil %>
+    <%# end %>
     <%#add child#delete%>
   </tr>
   <% end %>
 </table>
 <br />
-<%= link_to "Update Group Information", edit_group_path(@group) %><br /><br />
-<%= link_to "Close this group", group_path(@group), data: {:confirm => 'Are you sure?'}, method: :delete %><br />
+<%= link_to "Update Group Information", edit_group_path(@group) %><br />
+<%= link_to "Close this group", { action: :destroy, id: @group.id }, data: {:confirm => 'Are you sure?'}, method: :delete %><br />
+<%= link_to "Back", parent_path %>

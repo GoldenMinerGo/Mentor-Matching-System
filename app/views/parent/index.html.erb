@@ -19,9 +19,14 @@ Email: <%= @parent.email %><br />
   <tr>
     <td><%= child.id %></td>
     <td><%= child.name %></td>
-    <% if @groupnil %>
-      <td><%= child.group.title %></td>
-      <td><%= child.group.mentor.name %></td>
+    <% if @groupnotnil %>
+      <% if child.group_id == 0 %>
+        <td>group id is zero</td>
+        <td>Of course no mentor</td>
+      <%else%>
+        <td><%= child.group.title %></td>
+        <td><%= child.group.mentor.name %></td>
+      <% end %>
     <% else %>
       <td>No group</td>
       <td>Of course no mentor</td>
@@ -41,7 +46,7 @@ Email: <%= @parent.email %><br />
     <th>Members</th>
     <th></th>
   </tr>
-  <% if @groupnil %>
+  <% if @groupnotnil %>
     <% @groups.each do |group| %>
     <tr>
       <td><%= group.id %></td>
@@ -63,7 +68,7 @@ Email: <%= @parent.email %><br />
     <th>Member</th>
     <th>Status</th>
   </tr>
-<% if @groupnil %>
+<% if @groupnotnil %>
   <% @rinv.each do |inv| %>
   <tr>
     <td><%= inv.group.title %></td>
@@ -86,7 +91,7 @@ Email: <%= @parent.email %><br />
     <th>Member</th>
     <th>Status</th>
   </tr>
-<% if @groupnil %>
+<% if @groupnotnil %>
   <% @sinv.each do |inv| %>
   <tr>
     <td><%= inv.group.title %></td>

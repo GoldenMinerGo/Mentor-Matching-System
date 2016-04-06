@@ -11,4 +11,15 @@ class Group < ActiveRecord::Base
         end
         list.join(', ')
     end
+    
+    #before_show do
+    #    @group.title="RK"
+    #
+    before_destroy do
+        self.children.each do |child|
+            child.group_id = 0
+            child.save!
+        end
+    end
+    
 end

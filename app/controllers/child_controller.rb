@@ -17,7 +17,7 @@ class ChildController < ApplicationController
             redirect_to parent_path and return
         end
         @mychild = @child.parent.user_id == user.id
-        if @child.group_id.nil?
+        if @child.group.nil?
             @group = ''
             @mentor = ''
         elsif @child.group.mentor_id.nil?
