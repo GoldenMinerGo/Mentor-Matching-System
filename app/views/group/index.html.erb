@@ -1,6 +1,6 @@
 <h1>Group Information</h1>
 
-<h2>Your Group Information</h2>
+<h2>All Groups</h2>
 <table>
   <tr>
     <th>ID</th>
@@ -13,9 +13,10 @@
   <tr>
     <td><%= group.id %></td>
     <td><%= group.title %></td>
-    <td><%= group.mentor.name %></td>
+    <td><%#= group.mentor.name %></td>
     <td><%= group.members %></td>
 
   </tr>
   <% end %>
 </table>
+<%= link_to "Back", parent_path %>

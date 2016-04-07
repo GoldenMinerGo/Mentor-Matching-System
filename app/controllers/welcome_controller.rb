@@ -26,6 +26,7 @@ class WelcomeController < ApplicationController
   
   def index
     @user = User.whois(session)
+    reset_session
   end
   
   
