@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
     belongs_to :mentor
     belongs_to :admin, class_name: "Parent", foreign_key: "admin_id"
     has_many :invitations
-    
+    serialize :competitions
     def members
         list=[]
         self.children.each do |child|

@@ -11,6 +11,9 @@ gem 'jquery-rails','4.0.3'
 gem 'turbolinks', '2.3.0'
 gem 'jbuilder', '2.2.3'
 gem 'sdoc','0.4.0', group: :doc
+gem 'sprockets-rails'
+gem 'font-awesome-sass'
+gem 'bootstrap_tokenfield_rails'
 
 group :development, :test do 
 	gem 'sqlite3', '1.3.9'
@@ -24,6 +27,7 @@ group :development, :test do
     gem 'launchy'
     gem 'rspec-rails'
     gem 'simplecov'
+    gem 'htmlbeautifier'
 end
 
 group :test do

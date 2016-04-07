@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get "parent" => "parent#index"
   get "parent/edit" => "parent#edit"
   put "parent" => "parent#update"
+  get "parent/new" => "parent#new"
+  post "parent/create" => "parent#create"
   
   #get "group" => "group#index"
   #get "group/edit" => "group#edit"

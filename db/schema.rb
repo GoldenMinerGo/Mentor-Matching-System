@@ -22,7 +22,8 @@ ActiveRecord::Schema.define(version: 20160327032023) do
     t.string   "school"
     t.string   "grade"
     t.string   "time_slot"
-    t.string   "competitions", default: "--- []\n"
+    t.text     "competitions", default: "--- []\n"
+    t.string   "str_com"
     t.text     "description"
     t.boolean  "visible"
     t.datetime "created_at",                        null: false
@@ -33,7 +34,7 @@ ActiveRecord::Schema.define(version: 20160327032023) do
   create_table "groups", force: :cascade do |t|
     t.string   "title"
     t.string   "time_slot"
-    t.string   "competitions", default: "--- []\n"
+    t.text     "competitions", default: "--- []\n"
     t.text     "description"
     t.boolean  "visible"
     t.datetime "created_at",                        null: false
@@ -61,7 +62,7 @@ ActiveRecord::Schema.define(version: 20160327032023) do
     t.string   "school"
     t.string   "grade"
     t.string   "time_slot"
-    t.string   "competitions", default: "--- []\n"
+    t.text     "competitions", default: "--- []\n"
     t.text     "description"
     t.boolean  "visible"
     t.datetime "created_at",                        null: false

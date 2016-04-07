@@ -37,7 +37,11 @@ module NavigationHelpers
     when /^the Signup page$/
       '/users/new'
 
-
+    when /^the Group Information page$/
+      '/group'
+      
+    when /^the group edit page$/
+      '/group/edit'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -9,7 +9,8 @@ class CreateChildren < ActiveRecord::Migration
       t.string :school
       t.string :grade
       t.string :time_slot
-      t.string :competitions, array: true, default: []
+      t.text :competitions, array: true, default: []
+      t.string :str_com
       t.text :description
       t.boolean :visible
       t.timestamps null: false

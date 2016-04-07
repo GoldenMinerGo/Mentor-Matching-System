@@ -16,10 +16,6 @@
     <td><%= @group.mentor.name %></td>
     <td><%= child.name %></td>
     <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
-    <!--<td><%#= link_to (group_path(@group))do %></td>-->
-    <%#= child.group_id = nil %>
-    <%# end %>
-    <%#add child#delete%>
   </tr>
   <% end %>
 </table>
