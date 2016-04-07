@@ -15,7 +15,7 @@
     <td><%= @group.title %></td>
     <td><%= @group.mentor.name %></td>
     <td><%= child.name %></td>
-    <td><%= link_to "Delete", group_path(@group),data: {:confirm => 'Are you sure?'} %></td>
+    <td><%= link_to "Delete", group_path(@group),data: {:confirm => 'Are you sure?'}, method: :update %></td>
     <%#add child#delete%>
   </tr>
   <% end %>

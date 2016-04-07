@@ -1,4 +1,5 @@
 ##parent step
+##group step
 
 Given (/^the following (.*) exist:$/) do |type, table| 
     if type == "User"
