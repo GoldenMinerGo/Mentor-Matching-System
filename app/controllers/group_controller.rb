@@ -39,6 +39,7 @@ class GroupController < ApplicationController
     end
     
     def create
+        #add much informaton such as competition, mentor
         @user = User.whois(session)
         redirect_to root_path and return if @user.nil?
         @group = Group.new(group_params)
