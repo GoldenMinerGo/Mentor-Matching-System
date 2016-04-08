@@ -8,17 +8,19 @@ class MentorsController < ApplicationController
       @mentor = Mentor.new(mentor_params)
       @mentor.user_id = session[:user_id]
       @mentor.visible = true
-      if @mentor.save && dob_valid(@mentor)
-        flash[:success] = "You have successfully filled your mentor file"
-        redirect_to mentor_path(@mentor) and return
+      redirect_to new_mentor_path and return if !@mentor.date_of_birth.past?
+        if @mentor.save
+          flash[:success] = "You have successfully filled your mentor file"
+          redirect_to mentor_path(@mentor) and return
+        else
+          flash[:warning] = "Form is invalid"
+          redirect_to new_mentor_path and return
+        end
       else
-        flash[:warning] = "Form is invalid"
-        redirect_to new_mentor_path and return
-      end
   end
     
   def index
-    @mentor = Mentor.where(:visible => true)
+    @mentors = Mentor.where(:visible => true)
   end
   
   def edit
@@ -30,19 +32,19 @@ class MentorsController < ApplicationController
       @user = User.whois(session)
       redirect_to new_mentor_path and return if @mentor.nil?
       @id = @mentor.id
-      @age = age_calculate(@mentor.date_of_birth)
+      @age = @mentor.age
       @groups = @mentor.groups
-      @groupnil = !@groups.empty?
   end
   
   def update
       @mentor = check_user_and_return_mentor(session)
-      if @mentor.update_attributes(mentor_params) && dob_valid(@mentor)
+      redirect_to edit_mentor_path and return if !mentor_params[:date_of_birth].to_date.past?
+      if @mentor.update_attributes(mentor_params)
         flash[:success] = "Successfully updated"
-        redirect_to mentor_path(@mentor)
+        redirect_to mentor_path(@mentor) and return
       else
         flash[:warning] = "Invalid input form"
-        redirect_to edit_mentor_path
+        redirect_to edit_mentor_path and return
       end
   end
   
@@ -57,7 +59,7 @@ class MentorsController < ApplicationController
     @mentor = check_user_and_return_mentor(session)
     @group = Group.find_by_id(params[:id])
     @group.mentor_id = 0
-    @group.save
+    @group.save!
     redirect_to mentor_path(@mentor)
   end
     
@@ -74,19 +76,5 @@ class MentorsController < ApplicationController
     user.mentor
   end
   
-  def age_calculate(dob)
-    now = Time.now.utc.to_date
-    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
-  end
-  
-      
-  def dob_valid(mentor)
-    if !mentor.date_of_birth.past?
-      flash[:warning] = "Date of Birth must be before today"
-      redirect_to new_mentor_path and return
-    else
-      true
-    end
-  end
   
 end

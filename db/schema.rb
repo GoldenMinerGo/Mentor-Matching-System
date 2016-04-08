@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20160408042503) do
     t.string   "school"
     t.string   "grade"
     t.string   "time_slot"
-    t.string   "competitions",  default: "--- []\n"
+    t.text     "competitions",  default: "--- []\n"
     t.text     "description"
     t.boolean  "visible"
     t.datetime "created_at",                         null: false

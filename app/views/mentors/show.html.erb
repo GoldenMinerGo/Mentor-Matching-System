@@ -9,7 +9,7 @@ Last Login at: <%= @user.last_login_time %><br />
 Description: <%= @mentor.description %><br />
 
 <h2>Group</h2>
-<% if @groups.nil? %>
+<% if @groups.empty? %>
 
 <% else %>
 <table>
@@ -20,7 +20,7 @@ Description: <%= @mentor.description %><br />
 <% @groups.each do |group| %>
   <tr>
     <td><%= group.title %></td>
-    <td><%= link_to "Quit the group", mentor_quit_group_path(group), data: {:confirm => 'Are you sure?'}, method: :quit_group %></td>
+    <td><%= link_to "Quit the group", mentor_quit_group_path(group), data: {:confirm => 'Are you sure?'} %></td>
   </tr>
 <% end %>
 </table>
