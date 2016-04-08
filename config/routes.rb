@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get "parent/edit" => "parent#edit"
   put "parent" => "parent#update"
   
+  get "mentor/quit_group/:id" => "mentors#quit_group", as: :mentor_quit_group
+  
   #get "group" => "group#index"
   #get "group/edit" => "group#edit"
   #put "group" => "group#update"

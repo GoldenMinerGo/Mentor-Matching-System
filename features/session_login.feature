@@ -3,8 +3,8 @@ Feature: Session login
   I would like the database to remember my login status
   So that I would not be filling login every time
 
-  Background: Users in database
-    Given the following users exist:
+  Background: users in database
+    Given the following User exist:
       | username | password | role |
       | Lilei|19930618as|Mentor|
       | Hanmeimei|19930618as|Mentor|

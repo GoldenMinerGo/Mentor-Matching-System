@@ -6,6 +6,7 @@ class WelcomeController < ApplicationController
     authorized_user = User.authenticate(welcome_params[:username],welcome_params[:login_password])
     if authorized_user
       session[:user_id] = authorized_user.id
+      authorized_user.update_columns(:last_login_time => Time.zone.now)
       flash[:success] = "Wow Welcome again, you logged in as #{authorized_user.role} "
       if authorized_user.role == 'Mentor'
         redirect_to mentor_path(authorized_user) and return

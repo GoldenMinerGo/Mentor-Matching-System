@@ -18,9 +18,9 @@ end
 
 
 mentors = [
-	{:user_id => User.find(2).id, :firstname => 'Meimei', :lastname => 'Han', :phone => '9796760002', :email => 'user2@tamu.edu', :gender => 'male', :age => 25, :school => 'School 5', :grade => 'U1', :time_slot => '12:00 - 13:00 Mon', :competitions => ['FIRST'], :description => '...', :visible => false},
+	{:user_id => User.find(2).id, :firstname => 'Meimei', :lastname => 'Han', :phone => '9796760002', :email => 'user2@tamu.edu', :gender => 'male', :date_of_birth => 1993-06-18, :school => 'School 5', :grade => 'U1', :time_slot => '12:00 - 13:00 Mon', :competitions => ['FIRST'], :description => '...', :visible => false},
 	
-	{:user_id => User.find(3).id, :firstname => 'Hua', :lastname => 'Wang', :phone => '9796760003', :email => 'user3@tamu.edu', :gender => 'female', :age => 20, :school => 'School 6', :grade => 'U3', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST'], :description => '...', :visible => true}
+	{:user_id => User.find(3).id, :firstname => 'Hua', :lastname => 'Wang', :phone => '9796760003', :email => 'user3@tamu.edu', :gender => 'female', :date_of_birth => 1993-06-18, :school => 'School 6', :grade => 'U3', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST'], :description => '...', :visible => true}
 ]
 
 mentors.each do |mentor|
@@ -77,6 +77,18 @@ invitations = [
 	{:group_id => Group.find(1).id, :sender_id => Child.find(5).id, :receiver_id => Child.find(2).id, :status => 'declined'}
 ]
 
+
 invitations.each do |invitation|
   Invitation.create!(invitation)
+end
+
+groupinvs = [
+	{:group_id => Group.find(2).id, :mentor_id => Mentor.find(2).id, :status => 'pending'},
+	
+	{:group_id => Group.find(1).id, :mentor_id => Mentor.find(1).id, :status => 'declined'}
+]
+
+
+groupinvs.each do |groupinv|
+  Groupinv.create!(groupinv)
 end
