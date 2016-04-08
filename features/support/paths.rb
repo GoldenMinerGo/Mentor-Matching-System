@@ -39,9 +39,12 @@ module NavigationHelpers
 
     when /^the Group Information page$/
       '/group'
-      
-    when /^the group edit page$/
-      '/group/edit'
+    # to see the group information  
+    when /^the New Group page$/
+      '/group/new'
+    # to add a new group  
+  
+  
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

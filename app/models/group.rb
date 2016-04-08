@@ -22,4 +22,10 @@ class Group < ActiveRecord::Base
         end
     end
     
+    before_save do
+        self.competitions = self.str_com.split(/\s*,\s*/)
+        self.competitions.uniq!
+        self.str_com = self.competitions.join(',')
+    end
+    
 end

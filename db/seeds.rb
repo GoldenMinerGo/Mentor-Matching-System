@@ -44,9 +44,9 @@ end
 
 
 groups = [
-	{:title => 'group 1', :admin_id => Parent.find(1).id, :mentor_id => Mentor.find(1).id, :time_slot => '12:00 - 13:00 Mon', :competitions => ['FIRST'], :description => '...', :visible => true},
+	{:title => 'group 1', :admin_id => Parent.find(1).id, :mentor_id => Mentor.find(1).id, :time_slot => '12:00 - 13:00 Mon', :competitions => ['FIRST'],:str_com => 'FIRST', :description => '...', :visible => true},
 	
-	{:title => 'group 2', :admin_id => Parent.find(2).id, :mentor_id => Mentor.find(2).id, :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST'], :description => '...', :visible => true}
+	{:title => 'group 2', :admin_id => Parent.find(2).id, :mentor_id => Mentor.find(2).id, :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST'],:str_com => 'BEST', :description => '...', :visible => true}
 ]
 
 groups.each do |group|

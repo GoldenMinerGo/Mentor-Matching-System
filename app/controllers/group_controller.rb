@@ -43,10 +43,12 @@ class GroupController < ApplicationController
         @user = User.whois(session)
         redirect_to root_path and return if @user.nil?
         @group = Group.new(group_params)
+        @group.admin_id = @user.parent.id
         @child = Child.find(5)
         if @group.save
             @child.group_id = @group.id
             @child.save!
+            
             flash[:success] = "The group information has been created successfully"
             
             redirect_to parent_path and return
@@ -58,11 +60,10 @@ class GroupController < ApplicationController
     
     def change
         @child = Child.find_by_id(params[:id])
-        @group=@child.group
+        @group = @child.group
         @child.group_id = 0
         @child.save!
         redirect_to group_path(@group)
-
     end
     
     def destroy
@@ -80,6 +81,6 @@ class GroupController < ApplicationController
     private
     
     def group_params
-        params.require(:group).permit(:title)
+        params.require(:group).permit(:title, :time_slot, :competitions, :str_com)
     end
 end

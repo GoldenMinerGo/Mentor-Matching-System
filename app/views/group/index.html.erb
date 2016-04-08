@@ -6,17 +6,32 @@
     <th>ID</th>
     <th>Title</th>
     <th>Mentor</th>
-    <th>Members</th>
     
+    <th>Members</th>
+    <th>#Members</th>
+    <th>Admin</th>
+    <th>Available time</th>
+    <th>Competition</th>
   </tr>
  <% @groups.each do |group| %>
   <tr>
     <td><%= group.id %></td>
     <td><%= group.title %></td>
-    <td><%#= group.mentor.name %></td>
+    <% if group.mentor.nil? %>
+      <td>TBD</td>
+    <% else %>
+      <td><%= group.mentor.name %></td>
+    <% end %>
+    
     <td><%= group.members %></td>
+    <td><%= group.children.count%></td>
+    <%#= group.members.count %>
+    <td><%= Parent.find(group.admin_id).name %></td>
+    <td><%= group.time_slot %></td>
+    <td><%= group.competitions %></td>
 
   </tr>
   <% end %>
 </table>
+<br/>
 <%= link_to "Back", parent_path %>

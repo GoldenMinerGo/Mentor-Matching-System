@@ -8,16 +8,23 @@
     <th>Mentor</th>
     <th>Admin</th>
     <th>Members</th>
-    
+    <th>Available time</th>
+    <th>Competition</th>
     <th>Delete</th>
   </tr>
  <% @group.children.each do |child| %>
   <tr>
     <td><%= @group.id %></td>
     <td><%= @group.title %></td>
+    <% if @group.mentor.nil? %>
+    <td> TBD </td>
+    <%else%>
     <td><%= @group.mentor.name %></td>
+    <% end %>
     <td><%= Parent.find(@group.admin_id).name %></td>
     <td><%= child.name %></td>
+    <td><%= @group.time_slot %></td>
+    <td><%= @group.competitions %></td>
     <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
   </tr>
   <% end %>
