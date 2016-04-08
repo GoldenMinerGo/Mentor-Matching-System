@@ -10,13 +10,14 @@ class Mentor < ActiveRecord::Base
         %w(Male Female Unknown)
     end
     
+    
     EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i
     validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
     validates :firstname, :presence => true
     validates :lastname, :presence => true
     validates :phone, :presence => true
     validates :gender, :presence => true
-    validates :age, :presence => true
+    validates :date_of_birth, :presence => true
     validates :school, :presence => true
     validates :grade, :presence => true
     validates :time_slot, :presence => true

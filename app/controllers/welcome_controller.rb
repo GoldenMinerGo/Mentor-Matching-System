@@ -7,15 +7,15 @@ class WelcomeController < ApplicationController
     if authorized_user
       session[:user_id] = authorized_user.id
       session[:expires_at] = Time.current + 2.hours
-      flash[:notice] = "Wow Welcome again, you logged in as #{authorized_user.role} "
+      authorized_user.update_columns(:last_login_time => Time.zone.now)
+      flash[:success] = "Wow Welcome again, you logged in as #{authorized_user.role} "
       if authorized_user.role == 'Mentor'
         redirect_to mentor_path(authorized_user) and return
       else 
         redirect_to parent_path and return
       end
     else
-      flash[:notice] = "Invalid Username or Password"
-      flash[:color]= "invalid"
+      flash[:warning] = "Invalid Username or Password"
       redirect_to welcome_index_path
     end
   end

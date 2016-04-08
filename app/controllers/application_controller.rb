@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
   end
   def save_login_state
     if session[:user_id]
+      if User.find_by_id(session[:user_id]).nil?
+        session[:user_id] = nil
+        redirect_to welcome_index_path and return
+      end
       if User.find_by_id(session[:user_id]).role == "Parent"
         redirect_to(:controller => 'parent', :action => 'index')
       else

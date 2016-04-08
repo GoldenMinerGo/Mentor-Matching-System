@@ -1,0 +1,26 @@
+<h1>Mentor List</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Gender</th>
+    <th>Age</th>
+    <th>School</th>
+    <th>Grade</th>
+    <th>Time</th>
+    <th>Competitions</th>
+    <th>Description</th>
+  </tr>
+  <% @mentors.each do |mentor| %>
+  <tr>
+    <td><%= mentor.id %></td>
+    <td><%= mentor.gender %></td>
+    <td><%= mentor.age %></td>
+    <td><%= mentor.school %></td>
+    <td><%= mentor.grade %></td>
+    <td><%= mentor.time_slot %></td>
+    <td><%= mentor.competitions %></td>
+    <td><%= mentor.description %></td>
+  </tr>
+  <% end %>
+</table>

@@ -1,17 +1,7 @@
-Feature: Mentor edit
-  As a mentor 
-  I would like to be able to edit my profile 
-  So that I could change it to fit in my status
-
-  Mentor delete
-  As a coach
-  I would like to see that mentors can delete themselves when they don't want to teach anymore
-  So that I dont have to waste time waiting for an absent mentor
-  
-  Mentor quit group
-  As a mentor
-  I would like to be able to quit the group
-  So that I can find another when I don't like this group
+Feature: Group look for mentors
+  As a Coach of the group
+  I would like to be able to browse mentors 
+  So that I could pick them when I want
 
 Background: users, parents, children, groups, invitations, mentors in database
   Given the following User exist:
@@ -47,40 +37,3 @@ Background: users, parents, children, groups, invitations, mentors in database
     |2      | Nima     | Cao     | 9796760002  | nima@tamu.edu  | male    | 1993-06-18    | tamu   | U1    |12:00 - 13:00 Mon | ['BEST']     | heiheihei   | false   |
     |3      | Yibi     | keng    | 9796734502  | yibi@tamu.edu  | female  | 1993-06-19    | ecnu   | U2    |12:00 - 13:00 Mon | ['FIRST']    | heiheihei   | true    |
   
-  Given I am on the home page of Mentor Matching System
-  And I fill in "username" with "user3"
-  And I fill in "login_password" with "1q2w3e"
-  And I press "Log In"
-
-Scenario: Mentor edit
-  When I follow "Update Personal Information"
-  When I fill in "mentor[lastname]" with "Keng"
-  And I press "Update" 
-  Then I should see "Successfully"
-  And I should see "Keng"
-  And I should not see "keng"
-
-Scenario: Show all mentors
-  When I am on the Mentor Index page
-  Then I should not see "Nima"
-  And I should see "Yibi"
-  
-Scenario: Mentor quit group
-  When I press "Quit the group"
-  Then I should see "Yibi"
-  And I should not see "group 1"
-  
-Scenario: Mentor delete 
-  When I press "Delete"
-  Then I should be on the home page of Mentor Matching System
-  And I should see "successfully"
-  
-
-Scenario: Mentor edit failure (sad path)
-  When I follow "Update Personal Information"
-  When I fill in "mentor[date_of_birth]" with "2017-01-01"
-  And I fill in "mentor[lastname]" with "Keng"
-  And I press "Update"
-  Then I should not see "Keng"
-  Then I should see "Invalid"
-

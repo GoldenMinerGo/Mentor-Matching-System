@@ -28,8 +28,17 @@ module NavigationHelpers
     when /^the home page of Mentor Matching System$/
       '/welcome/index'
     
+    when /^the New User page$/
+      '/users/new'
+    
     when /^the New Mentor page$/
       '/mentors/new'
+      
+    when /^the Edit Mentor page$/
+      '/mentors/edit'
+      
+    when /^the Show Mentor page$/
+      '/mentors'
       
     when /^the Parent page$/
       '/parent'
@@ -45,6 +54,15 @@ module NavigationHelpers
     # to add a new group  
   
   
+    
+    when /^the Mentor Index page$/
+      '/mentors/index'
+    
+    when /^the Yibi page$/
+      '/mentors/3'
+      
+    when /^the Group Information page$/
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

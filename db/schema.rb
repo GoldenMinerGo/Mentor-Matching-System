@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327032023) do
+ActiveRecord::Schema.define(version: 20160408042503) do
 
   create_table "children", force: :cascade do |t|
     t.integer  "parent_id"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 20160327032023) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.integer  "group_id"
+  end
+
+  create_table "groupinvs", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "mentor_id"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "groups", force: :cascade do |t|
@@ -59,15 +67,15 @@ ActiveRecord::Schema.define(version: 20160327032023) do
     t.string   "phone"
     t.string   "email"
     t.string   "gender"
-    t.integer  "age",          default: 20
+    t.date     "date_of_birth"
     t.string   "school"
     t.string   "grade"
     t.string   "time_slot"
-    t.text     "competitions", default: "--- []\n"
+    t.string   "competitions",  default: "--- []\n"
     t.text     "description"
     t.boolean  "visible"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "user_id"
   end
 
