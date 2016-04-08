@@ -6,6 +6,7 @@ class ParentController < ApplicationController
         @parent=@user.parent
         @children=@parent.children
         @groups=Group.where(:admin_id => @parent)
+        #to be changed
         @rinv=Invitation.where(:receiver_id => @children)
         @sinv=Invitation.where(:sender_id => @children)
     end

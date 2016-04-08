@@ -1,21 +1,37 @@
 <h1>Group Information</h1>
 
-<h2>Your Group Information</h2>
+<h2>All Groups</h2>
 <table>
   <tr>
     <th>ID</th>
     <th>Title</th>
     <th>Mentor</th>
-    <th>Members</th>
     
+    <th>Members</th>
+    <th>#Members</th>
+    <th>Admin</th>
+    <th>Available time</th>
+    <th>Competition</th>
   </tr>
- <% @groups.children.each do |child| %>
+ <% @groups.each do |group| %>
   <tr>
-    <td><%= @groups.id %></td>
-    <td><%= @groups.title %></td>
-    <td><%= @groups.mentor.name %></td>
-    <td><%= child.name %></td>
+    <td><%= group.id %></td>
+    <td><%= group.title %></td>
+    <% if group.mentor.nil? %>
+      <td>TBD</td>
+    <% else %>
+      <td><%= group.mentor.name %></td>
+    <% end %>
+    
+    <td><%= group.members %></td>
+    <td><%= group.children.count%></td>
+    <%#= group.members.count %>
+    <td><%= Parent.find(group.admin_id).name %></td>
+    <td><%= group.time_slot %></td>
+    <td><%= group.competitions %></td>
 
   </tr>
   <% end %>
 </table>
+<br/>
+<%= link_to "Back", parent_path %>

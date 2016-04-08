@@ -2,8 +2,8 @@ class GroupController < ApplicationController
     def index
         user = User.find(1)
         @parent = user.parent
-        @groups = Group.where(:admin_id => @parent)[0]
-        #@groups = Group.all
+        #@groups = Group.where(:visible => true).where.not(:admin_id => @parent)
+        @groups = Group.all
         #@members = @groups.members
     end
     
@@ -17,10 +17,7 @@ class GroupController < ApplicationController
         #user = User.find(1)
         #@parent = user.parent
         @group = Group.find_by_id(params[:id])
-        #@children=@parent.children
-        #if you use where, @groups is an array, like [group1,group2],then
-        #you use @groups directly, it's not a group instance, so report error.
-        #@groups = Group.where(:admin_id => @parent)
+        
     end
     
     def update
@@ -28,15 +25,45 @@ class GroupController < ApplicationController
         @parent=user.parent
         #@groups=Group.where(:admin_id => @parent)[0]
         @group = Group.find_by_id(params[:id])
-        if @group.update_attributes!(group_params)
+        if @group.update_attributes(group_params)
             redirect_to group_path
         else
             redirect_to parent_path
         end
     end
     
+    def new
+        @user = User.whois(session)
+        redirect_to root_path and return if @user.nil?
+        @group = Group.new
+    end
+    
     def create
-        
+        #add much informaton such as competition, mentor
+        @user = User.whois(session)
+        redirect_to root_path and return if @user.nil?
+        @group = Group.new(group_params)
+        @group.admin_id = @user.parent.id
+        @child = Child.find(5)
+        if @group.save
+            @child.group_id = @group.id
+            @child.save!
+            
+            flash[:success] = "The group information has been created successfully"
+            
+            redirect_to parent_path and return
+        else
+            flash[:danger] = "The information you put is invalid"
+            redirect_to parent_new_path and return
+        end
+    end
+    
+    def change
+        @child = Child.find_by_id(params[:id])
+        @group = @child.group
+        @child.group_id = 0
+        @child.save!
+        redirect_to group_path(@group)
     end
     
     def destroy
@@ -47,15 +74,13 @@ class GroupController < ApplicationController
        
         #redirect_to group_path 
         redirect_to parent_path
-        flash[:notice] = "Your group deleted."
+        flash[:success] = "Your group deleted."
     end
     
+
     private
     
     def group_params
-        params.require(:group).permit(:title)
+        params.require(:group).permit(:title, :time_slot, :competitions, :str_com)
     end
-        
-    
-    
 end

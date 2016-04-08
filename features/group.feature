@@ -3,6 +3,7 @@ Feature: check group information
   I want to check my group information including group ID, group title, mentor of the group and members of the group.
   
   Background: users, parents, children, groups, mentors in database
+  
   Given the following User exist:
     | username    | password | role     | last_login_time |
     | user1       | 1q2w3e   | parent   | 1977-05-25      |
@@ -35,9 +36,41 @@ Feature: check group information
     |user_id| firstname| lastname| phone       | email          | gender  | age | school | grade |time_slot         | competitions | description | visible |
     |2      | Nima     | Cao     | 9796760002  | nima@tamu.edu  | male    | 25  | tamu   | U1    |12:00 - 13:00 Mon | ['BEST']     | heiheihei   | false   |
     |3      | Yibi     | keng    | 9796734502  | yibi@tamu.edu  | female  | 20  | ecnu   | U2    |12:00 - 13:00 Mon | ['FIRST']    | heiheihei   | true    |
-
+ Given I am on the home page of Mentor Matching System
+    When I fill in "username" with "user1"
+    And I fill in "login_password" with "1q2w3e"
+    And I press "Log In"
+    
 Scenario: show group information
 When I go to the Group Information page
-Then I should see "Meimei Han"
-Then I should see "Alei lei"
-Then I should see "Yeh Yeh"
+#Then I should see "Meimei Han"
+#Then I should see "Alei lei"
+#Then I should see "Yeh Yeh"
+
+Scenario: add a new group
+When I go to the parent dashboard page
+
+When I follow "Add a group"
+Then I should be on the New Group page
+And I fill in "group[title]" with "GoldenMiner"
+And I fill in "group[str_com]" with "Olympics"
+And I press "Create"
+Then I should see "GoldenMiner"
+Then I should see "Olympics"
+
+Scenario: update group information
+When I go to the Group Information page
+When I follow "Update Group Information"
+Then I should be on the group edit page
+And I fill in "group[title]" with "SilverMiner"
+And I fill in "group[str_com]" with "SportsMeeting"
+And I press "Update"
+Then I should see "SilverMiner"
+Then I should see "SportsMeeting"
+
+Scenario: delete the group
+When I go to the parent dashboard page
+And I press "More"
+Then I should be on the Group Information page
+And I press "Delete"
+Then I should not see .....?

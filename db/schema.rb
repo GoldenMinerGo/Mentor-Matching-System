@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160327032023) do
     t.string   "title"
     t.string   "time_slot"
     t.text     "competitions", default: "--- []\n"
+    t.string   "str_com"
     t.text     "description"
     t.boolean  "visible"
     t.datetime "created_at",                        null: false

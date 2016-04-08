@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   #delete "group" => "group#destroy"
   resources :child
   resources :group
+  get 'group/:id/change' => 'group#change'
+  
+  # get "delmem/:id" => "group#del_member", as: 'deletemember'
   #resources :group
   # You can have the root of your site routed with "root"
   root 'welcome#index'

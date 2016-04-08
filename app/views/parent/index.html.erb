@@ -93,13 +93,14 @@
               <% else %>
                 <td><%= group.mentor.name %></td>
               <% end %>
-              <td><%= group.members %></td>
+              <td><%= group.members %>  (<%= group.children.count%>)</td>
               <td><%= link_to "More", group_path(group) %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     <% end %>
+    <%= link_to "Add a group", new_group_path %>
     <hr>
   </div>
 </div>

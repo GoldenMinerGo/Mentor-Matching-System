@@ -11,4 +11,21 @@ class Group < ActiveRecord::Base
         end
         list.join(', ')
     end
+    
+    #before_show do
+    #    @group.title="RK"
+    #
+    before_destroy do
+        self.children.each do |child|
+            child.group_id = 0
+            child.save!
+        end
+    end
+    
+    before_save do
+        self.competitions = self.str_com.split(/\s*,\s*/)
+        self.competitions.uniq!
+        self.str_com = self.competitions.join(',')
+    end
+    
 end
