@@ -20,7 +20,7 @@ Description: <%= @mentor.description %><br />
 <% @groups.each do |group| %>
   <tr>
     <td><%= group.title %></td>
-    <td><%= link_to "Quit the group", mentor_quit_group_path(group), data: {:confirm => 'Are you sure?'}, method: :quit_group %></td>
+    <td><%= link_to "Quit the group", mentor_quit_group_path(group), data: {:confirm => 'Are you sure?'}, method: :get %></td>
   </tr>
 <% end %>
 </table>

@@ -66,12 +66,12 @@ Scenario: Show all mentors
   And I should see "Yibi"
   
 Scenario: Mentor quit group
-  When I press "Quit the group"
+  When I follow "Quit the group"
   Then I should see "Yibi"
   And I should not see "group 1"
   
 Scenario: Mentor delete 
-  When I press "Delete"
+  When I follow "Delete"
   Then I should be on the home page of Mentor Matching System
   And I should see "successfully"
   

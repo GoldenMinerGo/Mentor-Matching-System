@@ -39,10 +39,10 @@ class MentorsController < ApplicationController
       @mentor = check_user_and_return_mentor(session)
       if @mentor.update_attributes(mentor_params) && dob_valid(@mentor)
         flash[:success] = "Successfully updated"
-        redirect_to mentor_path(@mentor)
+        redirect_to mentor_path(@mentor) and return
       else
         flash[:warning] = "Invalid input form"
-        redirect_to edit_mentor_path
+        redirect_to edit_mentor_path and return 
       end
   end
   
@@ -83,7 +83,7 @@ class MentorsController < ApplicationController
   def dob_valid(mentor)
     if !mentor.date_of_birth.past?
       flash[:warning] = "Date of Birth must be before today"
-      redirect_to new_mentor_path and return
+      nil
     else
       true
     end
