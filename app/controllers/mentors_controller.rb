@@ -8,7 +8,6 @@ class MentorsController < ApplicationController
       @mentor = Mentor.new(mentor_params)
       @mentor.user_id = session[:user_id]
       @mentor.visible = true
-      redirect_to new_mentor_path and return if !@mentor.date_of_birth.past?
         if @mentor.save
           flash[:success] = "You have successfully filled your mentor file"
           redirect_to mentor_path(@mentor) and return
@@ -38,7 +37,6 @@ class MentorsController < ApplicationController
   
   def update
       @mentor = check_user_and_return_mentor(session)
-      redirect_to edit_mentor_path and return if !mentor_params[:date_of_birth].to_date.past?
       if @mentor.update_attributes(mentor_params)
         flash[:success] = "Successfully updated"
         redirect_to mentor_path(@mentor) and return
@@ -50,9 +48,14 @@ class MentorsController < ApplicationController
   
   def destroy
     @mentor = check_user_and_return_mentor(session)
-    @mentor.destroy
-    flash[:success] = "You have successfully deleted your profile. Now you should be on the login page"
-    redirect_to welcome_index_path
+    if @mentor.destroy
+      flash[:success] = "You have successfully deleted your profile. Now you should be on the login page"
+      session[:user_id] = nil
+      redirect_to welcome_index_path
+    else 
+      flash[:warning] = "Something's wrong. Please try again"
+      redirect_to mentor_path(@mentor)
+    end
   end
   
   def quit_group

@@ -16,10 +16,8 @@ Feature: Session login
     And I press "Log In"
     Then I should be on the New Mentor page
     And I should see "Welcome"
-    Given I am on the home page of Mentor Matching System
   
 Scenario: Session login
-  When I follow "Sign Up"
+  Given I am on the home page of Mentor Matching System
   Then I should be on the New Mentor page
-  And I follow "Log out"
   

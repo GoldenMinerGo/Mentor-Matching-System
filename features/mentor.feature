@@ -27,15 +27,15 @@ Background: users, parents, children, groups, invitations, mentors in database
     |5       | Liangchen | Ye       | 9796760006 | user6@tamu.edu |
     
   Given the following Child exist:
-    |parent_id| firstname| lastname| gender| age| school  | grade| time_slot         | competitions      | description | visible | group_id |
-    |1        | Alei     | Lei     | male  | 5  | school 1| G1   | 12:00 - 13:00 Mon | ['BEST', 'FIRST'] | heiheihei   | true    | 1        |
-    |1        | Bi       | Dou     | male  | 7  | school 1| G2   | 12:00 - 13:00 Mon | ['BEST', 'FIRST'] | hahahaha    | true    | 2        |
-    |1        | Ma       | Ni      | male  | 9  | school 2| G3   | 12:00 - 13:00 Mon | ['BEST', 'FIRST'] | hahahaha    | false   | 1        |
+    |parent_id| firstname| lastname| gender| age| school  | grade| time_slot         | str_com           | description | visible | group_id |
+    |1        | Alei     | Lei     | male  | 5  | school 1| G1   | 12:00 - 13:00 Mon | BEST，FIRST       | heiheihei   | true    | 1        |
+    |1        | Bi       | Dou     | male  | 7  | school 1| G2   | 12:00 - 13:00 Mon | BEST，FIRST       | hahahaha    | true    | 2        |
+    |1        | Ma       | Ni      | male  | 9  | school 2| G3   | 12:00 - 13:00 Mon | BEST，FIRST       | hahahaha    | false   | 1        |
     
   Given the following Group exist:
-    |title  | admin_id| mentor_id| time_slot         | competitions      | description | visible |
-    |group 1| 1       | 1        | 12:00 - 13:00 Mon | ['BEST']          | heiheihei   | true    |
-    |group 2| 2       | 2        | 12:00 - 13:00 Mon | ['FIRST']         | heiheihei   | true    |
+    |title  | admin_id| mentor_id| time_slot         | str_com       | description | visible |
+    |group 1| 1       | 1        | 12:00 - 13:00 Mon | BEST          | heiheihei   | true    |
+    |group 2| 2       | 2        | 12:00 - 13:00 Mon | FIRST         | heiheihei   | true    |
     
   Given the following Invitation exist:
     | group_id | sender_id | receiver_id| status  |

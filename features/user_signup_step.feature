@@ -31,7 +31,7 @@ Scenario: Successful signup and add new mentor
   And I fill in "mentor[phone]" with "13633617550"
   And I fill in "mentor[email]" with "wangpanda1993@163.com"
   And I select "Male" from "mentor[gender]"
-  And I fill in "mentor[age]" with "20"
+  And I fill in "mentor[date_of_birth]" with "1993-06-18"
   And I fill in "mentor[school]" with "Engineering"
   And I select "Sophomore" from "mentor[grade]"
   And I fill in "mentor[time_slot]" with "Whenever"
@@ -41,6 +41,26 @@ Scenario: Successful signup and add new mentor
   And I press "Create"
   Then I should see "Tianjian Wang"
   Then I should see "wangpanda1993@163.com"
+  
+Scenario: Successful signup and add new parent
+  When I fill in "user[username]" with "wangpanda"
+  And I fill in "user[password]" with "19930618as"
+  And I fill in "user[password_confirmation]" with "19930618as"
+  And I select "Parent" from "user[role]"
+  And I press "Signup"
+  Then I should be on the home page of Mentor Matching System
+  And I should see "You signed up successfully"
+  When I fill in "username" with "wangpanda"
+  And I fill in "login_password" with "19930618as"
+  And I press "Log In"
+  Then I should be on the New Parent page
+  When I fill in "parent_firstname" with "Tianjian"
+  And I fill in "parent_lastname" with "Wang"
+  And I fill in "parent_phone" with "13633617550"
+  And I fill in "parent_email" with "wangpanda1993@163.com"
+  And I press "Create"
+  Then I should see "Tianjian Wang"
+  And I should be on the parent page
 
 Scenario: Failure signup(sad path)
   When I fill in "user[username]" with "jiangbingqian"
@@ -68,7 +88,7 @@ Scenario: Failed new mentor signup(sad path)
   And I fill in "mentor[phone]" with "13633617550"
   And I fill in "mentor[email]" with "wangpanda1993@163.com"
   And I select "Male" from "mentor[gender]"
-  And I fill in "mentor[age]" with "101"
+  And I fill in "mentor[date_of_birth]" with "2018-06-18"
   And I fill in "mentor[school]" with "Engineering"
   And I select "Sophomore" from "mentor[grade]"
   And I fill in "mentor[time_slot]" with "Whenever"
