@@ -44,11 +44,7 @@ class MentorsController < ApplicationController
         redirect_to mentor_path(@mentor) and return
       else
         flash[:warning] = "Invalid input form"
-<<<<<<< HEAD
-        redirect_to edit_mentor_path and return 
-=======
-        redirect_to edit_mentor_path and return
->>>>>>> 07fe11ec42b371ffa8e66bffecc60104d8c0cff5
+        redirect_to edit_mentor_path(@mentor) and return
       end
   end
   
