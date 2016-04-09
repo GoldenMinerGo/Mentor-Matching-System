@@ -21,12 +21,12 @@ class ParentController < ApplicationController
         @user=User.whois(session)
         redirect_to root_path and return if @user.nil?
         @parent=@user.parent
-        if @parent.update_attributes!(parent_params)
+        if @parent.update_attributes(parent_params)
             flash[:success] = "Your personal information has been updated successfully"
             redirect_to parent_path
         else
             flash[:danger] = "The information you put is invalid"
-            redirect_to edit_parent_path
+            redirect_to parent_edit_path
         end
     end
     
