@@ -24,6 +24,9 @@ module NavigationHelpers
     
     when /^the parent edit page$/
       '/parent/edit'
+      
+    when /^the New Parent page$/
+      '/parent/new'
 
     when /^the home page of Mentor Matching System$/
       '/welcome/index'
