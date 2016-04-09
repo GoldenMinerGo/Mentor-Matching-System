@@ -36,11 +36,18 @@ Given (/^the following (.*) exist:$/) do |type, table|
     
 end
 
+
+Given /^(?:|I )am on (.+)$/ do |page_name|
+   visit path_to(page_name)
+end
+ 
 When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
-
+When /^(?:|I )choose "([^"]*)"$/ do |field|
+  choose(field)
+end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
   if page.respond_to? :should
@@ -75,7 +82,21 @@ When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
 end
 
+When /^(?:|I )follow "([^"]*)"$/ do |link|
+   click_link(link)
+end
 
+When /^(?:|I )follow first group's "([^"]*)"$/ do |link|
+    visit(group_path(1))
+end
+
+When /^(?:|I )follow second child's "([^"]*)"$/ do |link|
+    visit(child_path(2))
+end
+
+When /^(?:|I )press the first "([^"]*)"$/ do |button|
+  visit(change_group_path(1))
+end
 
 ##mentor steps
 

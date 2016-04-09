@@ -44,10 +44,10 @@ class GroupController < ApplicationController
         redirect_to root_path and return if @user.nil?
         @group = Group.new(group_params)
         @group.admin_id = @user.parent.id
-        @child = Child.find(5)
+        # @child = Child.find(5)
         if @group.save
-            @child.group_id = @group.id
-            @child.save!
+            # @child.group_id = @group.id
+            # @child.save!
             
             flash[:success] = "The group information has been created successfully"
             
