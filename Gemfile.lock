@@ -44,6 +44,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.0)
       sass (~> 3.2)
+    bootstrap_tokenfield_rails (0.12.1)
     builder (3.2.2)
     byebug (3.4.0)
       columnize (~> 0.8)
@@ -93,6 +94,8 @@ GEM
     erubis (2.7.0)
     execjs (2.6.0)
     ffi (1.9.10)
+    font-awesome-sass (4.5.0)
+      sass (>= 3.2)
     formatador (0.2.5)
     gherkin (3.2.0)
     globalid (0.3.6)
@@ -111,6 +114,7 @@ GEM
       minitest (>= 3.0)
     haml (4.0.7)
       tilt
+    htmlbeautifier (1.1.1)
     i18n (0.7.0)
     jbuilder (2.2.3)
       activesupport (>= 3.0.0, < 5)
@@ -264,14 +268,17 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (= 3.1.7)
   bootstrap-sass (= 3.2.0.0)
+  bootstrap_tokenfield_rails
   byebug (= 3.4.0)
   capybara
   coffee-rails (= 4.1.0)
   cucumber-rails
   cucumber-rails-training-wheels
   database_cleaner
+  font-awesome-sass
   guard-minitest (= 2.3.1)
   haml (= 4.0.7)
+  htmlbeautifier
   jbuilder (= 2.2.3)
   jquery-rails (= 4.0.3)
   launchy
@@ -286,6 +293,7 @@ DEPENDENCIES
   sdoc (= 0.4.0)
   simplecov
   spring (= 1.1.3)
+  sprockets-rails
   sqlite3 (= 1.3.9)
   turbolinks (= 2.3.0)
   uglifier (= 2.5.3)

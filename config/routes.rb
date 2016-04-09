@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get "parent" => "parent#index"
   get "parent/edit" => "parent#edit"
   put "parent" => "parent#update"
+  get "parent/new" => "parent#new"
+  post "parent/create" => "parent#create"
   
   get "mentor/quit_group/:id" => "mentors#quit_group", as: :mentor_quit_group
   
@@ -24,6 +26,9 @@ Rails.application.routes.draw do
   #delete "group" => "group#destroy"
   resources :child
   resources :group
+  get 'group/:id/change' => 'group#change'
+  
+  # get "delmem/:id" => "group#del_member", as: 'deletemember'
   #resources :group
   # You can have the root of your site routed with "root"
   root 'welcome#index'

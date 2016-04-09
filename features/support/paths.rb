@@ -45,6 +45,15 @@ module NavigationHelpers
       
     when /^the Signup page$/
       '/users/new'
+
+    when /^the Group Information page$/
+      '/group'
+    # to see the group information  
+    when /^the New Group page$/
+      '/group/new'
+    # to add a new group  
+  
+  
     
     when /^the Mentor Index page$/
       '/mentors/index'

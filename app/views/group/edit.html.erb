@@ -3,6 +3,8 @@
 <%# @groups.each do |group| %>
 <%= form_for @group, :method => :put do |f| %>
   Title: <%= f.text_field :title %><br />
+  Time_slot: <%= f.text_field :time_slot %><br />
+  Competition: <%= f.text_field :str_com %><br />
   
   <%= f.submit "Update"%>
   <%# end %>

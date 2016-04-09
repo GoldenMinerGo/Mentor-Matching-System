@@ -1,20 +1,59 @@
-<h1>Child Update Panel</h1>
-
-<%= form_for @child, :method => :put do |f| %>
-  First Name: <%= f.text_field :firstname %><br />
-  Last Name: <%= f.text_field :lastname %><br />
-  Gender:
-    <%= f.radio_button :gender, 'male', :checked => (@child.gender == 'male') %> 
-    <%= label :gender_male, 'Male' %>
-    <%= f.radio_button :gender, 'female', :checked => (@child.gender == 'female') %>
-    <%= label :gender_female, 'Female' %><br />
-  Age: <%= f.number_field :age , in: 0.0..20.0, step: 0.5 %><br />
-  School: <%= f.text_field :school %><br />
-  Grade: <%= f.text_field :grade %><br />
-  Time: <%= f.text_field :time_slot %><br />
-  Competitions: <%= f.text_field :competitions %><br />
-  Description: <%= f.text_area :description %><br />
-  Visible: <%= f.check_box :visible %><br />
-  <%= f.submit "Update"%>
-<% end %>
-<%= link_to "Back", child_path(@child) %>
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+    <h1>Child Update Panel</h1>
+    <%= form_for @child, :method => :put , :html => {:class => "form-horizontal"} do |f| %>
+      <div class="form-group">
+        <label for="inputFirstName" class="col-sm-4 control-label">First Name:</label>
+        <div class="col-sm-8"><%= f.text_field :firstname, :class => 'form-control'%></div>
+      </div>
+      <div class="form-group">
+        <label for="inputLastName" class="col-sm-4 control-label">Last Name:</label>
+        <div class="col-sm-8"><%= f.text_field :lastname, :class => 'form-control' %></div>
+      </div>
+      <div class="form-group">
+        <label for="inputGender" class="col-sm-4 control-label">Gender:</label>
+        <div class="col-sm-8">
+          <label class="radio-inline"><%= f.radio_button :gender, 'male', :checked => (@child.gender == 'male')%> Male</label>
+          <label class="radio-inline"><%= f.radio_button :gender, 'female', :checked => (@child.gender == 'female')%> Female</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputAge" class="col-sm-4 control-label">Age:</label>
+        <div class="col-sm-8"><%= f.number_field :age , in: 0.0..20.0, step: 0.5 , :class => 'form-control' %></div>
+      </div>
+      <div class="form-group">
+        <label for="inputSchool" class="col-sm-4 control-label">School:</label>
+        <div class="col-sm-8"><%= f.text_field :school , :class => 'form-control' %></div>
+      </div>
+      <div class="form-group">
+        <label for="inputGrade" class="col-sm-4 control-label">Grade:</label>
+        <div class="col-sm-8"><%= f.text_field :grade , :class => 'form-control' %></div>
+      </div>
+      <div class="form-group">
+        <label for="inputTime" class="col-sm-4 control-label">Time:</label>
+        <div class="col-sm-8"><%= f.text_field :time_slot , :class => 'form-control' %></div>
+      </div>
+      <div class="form-group">
+        <label for="inputCompetitions" class="col-sm-4 control-label">Competitions:</label>
+        <div class="col-sm-8"><%= f.text_field :str_com, :class => 'form-control tokenize', :placeholder => 'Type and hit enter'%></div>
+      </div>
+      <div class="form-group">
+        <label for="inputDescription" class="col-sm-4 control-label">Description:</label>
+        <div class="col-sm-8"><%= f.text_area :description, :class => 'form-control'  %></div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4 checkbox">
+          <label class="checkbox-inline">
+            <%= f.check_box :visible , :checked => (@child.visible)%> <b>Visible</b>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.submit "Update" , :class => 'btn btn-primary btn-block'%>
+          <%= link_to "Back", child_path(@child) , :class => 'btn btn-default btn-block'%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

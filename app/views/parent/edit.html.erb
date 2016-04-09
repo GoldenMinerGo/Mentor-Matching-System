@@ -1,10 +1,29 @@
-<h1>Parent Update Panel</h1>
-
-<%= form_for @parent, :method => :put do |f| %>
-  First Name: <%= f.text_field :firstname %><br />
-  Last Name: <%= f.text_field :lastname %><br />
-  Phone: <%= f.telephone_field :phone %><br />
-  Email: <%= f.email_field :email %><br />
-  <%= f.submit "Update"%>
-<% end %>
-<%= link_to "Back", parent_path %>
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+    <h1>Parent Update Panel</h1>
+    <%= form_for @parent, :method => :put , :html => {:class => "form-horizontal"} do |f| %>
+      <div class="form-group">
+        <label for="inputFirstName" class="col-sm-4 control-label">First Name:</label>
+        <div class="col-sm-8"><%= f.text_field :firstname, :class => 'form-control'%></div>
+      </div>
+      <div class="form-group">
+        <label for="inputLastName" class="col-sm-4 control-label">Last Name:</label>
+        <div class="col-sm-8"><%= f.text_field :lastname, :class => 'form-control' %></div>
+      </div>
+      <div class="form-group">
+        <label for="inputPhone" class="col-sm-4 control-label">Phone:</label>
+        <div class="col-sm-8"><%= f.telephone_field :phone, :class => 'form-control'%></div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail" class="col-sm-4 control-label">Email:</label>
+        <div class="col-sm-8"><%= f.email_field :email, :class => 'form-control'%></div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.submit "Update" , :class => 'btn btn-block btn-primary'%>
+          <%= link_to "Back", parent_path, :class => 'btn btn-block btn-default' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
