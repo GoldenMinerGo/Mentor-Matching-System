@@ -59,11 +59,6 @@ Scenario: Mentor edit
   Then I should see "Successfully"
   And I should see "Keng"
   And I should not see "keng"
-
-Scenario: Show all mentors
-  When I am on the Mentor Index page
-  Then I should not see "Nima"
-  And I should see "Yibi"
   
 Scenario: Mentor quit group
   When I follow "Quit the group"

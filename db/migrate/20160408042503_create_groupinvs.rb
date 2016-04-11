@@ -3,6 +3,7 @@ class CreateGroupinvs < ActiveRecord::Migration
     create_table :groupinvs do |t|
       t.integer :group_id
       t.integer :mentor_id
+      t.boolean :send_by_mentor, default: false
       t.string :status
       t.timestamps null: false
       

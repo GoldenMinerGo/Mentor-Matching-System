@@ -32,8 +32,11 @@ Given (/^the following (.*) exist:$/) do |type, table|
             Mentor.create!(element)
         end
     end
-    
-    
+    if type == "Groupinv"
+        table.hashes.each do |element|
+            Groupinv.create!(element)
+        end
+    end
 end
 
 

@@ -19,7 +19,14 @@ class MentorsController < ApplicationController
   end
     
   def index
-    @mentors = Mentor.where(:visible => true)
+    user = User.whois(session)
+    if !user.nil? && user.role == "parent"
+      @mentors = Mentor.where(:visible => true)
+    else
+      flash[:warning] = "Invalid user!"
+      session[:user_id] = nil
+      redirect_to welcome_index_path and return
+    end
   end
   
   def edit

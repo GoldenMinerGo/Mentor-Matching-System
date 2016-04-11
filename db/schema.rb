@@ -34,9 +34,10 @@ ActiveRecord::Schema.define(version: 20160408042503) do
   create_table "groupinvs", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "mentor_id"
+    t.boolean  "send_by_mentor", default: false
     t.string   "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "groups", force: :cascade do |t|

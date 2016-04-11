@@ -31,5 +31,6 @@
 </table>
 <br />
 <%= link_to "Update Group Information", edit_group_path(@group) %><br />
+<%= link_to "Browse mentors", mentors_path %><br />
 <%= link_to "Close this group", { action: :destroy, id: @group.id }, data: {:confirm => 'Are you sure?'}, method: :delete %><br />
 <%= link_to "Back", parent_path %>
