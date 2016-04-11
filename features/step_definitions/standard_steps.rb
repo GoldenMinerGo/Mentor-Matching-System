@@ -1,9 +1,7 @@
 ##parent step
 ##group step
 
-Given /^(?:|I )am on (.+)$/ do |page_name|
-   visit path_to(page_name)
- end
+
 
 Given (/^the following (.*) exist:$/) do |type, table| 
     if type == "User"
@@ -83,6 +81,9 @@ When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
 end
 
+When /^(?:|I )follow the first "([^"]*)"$/ do |link|
+  visit(change_group_path(1))
+end
 
 
 ##mentor steps
@@ -91,9 +92,7 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
-When /^(?:|I )follow "([^"]*)"$/ do |link|
-  click_link(link)
-end
+
 
 When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
   select(value, :from => field)
@@ -107,19 +106,5 @@ Then(/^I will nullify my session hash$/) do
   session[:user_id] = nil
 end
 
-Then /^(?:|I )should be on (.+)$/ do |page_name|
-  current_path = URI.parse(current_url).path
-  if current_path.respond_to? :should
-    current_path.should == path_to(page_name)
-  else
-    assert_equal path_to(page_name), current_path
-  end
-end
 
-Then /^(?:|I )should not see "([^"]*)"$/ do |text|
-  if page.respond_to? :should
-    page.should have_no_content(text)
-  else
-    assert page.has_no_content?(text)
-  end
-end
+

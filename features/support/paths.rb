@@ -47,11 +47,16 @@ module NavigationHelpers
       '/users/new'
 
     when /^the Group Information page$/
-      '/group'
+      '/group/1'
     # to see the group information  
     when /^the New Group page$/
       '/group/new'
     # to add a new group  
+    when /^the group edit page$/
+    '/group/1/edit'
+    
+    when /^the Group page$/
+      '/group'
   
   
     
@@ -61,7 +66,7 @@ module NavigationHelpers
     when /^the Yibi page$/
       '/mentors/3'
       
-    when /^the Group Information page$/
+    
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
