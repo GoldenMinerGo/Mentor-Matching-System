@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408042503) do
+ActiveRecord::Schema.define(version: 20160414212647) do
 
   create_table "children", force: :cascade do |t|
     t.integer  "parent_id"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 20160408042503) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.integer  "group_id"
+  end
+
+  create_table "fbusers", force: :cascade do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "user_id"
   end
 
   create_table "groupinvs", force: :cascade do |t|
@@ -89,7 +100,7 @@ ActiveRecord::Schema.define(version: 20160408042503) do
     t.integer  "user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "rglusers", force: :cascade do |t|
     t.string   "username"
     t.string   "password"
     t.string   "encrypted_password"
@@ -98,6 +109,14 @@ ActiveRecord::Schema.define(version: 20160408042503) do
     t.string   "salt"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "role"
+    t.string   "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

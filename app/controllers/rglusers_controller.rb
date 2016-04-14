@@ -1,4 +1,4 @@
-class UsersController < ApplicationController  
+class RglusersController < ApplicationController  
   before_filter :save_login_state, :only => [:new, :create]
   
   def new
@@ -15,6 +15,7 @@ class UsersController < ApplicationController
       redirect_to users_new_path and return
     end
   end
+
   
   def edit
   end

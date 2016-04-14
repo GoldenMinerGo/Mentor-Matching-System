@@ -1,9 +1,21 @@
 class ParentController < ApplicationController
     def index
         @user=User.whois(session)
-        redirect_to root_path and return if @user.nil?
-        redirect_to parent_new_path and return if @user.parent.nil?
-        @parent=@user.parent
+        @fbuser=Fbuser.whois(session)
+        redirect_to root_path and return if @user.nil? && @fbuser.nil?
+        if !@fbuser.nil?
+            redirect_to parent_new_path and return if @fbuser.parent.nil?
+        end
+        if !@user.nil?
+            redirect_to parent_new_path and return if @user.parent.nil?
+        end
+        
+        if !@fbuser.nil?
+            @parent=@fbuser.parent
+        end
+        if !@user.nil?
+            @parent=@user.parent
+        end
         @children=@parent.children
         @groups=Group.where(:admin_id => @parent)
         #to be changed
@@ -32,15 +44,22 @@ class ParentController < ApplicationController
     
     def new
         @user=User.whois(session)
-        redirect_to root_path and return if @user.nil?
+        @fbuser=Fbuser.whois(session)
+        redirect_to root_path and return if @user.nil? && @fbuser.nil?
         @parent=Parent.new
     end
     
     def create
         @user=User.whois(session)
-        redirect_to root_path and return if @user.nil?
+        @fbuser=Fbuser.whois(session)
+        redirect_to root_path and return if @user.nil? && @fbuser.nil?
         @parent=Parent.new(parent_params)
-        @parent.user_id=@user.id
+        if !@fbuser.nil?
+            @parent.fbuser_id=@fbuser.id
+        end
+        if !@user.nil?
+            @parent.user_id=@user.id
+        end
         if @parent.save
             flash[:success] = "Your personal information has been created successfully"
             redirect_to parent_path and return
