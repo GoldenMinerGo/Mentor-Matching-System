@@ -26,6 +26,70 @@ Description: <%= @mentor.description %><br />
 </table>
 <% end %>
 
+<hr>
+  </div>
+</div>
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2>Inbox</h2>
+    <% if @rinvs.empty? %>
+      <p align=center>None</p>
+    <% else %>
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>Sender</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @rinvs.each do |rinv| %>
+            <tr>
+              <td><%= rinv.group_id %></td>
+              <td><%= rinv.status %></td>
+              <% if rinv.status == 'pending' %>
+              <td><%= link_to "Accept Invitation", groupinvs_accept_inv_path(rinv)%></td>
+            <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <hr>
+  </div>
+</div>
+
+<hr>
+  </div>
+</div>
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2>Sent Out</h2>
+    <% if @sinvs.empty? %>
+      <p align=center>None</p>
+    <% else %>
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>Receiver</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sinvs.each do |sinv| %>
+            <tr>
+              <td><%= sinv.group_id %></td>
+              <td><%= sinv.status %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <hr>
+  </div>
+</div>
+<% session[:mentor_id] = @mentor.id %>
+<%= link_to "Browse Groups", group_index_path %>
 <%= link_to "Update Personal Information", edit_mentor_path(@mentor) %>
 <%= link_to "Delete", mentor_path(@mentor), data: {:confirm => 'Are you sure?'}, method: :delete %>
 <%= link_to "Log out", welcome_logout_path(@mentor) %>

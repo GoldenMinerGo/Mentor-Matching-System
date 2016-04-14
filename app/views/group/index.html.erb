@@ -13,7 +13,7 @@
     <th>Available time</th>
     <th>Competition</th>
   </tr>
- <% @groups.each do |group| %>
+  <% @groups.each do |group| %>
   <tr>
     <td><%= group.id %></td>
     <td><%= group.title %></td>
@@ -29,9 +29,13 @@
     <td><%= Parent.find(group.admin_id).name %></td>
     <td><%= group.time_slot %></td>
     <td><%= group.competitions %></td>
-
+    <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => group.id, :mentor_id => @mentor.id, :send_by_mentor => true) %></td>
   </tr>
   <% end %>
 </table>
 <br/>
-<%= link_to "Back", parent_path %>
+<% if User.whois(session).role == "Parent" %>
+  <%= link_to "Back", parent_path %> 
+<% elsif User.whois(session).role == "Mentor" %>
+  <%= link_to "Back", mentor_path(@mentor) %>
+<% end %>

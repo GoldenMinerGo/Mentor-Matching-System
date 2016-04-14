@@ -115,3 +115,14 @@ Then(/^I will nullify my session hash$/) do
   session[:user_id] = nil
 end
 
+=begin
+    group invitations steps
+=end
+
+When(/^I follow second mentor's "([^"]*)"$/) do |arg1|
+  visit(groupinvs_send_inv_path(1,2,false))
+end
+
+When(/^I follow first group "([^"]*)"$/) do |arg1|
+  visit(groupinvs_send_inv_path(1,1,true))
+end

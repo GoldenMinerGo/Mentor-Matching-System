@@ -5,11 +5,21 @@ class GroupController < ApplicationController
         #@groups = Group.where(:visible => true).where.not(:admin_id => @parent)
         @groups = Group.all
         #@members = @groups.members
+        if !session[:mentor_id].nil?
+          @mentor = Mentor.find_by_id(session[:mentor_id])
+        else
+          flash[:warning] = "Invalid user!"
+          reset_session
+          redirect_to welcome_index_path and return
+        end
     end
     
     def show
         @group = Group.find_by_id(params[:id])
-        
+        @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
+        #sinv means send invitation
+        @rinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => true)
+        #rinv means receive invitation
     end
     
     def edit
@@ -17,7 +27,6 @@ class GroupController < ApplicationController
         #user = User.find(1)
         #@parent = user.parent
         @group = Group.find_by_id(params[:id])
-        
     end
     
     def update

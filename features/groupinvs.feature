@@ -7,7 +7,7 @@ Background: users, parents, children, groups, invitations, mentors in database
   Given the following User exist:
     | username    | password | role     | last_login_time |
     | user1       | 1q2w3e   | Parent   | 1977-05-25      |
-    | user2       | 1q2w3e   | Parent   | 1982-06-25      |
+    | user2       | 1q2w3e   | Mentor   | 1982-06-25      |
     | user3       | 1q2w3e   | Mentor   | 1979-05-25      |
 
 
@@ -42,8 +42,9 @@ Background: users, parents, children, groups, invitations, mentors in database
 
   Given the following Groupinv exist:
     | group_id | mentor_id | send_by_mentor| status  |
-    | 2        | 1         | false         | pending |
-    | 1        | 2         | true          | declined|
+    | 1        | 1         | false         | pending |
+    | 1        | 2         | true          | Declined|
+    | 1        | 1         | true          | pending |
 
     Given I am on the home page of Mentor Matching System
     When I fill in "username" with "user1"
@@ -55,6 +56,26 @@ Scenario: Coach look for mentor list
   When I follow "Browse mentors"
   Then I should see "female"
   And I should see "22"
-  And I should not see "male"
+  And I should not see "tamu"
 
-Scenario: 
+Scenario: Create invitation from group
+  When I follow first group's "More"
+  When I follow "Browse mentors"
+  When I follow second mentor's "Send Invitation"
+  Then I should see "pending" 
+  
+Scenario: Create invitation from mentor
+  When I follow "Log out"
+  When I fill in "username" with "user2"
+  And I fill in "login_password" with "1q2w3e"
+  And I press "Log In"
+  Then I should be on the Second Mentor page
+  When I follow "Browse Groups"
+  When I follow first group "Send Invitation"
+  Then I should see "pending"
+  
+Scenario: Accept invitation from mentor
+  When I follow first group's "More"
+  When I follow first inbox's "Accept"
+  Then I should see
+  

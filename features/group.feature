@@ -6,9 +6,9 @@ Feature: check group information
   
   Given the following User exist:
     | username    | password | role     | last_login_time |
-    | user1       | 1q2w3e   | parent   | 1977-05-25      |
-    | user2       | 1q2w3e   | parent   | 1982-06-25      |
-    | user3       | 1q2w3e   | mentor   | 1979-05-25      |
+    | user1       | 1q2w3e   | Parent   | 1977-05-25      |
+    | user2       | 1q2w3e   | Parent   | 1982-06-25      |
+    | user3       | 1q2w3e   | Mentor   | 1979-05-25      |
 
   Given the following Parent exist:
     |user_id | firstname | lastname | phone      | email          |
