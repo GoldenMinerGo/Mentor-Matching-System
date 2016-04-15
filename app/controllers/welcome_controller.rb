@@ -1,13 +1,14 @@
 class WelcomeController < ApplicationController
+  
   def login
     #Login Form
   end
   def login_attempt
-    authorized_user = User.authenticate(welcome_params[:username],welcome_params[:login_password])
+    authorized_user = Rgluser.authenticate(welcome_params[:username],welcome_params[:login_password])
     if authorized_user
-      session[:user_id] = authorized_user.id
+      session[:user_id] = authorized_user.user.id
       session[:expires_at] = Time.current + 2.hours
-      authorized_user.update_columns(:last_login_time => Time.zone.now)
+      authorized_user.user.update_columns(:last_login_time => Time.zone.now)
       flash[:success] = "Wow Welcome again, you logged in as #{authorized_user.role} "
       if authorized_user.role == 'Mentor'
         redirect_to mentor_path(authorized_user) and return
@@ -37,6 +38,7 @@ class WelcomeController < ApplicationController
         end
       end
     end
+
   end
   
   
@@ -45,5 +47,8 @@ class WelcomeController < ApplicationController
   def welcome_params
       params.permit(:username, :login_password, :utf8, :authenticity_token, :commit)
   end
-
+  
+  def parent_signin
+    
+  end
 end

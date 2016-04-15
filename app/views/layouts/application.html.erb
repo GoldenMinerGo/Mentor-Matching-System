@@ -1,77 +1,66 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Mentor Matching System</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-</head>
-<body>
+  <head>
+    <title>Mentor Matching System</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+  </head>
+  <body>
     <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <% if !session[:user_id].nil? %>
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <% end %>
-      <%= link_to '<i class="fa fa-users fa-fw"></i> Mentor Matching System'.html_safe, root_path, :class => 'navbar-brand' %>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <% if !session[:user_id].nil? %>
-      <ul class="nav navbar-nav">
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Children", child_index_path %></li>
-        <li><%= link_to "Mentors", mentors_path %></li>
-        <li><%= link_to "Groups", group_index_path %></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in as <b><%= User.find(session[:user_id]).name %></b> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#"><i class="fa fa-cog fa-fw"></i> Setting</a></li>
-            <li><%= link_to '<i class="fa fa-sign-out fa-fw"></i> Log out'.html_safe, welcome_logout_path %></li>
-          </ul>
-        </li>
-      </ul>
-      <% end %>
-    </div>
-  </div>
-</nav>
-
-  <div class="container animated fadeIn">
-    <div class="row animated slideInDown">
-    <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %> alert-dismissible fade in">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <%= message %>
-      </div>
-    <% end %>
-    </div>
-    <%= yield %>
-    <!--<%= debug(params) if Rails.env.development? %>-->
-  </div>
-  
-  <footer class="row-footer">
-        <div class="container">
-            <div class="row row-content">
-              <div class="col-xs-12">
-                <p style="padding:10px;"></p>
-                <p align=center>Copyright &copy; 2016 TAMU Honors Program</p>
-              </div>
-            </div>
+      <div class="container">
+        <div class="navbar-header">
+          <% if !session[:user_id].nil? %>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          <% end %>
+          <%= link_to '<i class="fa fa-users fa-fw"></i> Mentor Matching System'.html_safe, root_path, :class => 'navbar-brand push' %>
         </div>
-    </footer>
-  
-  
-  <%= javascript_include_tag 'application_body', 'data-turbolinks-track' => true %>
-</body>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <% if !session[:user_id].nil? %>
+            <ul class="nav navbar-nav">
+              <li><%= link_to "Home", root_path, :class => 'grow'%></li>
+              <li><%= link_to "Children", child_index_path, :class => 'grow' %></li>
+              <li><%= link_to "Mentors", mentors_path, :class => 'grow' %></li>
+              <li><%= link_to "Groups", group_index_path, :class => 'grow' %></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Hello,  <b><%= User.find(session[:user_id]).firstname %></b><span class="caret grow"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><i class="fa fa-cog fa-fw"></i> Setting</a></li>
+                  <li><%= link_to '<i class="fa fa-sign-out fa-fw"></i> Log out'.html_safe, welcome_logout_path %></li>
+                </ul>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+    <div class="container animated fadeIn">
+      <div class="row animated slideInDown">
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %> alert-dismissible fade in">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <%= message %>
+          </div>
+        <% end %>
+      </div>
+      <%= yield %>
+      <!--<%= debug(params) if Rails.env.development? %>-->
+    </div>
+    <div class="footer">
+      <p align=center>Copyright &copy; 2016 TAMU Honors Program</p>
+    </div>
+    <%= javascript_include_tag 'application_body', 'data-turbolinks-track' => true %>
+    
+  </body>
 </html>
