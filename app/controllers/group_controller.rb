@@ -3,15 +3,9 @@ class GroupController < ApplicationController
         user = User.find(1)
         @parent = user.parent
         #@groups = Group.where(:visible => true).where.not(:admin_id => @parent)
-        @groups = Group.all
+        @groups = Group.where(:visible => true)
         #@members = @groups.members
-        if !session[:mentor_id].nil?
-          @mentor = Mentor.find_by_id(session[:mentor_id])
-        else
-          flash[:warning] = "Invalid user!"
-          reset_session
-          redirect_to welcome_index_path and return
-        end
+        @mentor = Mentor.find_by_id(session[:mentor_id])
     end
     
     def show

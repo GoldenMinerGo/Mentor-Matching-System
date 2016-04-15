@@ -47,7 +47,6 @@ class MentorsController < ApplicationController
       @id = @mentor.id
       @age = @mentor.age
       @groups = @mentor.groups
-      session[:mentor_id] = @mentor.id
       @sinvs = Groupinv.where(:mentor_id => @mentor.id).where(:send_by_mentor => true)
       @rinvs = Groupinv.where(:mentor_id => @mentor.id).where(:send_by_mentor => false)
   end

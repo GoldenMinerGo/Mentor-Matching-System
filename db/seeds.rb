@@ -83,9 +83,9 @@ invitations.each do |invitation|
 end
 
 groupinvs = [
-	{:group_id => Group.find(2).id, :mentor_id => Mentor.find(2).id, :status => 'pending'},
+	{:group_id => Group.find(2).id, :mentor_id => Mentor.find(2).id, :status => 'Pending'},
 	
-	{:group_id => Group.find(1).id, :mentor_id => Mentor.find(1).id, :status => 'declined'}
+	{:group_id => Group.find(1).id, :mentor_id => Mentor.find(1).id, :status => 'Declined'}
 ]
 
 

@@ -52,6 +52,7 @@
             <tr>
               <td><%= rinv.mentor_id %></td>
               <td><%= rinv.status %></td>
+               <td><%= link_to "Accept Invitation", groupinvs_accept_inv_group_path(rinv)%></td>
             </tr>
           <% end %>
         </tbody>
@@ -82,6 +83,9 @@
             <tr>
               <td><%= sinv.mentor_id %></td>
               <td><%= sinv.status %></td>
+              <% if sinv.status == 'pending' %>
+              <td><%= link_to "Cancel Invitation", groupinvs_cancel_inv_path(sinv)%></td>
+              <% end %> 
             </tr>
           <% end %>
         </tbody>
@@ -92,6 +96,8 @@
 </div>
 <% session[:group_id] = @group.id %>
 <%= link_to "Update Group Information", edit_group_path(@group) %><br />
-<%= link_to "Browse mentors", mentors_path %><br />
+<% if @group.mentor.nil? %>
+  <%= link_to "Browse mentors", mentors_path %><br />
+<%end%>
 <%= link_to "Close this group", { action: :destroy, id: @group.id }, data: {:confirm => 'Are you sure?'}, method: :delete %><br />
 <%= link_to "Back", parent_path %>
