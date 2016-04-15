@@ -32,7 +32,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Hello,  <b><%= User.find(session[:user_id]).username %></b><span class="caret grow"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Hello,  <b><%= User.find(session[:user_id]).firstname %></b><span class="caret grow"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="#"><i class="fa fa-cog fa-fw"></i> Setting</a></li>
                   <li><%= link_to '<i class="fa fa-sign-out fa-fw"></i> Log out'.html_safe, welcome_logout_path %></li>

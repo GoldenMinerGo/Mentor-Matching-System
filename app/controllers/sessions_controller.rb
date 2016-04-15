@@ -6,12 +6,23 @@ class SessionsController < ApplicationController
   
   def create
     fbuser = Fbuser.from_omniauth(env["omniauth.auth"])
-    session[:fbuser_id] = fbuser.id
+    if !fbuser.user_id.nil?
+      session[:user_id] = fbuser.user_id
+      redirect_to parent_path and return
+    end
+    user=User.new
+    user.role='Parent'
+    user.username=fbuser.name
+    user.save
+    session[:user_id] = user.id
+    session[:expires_at] = Time.current + 2.hours
+    fbuser.user_id=user.id
+    fbuser.save
     redirect_to root_path
   end
 
   def destroy
-    session[:fbuser_id] = nil
+    session[:user_id] = nil
     redirect_to root_path
   end
   

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   #delete "group" => "group#destroy"
   resources :user
   resources :rglusers
+  get 'fbuser/fb_login' => 'fbuser#fb_login', as: :fb_auth
   resources :child
   resources :group
   get 'group/:id/change' => 'group#change', as: :change_group

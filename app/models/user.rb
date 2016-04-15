@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
     has_one :mentor
     
     def self.whois(session)
-        # session[:user_id] = nil if !session.key?(:expires_at) || session[:expires_at] < Time.current
-        # nil if !session.key?(:user_id)
+        session[:user_id] = nil if !session.key?(:expires_at) || session[:expires_at] < Time.current
+        nil if !session.key?(:user_id)
         User.find_by_id(session[:user_id])
     end
     
@@ -21,7 +21,14 @@ class User < ActiveRecord::Base
     
     def firstname
         if self.role == 'Parent'
-            return self.parent.firstname if !self.parent.nil?
+            if !self.fbuser.nil?
+                return self.username
+            end
+            if self.parent.nil?
+                return self.username
+            else
+                return self.parent.firstname    
+            end
         else
             return self.mentor.firstname if !self.mentor.nil?
         end

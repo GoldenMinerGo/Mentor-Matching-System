@@ -1,4 +1,4 @@
-<%= link_to "Regular Signup", new_rgluser_path %>
+<%= link_to "Regular Signup", new_rgluser_path(:role => @role) %>
 
 <% if @role=="Parent" %>
 <div id="user-widget">
