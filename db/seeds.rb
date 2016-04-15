@@ -1,28 +1,27 @@
 users = [
-	{:role => 'parent', :username => 'Yifan'},
-	{:role => 'parent', :username => 'Yiding'},
-	{:role => 'parent', :username => 'Dalao'},
-	{:role => 'parent', :username => 'Jiang'},
-	{:role => 'mentor', :username => 'Runkun'},
-	{:role => 'mentor', :username => 'Lijin'},
-	{:role => 'mentor', :username => 'Bing'},
+	{:role => 'parent', :username => 'Yifan', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
+	{:role => 'parent', :username => 'Yiding', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
+	{:role => 'parent', :username => 'Dalao', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")},
+	{:role => 'parent', :username => 'Jiang', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
+	{:role => 'mentor', :username => 'Runkun', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
+	{:role => 'mentor', :username => 'Lijin', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")},
+	{:role => 'mentor', :username => 'Bing', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")}
 ]
 users.each do |user|
   User.create!(user)
 end
 
 rglusers = [
-	{:user_id => User.find(1).id, :username => 'user1', :password => 'indfj3jfkd', :encrypted_password => 'GSetrdVGt', :role => 'Parent', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
+	{:user_id => User.find(1).id, :username => 'user1', :password => 'indfj3jfkd', :encrypted_password => 'GSetrdVGt', :role => 'Parent'},
 	
-	{:user_id => User.find(2).id, :username => 'user2', :password => 'indfj3jfkd', :encrypted_password => 'g3fw4f43rf', :role => 'Parent', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
+	{:user_id => User.find(2).id, :username => 'user2', :password => 'indfj3jfkd', :encrypted_password => 'g3fw4f43rf', :role => 'Parent'},
+	{:user_id => User.find(5).id, :username => 'user3', :password => 'indfj3jfkd', :encrypted_password => 'TrrtVDttv', :role => 'Mentor'},
 	
-	{:user_id => User.find(5).id, :username => 'user3', :password => 'indfj3jfkd', :encrypted_password => 'TrrtVDttv', :role => 'Mentor', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")},
+	{:user_id => User.find(4).id, :username => 'user4', :password => 'indfj3jfkd', :encrypted_password => 'TbRSTVStf', :role => 'Parent'},
 	
-	{:user_id => User.find(4).id, :username => 'user4', :password => 'indfj3jfkd', :encrypted_password => 'TbRSTVStf', :role => 'Parent', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
+	{:user_id => User.find(3).id, :username => 'user5', :password => 'indfj3jfkd', :encrypted_password => 'g3fw4f43rf', :role => 'Parent'},
 	
-	{:user_id => User.find(3).id, :username => 'user5', :password => 'indfj3jfkd', :encrypted_password => 'g3fw4f43rf', :role => 'Parent', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
-	
-	{:user_id => User.find(6).id,:username => 'user6', :password => 'indfj3jfkd', :encrypted_password => 'TrrtVDttv', :role => 'Mentor', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")}
+	{:user_id => User.find(6).id,:username => 'user6', :password => 'indfj3jfkd', :encrypted_password => 'TrrtVDttv', :role => 'Mentor'}
 ]
 
 rglusers.each do |rgluser|

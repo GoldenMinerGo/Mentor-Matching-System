@@ -1,11 +1,10 @@
-<% @page_title = "UserAuth | Signup" %>
+<!--<% @page_title = "UserAuth | Signup" %>-->
 <div class="Sign_Form">
   <h1>Sign Up</h1>
-  <%= form_for(:rgluser, :url => {:controller => 'rlgusers', :action => 'create'}) do |f| %>
+  <%= form_for(:rgluser, :url => {:controller => 'rglusers', :action => 'create'}) do |f| %>
     <p> Username:</br> <%= f.text_field :username%> </p>
     <p> Password:</br> <%= f.password_field :password%></p>
     <p> Password Confirmation:</br> <%= f.password_field :password_confirmation%> </p>
-    <p> Role:</br> <%= f.select :role ,['Parent' , 'Mentor']%> </p>
     <%= f.submit :Signup %>
   <% end %>
 </div>

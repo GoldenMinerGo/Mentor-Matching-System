@@ -2,10 +2,6 @@ class Rgluser < ActiveRecord::Base
     belongs_to :user
     
     
-    def self.all_roles
-        %w(Parent Mentor)
-    end
-    
     before_save :encrypt_password
     after_save :clear_password
     def encrypt_password
@@ -19,9 +15,9 @@ class Rgluser < ActiveRecord::Base
     end
     
     def self.authenticate(username="", login_password="")
-        user = User.find_by_username(username)
-        if user && user.match_password(login_password)
-            return user
+        rgluser = Rgluser.find_by_username(username)
+        if rgluser && rgluser.match_password(login_password)
+            return rgluser
         else
             return false
         end
@@ -47,11 +43,6 @@ class Rgluser < ActiveRecord::Base
         end
         return "new user"
     end
-    
-
-
-
-    
     
     validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
     validates :password, :confirmation => true #password_confirmation attr

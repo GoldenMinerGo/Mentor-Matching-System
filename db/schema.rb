@@ -105,7 +105,6 @@ ActiveRecord::Schema.define(version: 20160414212647) do
     t.string   "password"
     t.string   "encrypted_password"
     t.string   "role"
-    t.datetime "last_login_time"
     t.string   "salt"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
@@ -115,8 +114,9 @@ ActiveRecord::Schema.define(version: 20160414212647) do
   create_table "users", force: :cascade do |t|
     t.string   "role"
     t.string   "username"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "last_login_time"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

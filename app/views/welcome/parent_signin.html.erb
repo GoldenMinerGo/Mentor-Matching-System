@@ -1,0 +1,21 @@
+<% @page_title = "UserAuth | Login" -%>
+<div class= "Sign_Form">
+  <h1>Log in</h1>
+  <%= form_tag(:controller => 'welcome', :action => 'login_attempt') do %>
+    <p>Username:</br> <%= text_field_tag(:username) %></p> 
+    <p>Password:</br> <%= password_field_tag :login_password %></p> 
+    <%= submit_tag("Log In") %>
+  <% end %>
+</div>
+
+<%= link_to "Forget Password", welcome_forget_password_path %>
+<%= link_to "Sign Up" %>
+
+<div id="user-widget">
+  <% if current_user %>
+    Welcome <strong><%= current_user.name %></strong>!
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+  <% else %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  <% end %>
+</div>

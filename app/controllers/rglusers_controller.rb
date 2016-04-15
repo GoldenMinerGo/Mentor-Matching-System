@@ -1,31 +1,43 @@
 class RglusersController < ApplicationController  
-  before_filter :save_login_state, :only => [:new, :create]
+
   
   def new
   end
   
   def create
-    @user = User.new(user_params)
-    @user.last_login_time = Time.zone.now
-    if @user.save
+    @user=User.whois(session)
+    redirect_to root_path and return if @user.nil?
+    @rgluser = Rgluser.new(rgluser_params)
+    @rgluser.user_id=@user.id
+    @rgluser.role=@user.role
+    if @rgluser.save
       flash[:success] = "You signed up successfully"
-      redirect_to welcome_index_path and return
+      if @rgluser.role=='Parent'
+        redirect_to parent_new_path and return
+      else
+        redirect_to new_mentor_path and return
+      end
     else
       flash[:warning] = "Form is invalid"
-      redirect_to users_new_path and return
+      redirect_to new_rgluser_path and return
     end
   end
 
   
   def edit
   end
-  
   def update
+  end
+  def destroy
+  end
+  def show
+  end
+  def index
   end
   
   private
   
-  def user_params
-    params.require(:user).permit(:username, :password, :role, :encrypted_password, :salt, :password_confirmation, :last_login_time)
+  def rgluser_params
+    params.require(:rgluser).permit(:username, :password, :encrypted_password, :salt, :password_confirmation, :last_login_time)
   end
 end

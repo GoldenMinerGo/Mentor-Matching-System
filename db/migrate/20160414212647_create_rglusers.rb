@@ -5,7 +5,6 @@ class CreateRglusers < ActiveRecord::Migration
     t.string   :password
     t.string   :encrypted_password
     t.string   :role
-    t.datetime :last_login_time
     t.string   :salt
     t.timestamps null: false
     

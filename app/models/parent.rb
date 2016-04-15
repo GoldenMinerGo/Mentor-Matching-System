@@ -1,7 +1,6 @@
 class Parent < ActiveRecord::Base
     has_many :children
     belongs_to :user
-    belongs_to :fbuser
     has_many :mygroups, class_name: "Group", as: :admin
     
     def name
