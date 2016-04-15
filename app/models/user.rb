@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
     has_one :fbuser
     has_one :parent
     has_one :mentor
+    has_many :groupinv
     
     def self.whois(session)
         session[:user_id] = nil if !session.key?(:expires_at) || session[:expires_at] < Time.current

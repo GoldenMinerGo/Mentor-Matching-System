@@ -40,8 +40,8 @@ module NavigationHelpers
     when /^the Edit Mentor page$/
       '/mentors/edit'
       
-    when /^the Show Mentor page$/
-      '/mentors'
+    when /^the Second Mentor page$/
+      '/mentors/2'
       
     when /^the Parent page$/
       '/parent'
@@ -50,7 +50,7 @@ module NavigationHelpers
       '/users/new'
 
     when /^the Group Information page$/
-      '/group'
+      '/group/1'
     # to see the group information  
     when /^the New Group page$/
       '/group/new'

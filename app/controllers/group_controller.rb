@@ -3,13 +3,17 @@ class GroupController < ApplicationController
         user = User.find(1)
         @parent = user.parent
         #@groups = Group.where(:visible => true).where.not(:admin_id => @parent)
-        @groups = Group.all
+        @groups = Group.where(:visible => true)
         #@members = @groups.members
+        @mentor = Mentor.find_by_id(session[:mentor_id])
     end
     
     def show
         @group = Group.find_by_id(params[:id])
-        
+        @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
+        #sinv means send invitation
+        @rinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => true)
+        #rinv means receive invitation
     end
     
     def edit
@@ -17,7 +21,6 @@ class GroupController < ApplicationController
         #user = User.find(1)
         #@parent = user.parent
         @group = Group.find_by_id(params[:id])
-        
     end
     
     def update

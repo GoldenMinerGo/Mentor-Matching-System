@@ -1,6 +1,6 @@
 class Group < ActiveRecord::Base
     has_many :children
-    belongs_to :mentor
+    belongs_to :mentor, class_name: "Mentor", foreign_key: "mentor_id"
     belongs_to :admin, class_name: "Parent", foreign_key: "admin_id"
     has_many :invitations
     serialize :competitions

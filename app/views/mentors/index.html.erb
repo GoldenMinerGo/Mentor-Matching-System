@@ -21,6 +21,8 @@
     <td><%= mentor.time_slot %></td>
     <td><%= mentor.competitions %></td>
     <td><%= mentor.description %></td>
-  </tr>
+    <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => @group.id, :mentor_id => mentor.id, :send_by_mentor => false) %></td>
+   </tr>
   <% end %>
 </table>
+<%= link_to "Back", group_path(@group) %>

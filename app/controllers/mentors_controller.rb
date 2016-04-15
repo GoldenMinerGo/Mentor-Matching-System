@@ -15,12 +15,19 @@ class MentorsController < ApplicationController
           flash[:warning] = "Form is invalid"
           redirect_to new_mentor_path and return
         end
-      else
   end
     
   def index
     user = User.whois(session)
-    if !user.nil? && user.role == "parent"
+    if !session[:group_id].nil? 
+      @group = Group.find_by_id(session[:group_id])
+      session.delete(:group_id)
+    else
+      flash[:warning] = "Invalid user!"
+      reset_session
+      redirect_to welcome_index_path and return
+    end
+    if !user.nil? && user.role == "Parent"
       @mentors = Mentor.where(:visible => true)
     else
       flash[:warning] = "Invalid user!"
@@ -40,6 +47,8 @@ class MentorsController < ApplicationController
       @id = @mentor.id
       @age = @mentor.age
       @groups = @mentor.groups
+      @sinvs = Groupinv.where(:mentor_id => @mentor.id).where(:send_by_mentor => true)
+      @rinvs = Groupinv.where(:mentor_id => @mentor.id).where(:send_by_mentor => false)
   end
   
   def update
