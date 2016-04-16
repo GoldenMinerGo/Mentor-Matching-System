@@ -4,11 +4,11 @@
 <table>
   <tr>
     <th>ID</th>
-    <th>Title</th>
+    <th><%= link_to "Group Title", group_index_path(sort: 'title') %></th>
     <th>Mentor</th>
     
     <th>Members</th>
-    <th>#Members</th>
+    <th><%= link_to "#Members", group_index_path(sort: 'children.count') %></th>
     <th>Admin</th>
     <th>Available time</th>
     <th>Competition</th>
