@@ -5,6 +5,28 @@ class GroupController < ApplicationController
         #@groups = Group.where(:visible => true).where.not(:admin_id => @parent)
         @groups = Group.all
         #@members = @groups.members
+    #sort
+    if(params[:sort].to_s == 'title')
+      session[:sort] = params[:sort]
+      if(@groups==nil)
+        @groups=Group.order('title')
+      elsif
+        @groups = @groups.sort_by{|m| m.title}
+      end
+      
+      elsif(params[:sort].to_i == 'children.count')
+      session[:sort] = params[:sort]
+      if(@groups==nil)
+        @groups=Group.order('children.count')
+      elsif
+        @groups = @groups.sort_by{|m| m.children.count}
+      end
+      
+      elsif(session.has_key?(:sort))
+      params[:sort]=session[:sort]
+      @redirect=true
+      end
+    
     end
     
     def show
