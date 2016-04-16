@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-
+  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  match 'auth/failure', to: redirect('/'), via: [:get, :post]
+  match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
+  
   post "welcome/login_attempt" => "welcome#login_attempt"
-  post "users/create" => "users#create"
   resources :mentors
 
   get "welcome/forget_password" => "welcome#forget_password"
-  get "users/new" => "users#new"
   get "welcome/index" => "welcome#index"
+  get "welcome/parent_signin" => "welcome#parent_signin"
   get "welcome/logout" => "welcome#logout"
   get "mentors_new" => "mentors#new"
   get "groupinvs/send_inv/:id" =>"groupinvs#send_inv", as: :groupinvs_send_inv
@@ -28,6 +30,9 @@ Rails.application.routes.draw do
   #get "group/edit" => "group#edit"
   #put "group" => "group#update"
   #delete "group" => "group#destroy"
+  resources :user
+  resources :rglusers
+  get 'fbuser/fb_login' => 'fbuser#fb_login', as: :fb_auth
   resources :child
   resources :group
   get 'group/:id/change' => 'group#change', as: :change_group

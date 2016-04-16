@@ -3,6 +3,7 @@ class ParentController < ApplicationController
         @user=User.whois(session)
         redirect_to root_path and return if @user.nil?
         redirect_to parent_new_path and return if @user.parent.nil?
+
         @parent=@user.parent
         @children=@parent.children
         @groups=Group.where(:admin_id => @parent)
@@ -31,9 +32,7 @@ class ParentController < ApplicationController
     end
     
     def new
-        @user=User.whois(session)
-        redirect_to root_path and return if @user.nil?
-        @parent=Parent.new
+
     end
     
     def create

@@ -1,26 +1,42 @@
 users = [
-	{:username => 'user1', :password => 'indfj3jfkd', :encrypted_password => 'GSetrdVGt', :role => 'Parent', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
-	
-	{:username => 'user2', :password => 'indfj3jfkd', :encrypted_password => 'g3fw4f43rf', :role => 'Mentor', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
-	
-	{:username => 'user3', :password => 'indfj3jfkd', :encrypted_password => 'TrrtVDttv', :role => 'Mentor', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")},
-	
-	{:username => 'user4', :password => 'indfj3jfkd', :encrypted_password => 'TbRSTVStf', :role => 'Parent', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
-	
-	{:username => 'user5', :password => 'indfj3jfkd', :encrypted_password => 'g3fw4f43rf', :role => 'Parent', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
-	
-	{:username => 'user6', :password => 'indfj3jfkd', :encrypted_password => 'TrrtVDttv', :role => 'Parent', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")}
+	{:role => 'Parent', :username => 'Yifan', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
+	{:role => 'Parent', :username => 'Yiding', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
+	{:role => 'Parent', :username => 'Dalao', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")},
+	{:role => 'Parent', :username => 'Jiang', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
+	{:role => 'Mentor', :username => 'Runkun', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
+	{:role => 'Mentor', :username => 'Lijin', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")},
+	{:role => 'Mentor', :username => 'Bing', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")}
 ]
-
 users.each do |user|
   User.create!(user)
 end
 
+rglusers = [
+	{:user_id => User.find(1).id, :username => 'user1', :password => '123456', :encrypted_password => 'GSetrdVGt', :role => 'Parent'},
+	
+	{:user_id => User.find(2).id, :username => 'user2', :password => '123456', :encrypted_password => 'g3fw4f43rf', :role => 'Parent'},
+	{:user_id => User.find(5).id, :username => 'user3', :password => '123456', :encrypted_password => 'TrrtVDttv', :role => 'Mentor'},
+	
+	{:user_id => User.find(4).id, :username => 'user4', :password => '123456', :encrypted_password => 'TbRSTVStf', :role => 'Parent'},
+	
+	{:user_id => User.find(3).id, :username => 'user5', :password => '123456', :encrypted_password => 'g3fw4f43rf', :role => 'Parent'},
+	
+	{:user_id => User.find(6).id,:username => 'user6', :password => '123456', :encrypted_password => 'TrrtVDttv', :role => 'Mentor'}
+]
+
+rglusers.each do |rgluser|
+  Rgluser.create!(rgluser)
+end
+
 
 mentors = [
+<<<<<<< HEAD
 	{:user_id => User.find(2).id, :firstname => 'Meimei', :lastname => 'Han', :phone => '9796760002', :email => 'user2@tamu.edu', :gender => 'male', :date_of_birth => '1993-06-18', :school => 'School 5', :grade => 'U1', :time_slot => '12:00 - 13:00 Mon', :competitions => ['FIRST'], :description => '...', :visible => true},
+=======
+	{:user_id => User.find(5).id, :firstname => 'Meimei', :lastname => 'Han', :phone => '9796760002', :email => 'user2@tamu.edu', :gender => 'male', :date_of_birth => '1993-06-18', :school => 'School 5', :grade => 'U1', :time_slot => '12:00 - 13:00 Mon', :competitions => ['FIRST'], :description => '...', :visible => true},
+>>>>>>> eabf2dcbc36394ca2284ca5482610baa24908612
 	
-	{:user_id => User.find(3).id, :firstname => 'Hua', :lastname => 'Wang', :phone => '9796760003', :email => 'user3@tamu.edu', :gender => 'female', :date_of_birth => '1993-06-18', :school => 'School 6', :grade => 'U3', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST'], :description => '...', :visible => true}
+	{:user_id => User.find(6).id, :firstname => 'Hua', :lastname => 'Wang', :phone => '9796760003', :email => 'user3@tamu.edu', :gender => 'female', :date_of_birth => '1993-06-18', :school => 'School 6', :grade => 'U3', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST'], :description => '...', :visible => true}
 ]
 
 mentors.each do |mentor|
@@ -31,11 +47,11 @@ end
 parents = [
 	{:user_id => User.find(1).id, :firstname => 'Lei', :lastname => 'Li', :phone => '9796760001', :email => 'user1@tamu.edu'},
 	
-	{:user_id => User.find(4).id, :firstname => 'Ming', :lastname => 'Xiao', :phone => '9796760004', :email => 'user4@tamu.edu'},
+	{:user_id => User.find(2).id, :firstname => 'Ming', :lastname => 'Xiao', :phone => '9796760004', :email => 'user4@tamu.edu'},
 	
-	{:user_id => User.find(5).id, :firstname => 'Ritian', :lastname => 'Zhao', :phone => '9796760005', :email => 'user5@tamu.edu'},
+	{:user_id => User.find(3).id, :firstname => 'Ritian', :lastname => 'Zhao', :phone => '9796760005', :email => 'user5@tamu.edu'},
 	
-	{:user_id => User.find(6).id, :firstname => 'Liangchen', :lastname => 'Ye', :phone => '9796760006', :email => 'user6@tamu.edu'}
+	{:user_id => User.find(4).id, :firstname => 'Liangchen', :lastname => 'Ye', :phone => '9796760006', :email => 'user6@tamu.edu'}
 ]
 
 parents.each do |parent|

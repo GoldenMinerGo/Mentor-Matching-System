@@ -28,7 +28,18 @@ class ApplicationController < ActionController::Base
       return false
     else
       return true
-    end
+    end 
   end
   
+  
+  private
+  def current_user
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      if !@user.fbuser.nil?
+        @fbuser = Fbuser.find(@user.fbuser.id)
+      end
+    end
+  end
+  helper_method :current_user
 end

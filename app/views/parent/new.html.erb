@@ -26,12 +26,6 @@
         </div>
       <% end %>
     </div>
-    <% if @parent.errors.any? %>
-      <ul class="Signup_Errors">
-        <% for message_error in @parent.errors.full_messages %>
-          <li>* <%= message_error %></li>
-        <% end %>
-      </ul>
-    <% end %>
+  
   </div>
 </div>
