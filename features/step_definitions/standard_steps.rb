@@ -56,6 +56,10 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
   end
 end
 
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  page.body.index(e1).should < page.body.index(e2)
+end
+
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
    if current_path.respond_to? :should
