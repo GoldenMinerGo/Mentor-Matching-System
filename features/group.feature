@@ -1,6 +1,7 @@
 Feature: check group information
   As an user
   I want to check my group information including group ID, group title, mentor of the group and members of the group.
+  I also want to sort for the group title and num of members by clicking on the relevant buttons.
   
   Background: users, parents, children, groups, invitations and mentors in database
   
@@ -99,3 +100,8 @@ Scenario: close the group
 When I go to the Group Information page
 And I follow "Close this group"
 Then I should be on the parent dashboard page
+
+Scenario: sort by group title
+When I go to the Group page
+And I follow "Group Title"
+Then I should see "group 1" before "group 2"
