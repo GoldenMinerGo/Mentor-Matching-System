@@ -31,7 +31,7 @@ class PasswordResetsController < ApplicationController
     if params[:rgluser][:password].empty?
       flash[:danger] = "Password must be valid"
       render 'edit'
-    elsif @rgluser.update_attributes(user_params)
+    elsif @rgluser.update_attributes(rgluser_params)
       flash[:success] = "Password has been reset."
       redirect_to welcome_index_path and return
     else
