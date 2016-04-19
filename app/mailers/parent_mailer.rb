@@ -16,9 +16,9 @@ class ParentMailer < ApplicationMailer
   #
   #   en.parent_mailer.password_reset.subject
   #
-  def password_reset(parent = Parent.find_by_id(1))
-    @parent = parent
-    @rgluser = parent.user.rgluser
-    mail to: parent.email, subject: "Reset Password Requested"
+  def password_reset(rgluser)
+    @rgluser = rgluser
+    @parent = rgluser.user.parent
+    mail to: @parent.email, subject: "Reset Password Requested"
   end
 end
