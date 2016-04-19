@@ -58,9 +58,7 @@ class Rgluser < ActiveRecord::Base
         return "new user"
     end
     
-    def new_token
-      SecureRandom.urlsafe_base64
-    end
+
     
     validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
     validates :password, :confirmation => true #password_confirmation attr
@@ -72,6 +70,10 @@ class Rgluser < ActiveRecord::Base
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
+    end
+    
+    def self.new_token
+      SecureRandom.urlsafe_base64
     end
     
 end
