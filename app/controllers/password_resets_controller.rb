@@ -23,8 +23,9 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
+    aaa
     @rgluser = Rgluser.find_by_reset_token(params[:id])
-    redirect_to welcome_index_path and return if !@rgluser.nil?
+    redirect_to welcome_index_path and return if @rgluser.nil?
   end
   
   def update
