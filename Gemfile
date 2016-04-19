@@ -30,6 +30,7 @@ group :development, :test do
     gem 'rspec-rails'
     gem 'simplecov'
     gem 'htmlbeautifier'
+	gem 'rubycas-client', :git => 'git://github.com/rubycas/rubycas-client.git'
 end
 
 group :test do

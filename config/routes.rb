@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :mentors
 
   get "welcome/forget_password" => "welcome#forget_password"
+  resources :password_resets,     only: [:new, :create, :edit, :update]
+  
   get "welcome/index" => "welcome#index"
   get "welcome/parent_signin" => "welcome#parent_signin"
   get "welcome/logout" => "welcome#logout"
@@ -33,6 +35,8 @@ Rails.application.routes.draw do
   resources :user
   resources :rglusers
   get 'fbuser/fb_login' => 'fbuser#fb_login', as: :fb_auth
+  get 'casusers/cas_login' => 'casusers#cas_login', as: :cas_login
+  get 'casusers/cas_logout' => 'casusers#cas_logout', as: :cas_logout
   resources :child
   resources :group
   get 'group/:id/change' => 'group#change', as: :change_group

@@ -22,8 +22,12 @@ class WelcomeController < ApplicationController
   end
   
   def logout
-    session[:user_id] = nil
-    redirect_to welcome_index_path
+    if !User.find_by_id(session[:user_id]).nil? && User.find_by_id(session[:user_id]).role == "Mentor"
+      redirect_to cas_logout_path
+    else
+      session[:user_id] = nil
+      redirect_to welcome_index_path
+    end
   end
   
   def index
@@ -41,6 +45,13 @@ class WelcomeController < ApplicationController
 
   end
   
+  def forget_password
+    
+  end
+  
+  def send_password_email
+    user = Parent.find_by_email(params[:email]).user
+  end
   
   private 
   
