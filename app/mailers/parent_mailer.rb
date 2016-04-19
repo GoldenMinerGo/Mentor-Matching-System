@@ -5,7 +5,7 @@ class ParentMailer < ApplicationMailer
   #
   #   en.parent_mailer.account_activation.subject
   #
-  def account_activation(parent = Parent.find_by_id(1))
+  def account_activation(parent)
     @parent = parent
 
     mail to: parent.email, subject: "Account Activated"
