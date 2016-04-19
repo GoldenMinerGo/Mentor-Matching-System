@@ -23,6 +23,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
+    @rgluser = Rgluser.find_by_reset_token(params[:id])
   end
   
   def update
