@@ -29,7 +29,7 @@ class PasswordResetsController < ApplicationController
   
   def update
     if params[:rgluser][:password].empty?
-      @rgluser.errors.add(:password, "can't be empty")
+      flash[:danger] = "Password must be valid"
       render 'edit'
     elsif @rgluser.update_attributes(user_params)
       flash[:success] = "Password has been reset."
