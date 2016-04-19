@@ -45,12 +45,12 @@ class PasswordResetsController < ApplicationController
     params.require(:rgluser).permit(:password, :password_confirmation)
   end
   
-  def get_user
+  def get_rgluser
       @rgluser = Parent.find_by(email: params[:email]).user.rgluser
   end
 
     # Confirms a valid user.
-  def valid_user
+  def valid_rgluser
     unless @rgluser
       redirect_to root_url
     end
