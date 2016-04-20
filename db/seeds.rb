@@ -84,9 +84,9 @@ end
 
 
 invitations = [
-	{:group_id => Group.find(2).id, :sender_id => Child.find(1).id, :receiver_id => Child.find(4).id, :status => 'pending'},
+	{:group_id => Group.find(2).id, :sender_id => Child.find(1).id, :receiver_id => Child.find(4).id, :status => 'Pending'},
 
-	{:group_id => Group.find(1).id, :sender_id => Child.find(5).id, :receiver_id => Child.find(2).id, :status => 'declined'}
+	{:group_id => Group.find(1).id, :sender_id => Child.find(5).id, :receiver_id => Child.find(2).id, :status => 'Declined'}
 ]
 
 

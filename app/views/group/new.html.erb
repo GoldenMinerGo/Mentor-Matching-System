@@ -1,7 +1,7 @@
 <% @page_title = "Create Group" %>
 <div class="Sign_Form">
   <h1>Fill in information</h1>
-  <%= form_for(:group, :url => {:controller => 'group', :action => 'create'}) do |g| %>
+  <%= form_for(:group, :url => {:controller => 'group', :action => 'create', :child_id => @id}) do |g| %>
     <p> Title</br> <%= g.text_field :title%> </p>
     <p> Available Time</br> <%= g.text_field :time_slot %></p>
     <p> Competitions</br> <%= g.text_field :str_com %></p>

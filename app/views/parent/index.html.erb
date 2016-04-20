@@ -18,9 +18,10 @@
       <table class='table table-hover'>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Group</th>
+            <th><%= link_to "#", parent_path(sort: '#') %></th>
+            <th><%= link_to "Name", parent_path(sort: 'name') %></th>
+            
+            <th>Group<%#= link_to "Group", parent_path(sort: 'group') %></th>
             <th>Mentor</th>
             <th></th>
             <th></th>
@@ -32,10 +33,11 @@
               <td><%= child.id %></td>
               <td><%= child.name %></td>
               <% if child.group.nil? %>
-                <td></td>
+                <td><%= link_to "Search group"%> or <%= link_to "Create group", new_group_path(:child_id => child.id) %></td>
                 <td></td>
               <% else %>
-                <td><%= child.group.title %></td>
+                
+                <td><%= link_to child.group.title, group_path(:id => child.group.id, :ch =>child.id) %></td>
                 <% if child.group.mentor.nil? %>
                   <td></td>
                 <% else %>
@@ -88,7 +90,7 @@
         </tbody>
       </table>
     <% end %>
-    <p align="right"><%= link_to '<i class="fa fa-plus"></i> Add Group'.html_safe, new_group_path , :class => 'btn btn-primary hover-shadow'%></p>
+    <p align="right"><%#= link_to '<i class="fa fa-plus"></i> Add Group'.html_safe, new_group_path , :class => 'btn btn-primary hover-shadow'%></p>
   </div>
 </div>
 <div class='row'>
@@ -101,6 +103,7 @@
         <thead>
           <tr>
             <th>Sender</th>
+            <th>Receiver</th>
             <th>Title</th>
             <th>Mentor</th>
             <th>Member</th>
@@ -112,6 +115,7 @@
           <% @rinv.each do |inv| %>
             <tr>
               <td><%= link_to "#{inv.sender.name}", child_path(inv.sender) %></td>
+              <td><%= inv.receiver.name %></td>
               <% if inv.group.nil? %>
                 <td></td>
                 <td></td>
@@ -126,7 +130,11 @@
                 <td><%= inv.group.members %></td>
               <% end %>
               <td></td>
+              <% if inv.status == "Pending"%>
+              <td><%= link_to "Accept", invitation_child_accept_group_path(inv) %> or <%= link_to "Decline" %></td>
+              <% else %>
               <td><%= inv.status %></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
@@ -169,7 +177,11 @@
                 <td><%= inv.group.members %></td>
               <% end %>
               <td></td>
+              <% if inv.status == "Pending"%>
+              <td><%= link_to "Cancel" %></td>
+              <% else %>
               <td><%= inv.status %></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

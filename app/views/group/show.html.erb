@@ -21,7 +21,7 @@
     <%else%>
     <td><%= @group.mentor.name %></td>
     <% end %>
-    <td><%= Parent.find(@group.admin_id).name %></td>
+    <td><%= @group.admin.name %></td>
     <td><%= child.name %></td>
     <td><%= @group.time_slot %></td>
     <td><%= @group.competitions %></td>
@@ -76,6 +76,7 @@
           <tr>
             <th>Receiver</th>
             <th>Status</th>
+            <th>dsfdsf</th>
           </tr>
         </thead>
         <tbody>
@@ -83,7 +84,7 @@
             <tr>
               <td><%= sinv.mentor_id %></td>
               <td><%= sinv.status %></td>
-              <% if sinv.status == 'pending' %>
+              <% if sinv.status == "Pending" %>
               <td><%= link_to "Cancel Invitation", groupinvs_cancel_inv_path(sinv)%></td>
               <% end %> 
             </tr>
@@ -99,5 +100,7 @@
 <% if @group.mentor.nil? %>
   <%= link_to "Browse mentors", mentors_path %><br />
 <%end%>
+<% session[:child_id] = @child.id %>
+<%= link_to "Browse members", child_index_path%><br />
 <%= link_to "Close this group", { action: :destroy, id: @group.id }, data: {:confirm => 'Are you sure?'}, method: :delete %><br />
 <%= link_to "Back", parent_path %>

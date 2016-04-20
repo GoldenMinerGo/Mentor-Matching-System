@@ -14,6 +14,7 @@
           <th>Description</th>
           <th>Group #</th>
           <th>Title</th>
+          <th>More</th>
         </tr>
       </thead>
       <tbody>
@@ -34,9 +35,11 @@
             <% if child.group.nil? %>
               <td></td>
               <td></td>
+              <td><%= link_to "Send invitation", {:controller => 'invitation', :action => 'group_send_inv_to_child', :id => @group.id, :sender_id => @child.id, :rec_id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
             <% else %>
               <td><%= child.group_id %></td>
               <td><%= child.group.title %></td>
+              <td></td>
             <% end %>
           </tr>
         <% end %>

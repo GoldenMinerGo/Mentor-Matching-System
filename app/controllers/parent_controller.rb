@@ -3,11 +3,22 @@ class ParentController < ApplicationController
         @user=User.whois(session)
         redirect_to root_path and return if @user.nil?
         redirect_to parent_new_path and return if @user.parent.nil?
-
+        
         @parent=@user.parent
-        @children=@parent.children
+        #@children=@parent.children
         @groups=Group.where(:admin_id => @parent)
         #to be changed
+        
+        case params[:sort]
+        #when 'group'
+            #@children=@parent.children.sort_by{|c| c.group.title} 
+        when '#'
+            @children=@parent.children
+        when 'name'
+            @children=@parent.children.sort_by{|c| c.name}
+        else
+            @children=@parent.children
+        end
         @rinv=Invitation.where(:receiver_id => @children)
         @sinv=Invitation.where(:sender_id => @children)
     end

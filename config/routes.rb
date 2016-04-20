@@ -25,7 +25,8 @@ Rails.application.routes.draw do
   post "parent/create" => "parent#create"
   
   get "mentor/quit_group/:id" => "mentors#quit_group", as: :mentor_quit_group
-  
+  get "invitation/group_send_inv_to_child/:id" =>"invitation#group_send_inv_to_child", as: :invitation_group_send_inv_to_child
+  get "invitation/child_accept_group/:id" =>"invitation#child_accept_group", as: :invitation_child_accept_group
   #get "group" => "group#index"
   #get "group/edit" => "group#edit"
   #put "group" => "group#update"

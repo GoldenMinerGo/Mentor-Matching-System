@@ -1,8 +1,27 @@
 class ChildController < ApplicationController
     def index
         @user=User.whois(session)
-        redirect_to root_path and return if @user.nil?
-        @children=Child.where(:visible => true).where.not(:parent_id => @user.parent)
+        
+        if !session[:child_id].nil?
+            
+            @child = Child.find_by_id(session[:child_id])
+            @group = @child.group
+            session.delete(:child_id)
+        else
+            flash[:warning] = "Invalid user!"
+            reset_session
+            redirect_to welcome_index_path and return
+        end
+        
+        if !@user.nil? && @user.role == "Parent"
+            
+            
+            @children=Child.where(:visible => true)
+        else
+            flash[:warning] = "Invalid user!"
+            session[:user_id] = nil
+            redirect_to welcome_index_path and return
+        end
     end
     
     def show
