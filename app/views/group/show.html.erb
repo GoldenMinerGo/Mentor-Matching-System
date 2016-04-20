@@ -52,7 +52,10 @@
             <tr>
               <td><%= rinv.mentor_id %></td>
               <td><%= rinv.status %></td>
-               <td><%= link_to "Accept Invitation", groupinvs_accept_inv_group_path(rinv)%></td>
+              <% if rinv.status == "Pending" %>
+               <td><%= link_to "Accept", groupinvs_accept_inv_group_path(rinv)%></td>
+               <td><%= link_to "Decline", groupinvs_decline_inv_path(rinv)%></td>
+               <% end %>
             </tr>
           <% end %>
         </tbody>
@@ -83,7 +86,7 @@
             <tr>
               <td><%= sinv.mentor_id %></td>
               <td><%= sinv.status %></td>
-              <% if sinv.status == 'pending' %>
+              <% if sinv.status == "pending" %>
               <td><%= link_to "Cancel Invitation", groupinvs_cancel_inv_path(sinv)%></td>
               <% end %> 
             </tr>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "groupinvs/accept_inv_mentor/:id" => "groupinvs#accept_inv_mentor", as: :groupinvs_accept_inv_mentor
   get "groupinvs/accept_inv_group/:id" => "groupinvs#accept_inv_group", as: :groupinvs_accept_inv_group
   get "groupinvs/cancel_inv/:id" => "groupinvs#cancel_inv", as: :groupinvs_cancel_inv
+  get "groupinvs/decline_inv/:id" => "groupinvs#decline_inv", as: :groupinvs_decline_inv
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

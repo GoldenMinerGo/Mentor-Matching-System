@@ -48,7 +48,8 @@ Description: <%= @mentor.description %><br />
               <td><%= rinv.group_id %></td>
               <td><%= rinv.status %></td>
               <% if rinv.status == 'Pending' %>
-              <td><%= link_to "Accept Invitation", groupinvs_accept_inv_mentor_path(rinv)%></td>
+              <td><%= link_to "Accept", groupinvs_accept_inv_mentor_path(rinv)%></td>
+              <td><%= link_to "Declined", groupinvs_decline_inv_path(rinv)%></td>
             <% end %>
             </tr>
           <% end %>
@@ -80,7 +81,7 @@ Description: <%= @mentor.description %><br />
             <tr>
               <td><%= sinv.group_id %></td>
               <td><%= sinv.status %></td>
-              <% if sinv.status == 'Pending' %>
+              <% if sinv.status == "Pending" %>
               <td><%= link_to "Cancel Invitation", groupinvs_cancel_inv_path(sinv)%></td>
               <% end %>
             </tr>

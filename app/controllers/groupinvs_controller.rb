@@ -16,6 +16,7 @@ class GroupinvsController < ApplicationController
       @groupinv.status = "Pending"
       if @groupinv.save
         flash[:success] = "Invitation susccessfully sent!"
+        GroupinvMailer.groupinv_received(@groupinv)
         if User.whois(session).role == "Parent"
           redirect_to group_path(params[:id]) and return
         elsif User.whois(session).role == "Mentor" || User.whois(session).role == "mentor" 
@@ -40,6 +41,8 @@ class GroupinvsController < ApplicationController
     @groupinv.mentor.update(:visible => false) 
     @groupinv.group.update(:visible => false)
     if @groupinv.save
+      changed_by_mentor = true
+      GroupinvMailer.groupinv_changed(@groupinv, changed_by_mentor)
       flash[:success] = "You joined the group!"
       redirect_to mentor_path(@groupinv.mentor_id) and return
     else
@@ -58,28 +61,42 @@ class GroupinvsController < ApplicationController
     @groupinv.mentor.update(:visible => false)
     @groupinv.group.update(:visible => false)
     if @groupinv.save
+      changed_by_mentor = false
+      GroupinvMailer.groupinv_changed(@groupinv, changed_by_mentor)
       flash[:success] = "You have a mentor now!"
-      redirect_to  group_path(@groupinv.group_id) and return
+      redirect_to group_path(@groupinv.group_id) and return
     else
       flash[:warning] = "Oops!Try again!"
       redirect_to group_path(@groupinv.group_id) and return
     end
- end
+  end
+  
+  def decline_inv
+    @groupinv = Groupinv.find_by_id(params[:id])
+    @groupinv.status = "Declined"
+    if @groupinv.save
+      flash[:success] = "You decline a mentor request"
+      redirect_to group_path(@groupinv.group_id) and return
+    else
+      flash[:warning] = "Oops!Try again!"
+      redirect_to group_path(@groupinv.group_id) and return 
+   end
+end 
  
- def cancel_inv
-   @groupinv_cancel = Groupinv.find_by_id(params[:id])
-   if @groupinv_cancel.present?
-   @groupinv_cancel.destroy
- end
-   if User.whois(session).role == "Parent"
-          redirect_to group_path(params[:id]) and return
-        elsif User.whois(session).role == "Mentor"
-          redirect_to mentor_path(params[:id]) and return
-        end   
- end
- 
- def decline_inv
-   
+  def cancel_inv
+    @groupinv_cancel = Groupinv.find_by_id(params[:id])
+    if @groupinv_cancel.present?
+      @groupinv_cancel.destroy
+    end
+    if User.whois(session).role == "Parent"
+      redirect_to group_path(params[:id]) and return
+    elsif User.whois(session).role == "Mentor"
+      redirect_to mentor_path(params[:id]) and return
+    end   
+  end
+  
+
+  
  
  private
   def edit_the_table(groupinv)
@@ -115,6 +132,4 @@ class GroupinvsController < ApplicationController
       end
     end
   end
-end
-    
 end
