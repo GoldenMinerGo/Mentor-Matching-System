@@ -1,19 +1,37 @@
-<% @page_title = "Create Group" %>
-<div class="Sign_Form">
-  <h1>Fill in information</h1>
-  <%= form_for(:group, :url => {:controller => 'group', :action => 'create'}) do |g| %>
-    <p> Title</br> <%= g.text_field :title%> </p>
-    <p> Available Time</br> <%= g.text_field :time_slot %></p>
-    <p> Competitions</br> <%= g.text_field :str_com %></p>
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-2">
+    <div class="col-sm-8 col-sm-offset-4">
+      <h1 align="center" class="animated fadeInDown">Fill in Information</h1><br><br>
+    </div>
     
-    <%= g.submit "Create" %>
-    <%= link_to "Back", parent_path %>
-  <% end %>
-  <% if @group.errors.any? %>
-    <ul class="Signup_Errors">
-    <% for message_error in @group.errors.full_messages %>
-      <li>* <%= message_error %></li>
+    <div class="Sign_Form">
+      <%= form_for(:group, :url => {:controller => 'group', :action => 'create'}, :html => {:class => "form-horizontal"}) do |g| %>
+        <div class="form-group">
+          <label for="inputTitle" class="col-sm-4 control-label">Title:</label>
+          <div class="col-sm-8"><%= g.text_field :title, :class => 'form-control'%></div>
+        </div>
+        <div class="form-group">
+          <label for="inputAvailableTime" class="col-sm-4 control-label">Available Time:</label>
+          <div class="col-sm-8"><%= g.text_field :time_slot, :class => 'form-control'%></div>
+        </div>
+        <div class="form-group">
+          <label for="inputCompetitions" class="col-sm-4 control-label">Competitions:</label>
+          <div class="col-sm-8"><%= g.text_field :str_com, :class => 'form-control'%></div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-8 col-sm-offset-4">
+            <%= g.submit "Create" , :class => 'btn btn-success btn-block'%>
+            <%= link_to "Back", parent_path, :class => 'btn btn-block btn-default' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% if @group.errors.any? %>
+      <ul class="Signup_Errors">
+        <% for message_error in @group.errors.full_messages %>
+          <li>* <%= message_error %></li>
+        <% end %>
+      </ul>
     <% end %>
-    </ul>
-  <% end %>
+  </div>
 </div>
