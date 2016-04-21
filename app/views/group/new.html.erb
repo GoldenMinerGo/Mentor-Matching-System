@@ -7,7 +7,7 @@
 
     
     <div class="Sign_Form">
-      <%= form_for(:group, :url => {:controller => 'group', :action => 'create',:child_id => @id}, :html => {:class => "form-horizontal"}) do |g| %>
+      <%= form_for(:group, :url => {:controller => 'group', :action => 'create'}, :html => {:class => "form-horizontal"}) do |g| %>
         <div class="form-group">
           <label for="inputTitle" class="col-sm-4 control-label">Title:</label>
           <div class="col-sm-8"><%= g.text_field :title, :class => 'form-control'%></div>

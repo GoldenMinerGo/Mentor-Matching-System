@@ -32,8 +32,9 @@
             <tr>
               <td><%= child.id %></td>
               <td><%= child.name %></td>
+              
               <% if child.group.nil? %>
-                <td><%= link_to "Search group"%> or <%= link_to "Create group", new_group_path(:child_id => child.id) %></td>
+                <td><%= link_to "Search group"%> or <%= link_to "Create group", new_group_path(:child_id => child.id)%></td>
                 <td></td>
               <% else %>
                 
