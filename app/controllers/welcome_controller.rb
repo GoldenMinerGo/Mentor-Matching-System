@@ -25,7 +25,7 @@ class WelcomeController < ApplicationController
     if !User.find_by_id(session[:user_id]).nil? && User.find_by_id(session[:user_id]).role == "mentor"
       redirect_to cas_logout_path
     else
-      session[:user_id] = nil
+      reset_session
       redirect_to welcome_index_path
     end
   end

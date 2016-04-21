@@ -1,10 +1,10 @@
 class CasusersController < ApplicationController
     
-before_filter CASClient::Frameworks::Rails::Filter
+before_filter CASClient::Frameworks::Rails::Filter, :except => [:cas_logout]
 
   def cas_login
     casuser = Casuser.find_by_cas_user_name(session[:cas_user])
-    if !casuser.user_id.nil?
+    if !casuser.nil? && !casuser.user_id.nil?
       session[:user_id] = casuser.user.id
       session[:expires_at] = Time.current + 2.hours
       casuser.user.last_login_time=Time.zone.now

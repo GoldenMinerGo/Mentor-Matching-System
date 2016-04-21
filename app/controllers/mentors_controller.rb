@@ -81,6 +81,16 @@ class MentorsController < ApplicationController
     @group.save!
     redirect_to mentor_path(@mentor)
   end
+  
+  def detail
+    @mentor = Mentor.find_by_id(params[:id])
+    if @mentor.nil?
+      redirect_to welcome_logout_path and return
+    end
+    @age = @mentor.age
+    @user = @mentor.user
+    @group = @mentor.groups.first
+  end
     
     
   private 

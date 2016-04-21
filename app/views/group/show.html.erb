@@ -19,7 +19,7 @@
     <% if @group.mentor.nil? %>
     <td> TBD </td>
     <%else%>
-    <td><%= @group.mentor.name %></td>
+    <td><%= link_to @group.mentor.name , mentors_detail_path(@group.mentor) %></td>
     <% end %>
     <td><%= @group.admin.name %></td>
     <td><%= child.name %></td>
