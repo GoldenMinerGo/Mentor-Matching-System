@@ -21,7 +21,7 @@ class GroupController < ApplicationController
     
     def show
         @group = Group.find_by_id(params[:id])
-        @child = Child.find_by_id(params[:ch])
+        @child = Child.find_by_id(params[:child_id])
         @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
         #sinv means send invitation
         @rinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => true)
@@ -32,16 +32,16 @@ class GroupController < ApplicationController
         #group 
         #user = User.find(1)
         #@parent = user.parent
-        @group = Group.find_by_id(params[:id])
+        @child = Child.find_by_id(session[:child_id])
+        @group = @child.group
     end
     
     def update
-        user=User.find(1)
-        @parent=user.parent
-        #@groups=Group.where(:admin_id => @parent)[0]
+        @user = User.whois(session)
+        @child = Child.find_by_id(session[:child_id])
         @group = Group.find_by_id(params[:id])
         if @group.update_attributes(group_params)
-            redirect_to group_path
+            redirect_to group_path(:id => @group.id,:child_id =>@child.id)
         else
             redirect_to parent_path
         end

@@ -37,7 +37,7 @@
                 <td></td>
               <% else %>
                 
-                <td><%= link_to child.group.title, group_path(:id => child.group.id, :ch =>child.id) %></td>
+                <td><%= link_to child.group.title, group_path(:id => child.group.id, :child_id =>child.id) %></td>
                 <% if child.group.mentor.nil? %>
                   <td></td>
                 <% else %>
