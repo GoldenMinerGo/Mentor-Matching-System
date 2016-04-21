@@ -1,8 +1,9 @@
 Feature: check group information
   As an user
   I want to check my group information including group ID, group title, mentor of the group and members of the group.
+  I also want to sort for the group title and num of members by clicking on the relevant buttons.
   
-  Background: users, parents, children, groups, mentors in database
+  Background: users, parents, children, groups, invitations and mentors in database
   
   Given the following User exist:
     | username    | password | role     | last_login_time |
@@ -36,21 +37,34 @@ Feature: check group information
     |user_id| firstname| lastname| phone       | email          | gender  | date_of_birth | school | grade |time_slot         | competitions | description | visible |
     |2      | Nima     | Cao     | 9796760002  | nima@tamu.edu  | male    | 1993-06-18    | tamu   | U1    |12:00 - 13:00 Mon | ['BEST']     | heiheihei   | false   |
     |3      | Yibi     | keng    | 9796734502  | yibi@tamu.edu  | female  | 1993-06-18    | ecnu   | U2    |12:00 - 13:00 Mon | ['FIRST']    | heiheihei   | true    |
+
 Given I am on the home page of Mentor Matching System
     When I fill in "username" with "user1"
     And I fill in "login_password" with "1q2w3e"
     And I press "Log In"
+
+Scenario: see group information
+Then I should be on the parent page
+And I should see "group 1"
+
+#test index
+Scenario: see all group information
+When I go to the Group page
+And I should see "group 1"
+And I should see "group 2"
     
 Scenario: show group information
 When I go to the Group Information page
 Then I should see "Alei Lei"
 Then I should see "Nima Cao"
 
+#test create
 Scenario: add a new group
 When I go to the parent dashboard page
 When I follow "Add a group"
 Then I should be on the New Group page
 And I fill in "group[title]" with "GoldenMiner"
+#And I fill in "group[time_slot]" with "12:00"
 And I fill in "group[str_com]" with "Olympics"
 And I fill in "group[time_slot]" with "Avail"
 And I press "Create"
@@ -61,9 +75,11 @@ When I follow first group's "More"
 When I follow "Update Group Information"
 Then I should be on the group edit page
 And I fill in "group[title]" with "SilverMiner"
+#And I fill in "group[time_slot]"with "12:00"
 And I fill in "group[str_com]" with "SportsMeeting"
 And I press "Update"
 Then I should see "SilverMiner"
+#Then I should see "12:00"
 Then I should see "SportsMeeting"
 
 

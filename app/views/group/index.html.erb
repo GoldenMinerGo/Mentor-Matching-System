@@ -3,12 +3,14 @@
 <h2>All Groups</h2>
 <table>
   <tr>
+
     <th><%= link_to 'ID', group_index_path(sort: 'id')%></th>
     <th><%= link_to 'Title', group_index_path(sort: 'title')%></th>
     <th>Mentor</th>
     
     <th>Members</th>
     <th><%= link_to '#Members', group_index_path(sort: 'num')%></th>
+
     <th>Admin</th>
     <th>Available time</th>
     <th>Competition</th>
@@ -34,8 +36,10 @@
   <% end %>
 </table>
 <br/>
+
 <% if User.whois(session).role == "Parent" %>
   <%= link_to "Back", parent_path %> 
 <% elsif User.whois(session).role == "Mentor" %>
   <%= link_to "Back", mentor_path(@mentor) %>
 <% end %>
+

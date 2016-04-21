@@ -1,6 +1,7 @@
 ##parent step
 ##group step
 
+
 Given (/^the following (.*) exist:$/) do |type, table| 
     if type == "User"
         table.hashes.each do |element|
@@ -58,6 +59,10 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
   else
     assert page.has_content?(text)
   end
+end
+
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  page.body.index(e1).should < page.body.index(e2)
 end
 
 Then /^(?:|I )should be on (.+)$/ do |page_name|

@@ -13,8 +13,10 @@ class GroupController < ApplicationController
         #@groups = Group.where(:visible => true).where.not(:admin_id => @parent)
             @groups = Group.where(:visible => true)
         #@members = @groups.members
+
             
         end
+
     end
     
     def show
