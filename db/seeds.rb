@@ -30,9 +30,9 @@ end
 
 
 mentors = [
-	{:user_id => User.find(5).id, :firstname => 'Meimei', :lastname => 'Han', :phone => '9796760002', :email => 'user2@tamu.edu', :gender => 'male', :date_of_birth => '1993-06-18', :school => 'School 5', :grade => 'U1', :time_slot => '12:00 - 13:00 Mon', :competitions => ['FIRST'], :description => '...', :visible => true},
+	{:user_id => User.find(5).id, :firstname => 'Meimei', :lastname => 'Han', :phone => '9796760002', :email => 'user2@tamu.edu', :gender => 'male', :date_of_birth => '1993-06-18', :school => 'School 5', :grade => 'U1', :time_slot => '12:00 - 13:00 Mon', :competitions => 'FIRST', :description => '...', :visible => true},
 	
-	{:user_id => User.find(6).id, :firstname => 'Hua', :lastname => 'Wang', :phone => '9796760003', :email => 'user3@tamu.edu', :gender => 'female', :date_of_birth => '1993-06-18', :school => 'School 6', :grade => 'U3', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST'], :description => '...', :visible => true}
+	{:user_id => User.find(6).id, :firstname => 'Hua', :lastname => 'Wang', :phone => '9796760003', :email => 'user3@tamu.edu', :gender => 'female', :date_of_birth => '1993-06-18', :school => 'School 6', :grade => 'U3', :time_slot => '12:00 - 13:00 Mon', :competitions => 'BEST', :description => '...', :visible => true}
 ]
 
 mentors.each do |mentor|

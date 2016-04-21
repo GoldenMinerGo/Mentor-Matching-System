@@ -16,6 +16,7 @@ gem 'font-awesome-sass'
 gem 'bootstrap_tokenfield_rails'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
+gem 'rubycas-client', :git => 'git://github.com/rubycas/rubycas-client.git'
 
 group :development, :test do 
 	gem 'sqlite3', '1.3.9'

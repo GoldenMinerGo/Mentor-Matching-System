@@ -53,6 +53,7 @@ class ParentController < ApplicationController
         @parent.user_id=@user.id
         if @parent.save
             flash[:success] = "Your personal information has been created successfully"
+            ParentMailer.account_activation(@parent).deliver_now
             redirect_to parent_path and return
         else
             flash[:danger] = "The information you put is invalid"

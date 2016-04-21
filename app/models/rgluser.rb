@@ -26,25 +26,54 @@ class Rgluser < ActiveRecord::Base
         encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
     end
     
+    def send_password_reset_email
+        ParentMailer.password_reset(self).deliver_now
+    end
+    
+    def password_reset_expired?
+      reset_sent_at < 2.hours.ago
+    end
+    
+    def create_reset_digest
+        self.reset_token = Rgluser.new_token
+        update_attribute(:reset_digest,  Rgluser.digest(reset_token))
+        update_attribute(:reset_sent_at, Time.zone.now)
+    end
+    
     def name
-        if self.role == 'Parent'
-            return self.parent.name if !self.parent.nil?
+        if self.user.role == "Parent"
+            return self.user.parent.name if !self.user.parent.nil?
         else
-            return self.mentor.name if !self.mentor.nil?
+            return self.user.mentor.name if !self.user.mentor.nil?
         end
         return "new user"
     end
     
     def firstname
-        if self.role == 'Parent'
-            return self.parent.firstname if !self.parent.nil?
+        if self.user.role == 'Parent'
+            return self.user.parent.firstname if !self.parent.nil?
         else
-            return self.mentor.firstname if !self.mentor.nil?
+            return self.user.mentor.firstname if !self.mentor.nil?
         end
         return "new user"
     end
     
+
+    
     validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
     validates :password, :confirmation => true #password_confirmation attr
     validates_length_of :password, :in => 6..20, :on => :create
+    
+    private
+    
+    def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+    end
+    
+    def self.new_token
+      SecureRandom.urlsafe_base64
+    end
+    
 end

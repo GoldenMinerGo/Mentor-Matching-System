@@ -1,0 +1,19 @@
+<h1>Group quit inquiry</h1>
+
+<p>
+  Hi <%= @coach.name %>,
+</p>
+
+<p>
+  <% @child.name %> would like to quit your group. If you approve it please log into the system and remove the child.
+  
+  Click on the link below to log into the system:
+</p>
+
+<p>
+  <%= link_to "Log in", welcome_index_url  %>,
+</p>
+
+<p>
+If you did not register for the system, please ignore this email and contact ### immediately.
+</p>

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :mentors
 
   get "welcome/forget_password" => "welcome#forget_password"
+  resources :password_resets,     only: [:new, :create, :edit, :update]
+  
   get "welcome/index" => "welcome#index"
   get "welcome/parent_signin" => "welcome#parent_signin"
   get "welcome/logout" => "welcome#logout"
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
   get "groupinvs/accept_inv_mentor/:id" => "groupinvs#accept_inv_mentor", as: :groupinvs_accept_inv_mentor
   get "groupinvs/accept_inv_group/:id" => "groupinvs#accept_inv_group", as: :groupinvs_accept_inv_group
   get "groupinvs/cancel_inv/:id" => "groupinvs#cancel_inv", as: :groupinvs_cancel_inv
+  get "groupinvs/decline_inv/:id" => "groupinvs#decline_inv", as: :groupinvs_decline_inv
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -34,6 +37,8 @@ Rails.application.routes.draw do
   resources :user
   resources :rglusers
   get 'fbuser/fb_login' => 'fbuser#fb_login', as: :fb_auth
+  get 'casusers/cas_login' => 'casusers#cas_login', as: :cas_login
+  get 'casusers/cas_logout' => 'casusers#cas_logout', as: :cas_logout
   resources :child
   resources :group
   get 'group/:id/change' => 'group#change', as: :change_group
