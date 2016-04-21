@@ -31,7 +31,9 @@
     <td><%= Parent.find(group.admin_id).name %></td>
     <td><%= group.time_slot %></td>
     <td><%= group.competitions %></td>
-    <td><%#= link_to "Send Invitation", groupinvs_send_inv_path(:id => group.id, :mentor_id => @mentor.id, :send_by_mentor => true) %></td>
+    <%if !@mentor.nil?%>
+    <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => group.id, :mentor_id => @mentor.id, :send_by_mentor => true) %></td>
+    <%end%>
   </tr>
   <% end %>
 </table>

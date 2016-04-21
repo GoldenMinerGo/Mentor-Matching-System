@@ -87,11 +87,9 @@
             <tr>
               <td><%= sinv.mentor_id %></td>
               <td><%= sinv.status %></td>
-<<<<<<< HEAD
+
               <% if sinv.status == "Pending" %>
-=======
-              <% if sinv.status == "pending" %>
->>>>>>> 4ebba7ce66b1c38ed35ff97e82281bf49d564932
+
               <td><%= link_to "Cancel Invitation", groupinvs_cancel_inv_path(sinv)%></td>
               <% end %> 
             </tr>
