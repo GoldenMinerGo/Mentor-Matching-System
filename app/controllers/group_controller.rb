@@ -20,8 +20,14 @@ class GroupController < ApplicationController
     end
     
     def show
-        @group = Group.find_by_id(params[:id])
-        @child = Child.find_by_id(params[:ch])
+        #@group = Group.find_by_id(params[:id])
+        if !params[:child_id].nil?
+            @child = Child.find_by_id(params[:child_id])
+            session[:child_id] = @child.id
+        else
+            @child = Child.find_by_id(session[:child_id])
+        end
+        @group = @child.group
         @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
         #sinv means send invitation
         @rinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => true)
@@ -32,13 +38,13 @@ class GroupController < ApplicationController
         #group 
         #user = User.find(1)
         #@parent = user.parent
-        @group = Group.find_by_id(params[:id])
+        @child = Child.find_by_id(session[:child_id])
+        @group = @child.group
     end
     
     def update
-        user=User.find(1)
-        @parent=user.parent
-        #@groups=Group.where(:admin_id => @parent)[0]
+        @user = User.whois(session)
+        @child = Child.find_by_id(session[:child_id])
         @group = Group.find_by_id(params[:id])
         if @group.update_attributes(group_params)
             redirect_to group_path
@@ -50,8 +56,12 @@ class GroupController < ApplicationController
     def new
         @user = User.whois(session)
         redirect_to root_path and return if @user.nil?
-        @id = params[:child_id]
-        
+        if !params[:child_id].nil?
+            @child = Child.find_by_id(params[:child_id])
+            session[:child_id] = @child.id
+        else
+            @child = Child.find_by_id(session[:child_id])
+        end
         @group = Group.new
     end
     
@@ -62,7 +72,7 @@ class GroupController < ApplicationController
         @group = Group.new(group_params)
         @group.admin_id = @user.parent.id
         @group.visible = 'true'
-        @child = Child.find_by_id(params[:child_id])
+        @child = Child.find_by_id(session[:child_id])
         if @group.save
             @child.group_id = @group.id
             @child.save!

@@ -16,7 +16,7 @@ class InvitationController < ApplicationController
         @invitation.status = "Pending"
         if @invitation.save
             flash[:success] = "Invitation sent successfully!"
-            redirect_to group_path(:id => @invitation.group_id, :ch => @invitation.sender_id) and return
+            redirect_to group_path(:id => @invitation.group_id, :child_id => @invitation.sender_id) and return
         else
             flash[:warning] = "Warning!Invitation not sent!"
             redirect_to child_index_path and return
