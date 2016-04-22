@@ -1,5 +1,6 @@
 class GroupController < ApplicationController
     def index
+        
         @mentor = Mentor.find_by_id(session[:mentor_id])
         case params[:sort]
         when 'id'
@@ -17,6 +18,28 @@ class GroupController < ApplicationController
             
         end
 
+    end
+    
+    def index_for_parent
+        if !params[:child_id].nil?
+            @child = Child.find_by_id(params[:child_id])
+            session[:child_id] = @child.id
+        else
+            @child = Child.find_by_id(session[:child_id])
+    
+        end
+        case params[:sort]
+        when 'id'
+            @groups = Group.where(:visible => true).order('id ASC')
+        when 'title'
+            @groups = Group.where(:visible => true).order('title ASC')
+        when 'num'
+            @groups = Group.where(:visible => true).sort_by{|g| g.children.count}
+        else
+            
+        #@groups = Group.where(:visible => true).where.not(:admin_id => @parent)
+            @groups = Group.where(:visible => true)
+        end
     end
     
     def show

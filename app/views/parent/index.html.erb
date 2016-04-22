@@ -34,7 +34,7 @@
               <td><%= child.name %></td>
               
               <% if child.group.nil? %>
-                <td><%= link_to "Search group"%> or <%= link_to "Create group", new_group_path(:child_id => child.id)%></td>
+                <td><%= link_to "Search group", {:controller => "group", :action => "index_for_parent", :child_id => child.id}%> or <%= link_to "Create group", new_group_path(:child_id => child.id)%></td>
                 <td></td>
               <% else %>
                 
@@ -132,7 +132,7 @@
               <% end %>
               <td></td>
               <% if inv.status == "Pending"%>
-              <td><%= link_to "Accept", invitation_child_accept_group_path(inv) %> or <%= link_to "Decline" %></td>
+              <td><%= link_to "Accept", invitation_child_accept_group_path(inv) %> or <%= link_to "Decline", invitation_decline_inv_path(inv) %></td>
               <% else %>
               <td><%= inv.status %></td>
               <% end %>
@@ -179,7 +179,7 @@
               <% end %>
               <td></td>
               <% if inv.status == "Pending"%>
-              <td><%= link_to "Cancel" %></td>
+              <td><%= link_to "Cancel", invitation_cancel_inv_path(inv) %></td>
               <% else %>
               <td><%= inv.status %></td>
               <% end %>

@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   get "mentor/quit_group/:id" => "mentors#quit_group", as: :mentor_quit_group
   get "invitation/group_send_inv_to_child/:id" =>"invitation#group_send_inv_to_child", as: :invitation_group_send_inv_to_child
   get "invitation/child_accept_group/:id" =>"invitation#child_accept_group", as: :invitation_child_accept_group
+  get "invitation/cancel_inv/:id" => "invitation#cancel_inv", as: :invitation_cancel_inv
+  get "invitation/decline_inv/:id" => "invitation#decline_inv", as: :invitation_decline_inv
   #get "group" => "group#index"
   #get "group/edit" => "group#edit"
   #put "group" => "group#update"
@@ -40,7 +42,12 @@ Rails.application.routes.draw do
   get 'casusers/cas_login' => 'casusers#cas_login', as: :cas_login
   get 'casusers/cas_logout' => 'casusers#cas_logout', as: :cas_logout
   resources :child
-  resources :group
+  resources :group do
+    collection do
+      get 'index_for_parent'
+    end
+  end
+    
   get 'group/:id/change' => 'group#change', as: :change_group
   
   # get "delmem/:id" => "group#del_member", as: 'deletemember'
