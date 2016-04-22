@@ -1,39 +1,45 @@
-<h1>Group Information</h1>
 
-<h2>Your Group Information</h2>
-<table>
-  <tr>
-    <th>Members</th>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Mentor</th>
-    <th>Admin</th>
-    
-    <th>Available time</th>
-    <th>Competition</th>
-    <th>Delete</th>
-  </tr>
- <% @group.children.each do |child| %>
-  <tr>
-    <td><%= child.name %></td>
-    <td><%= @group.id %></td>
-    <td><%= @group.title %></td>
-    <% if @group.mentor.nil? %>
-    <td> TBD </td>
-    <%else%>
-    <td><%= @group.mentor.name %></td>
-    <% end %>
-    <td><%= @group.admin.name %></td>
-    
-    <td><%= @group.time_slot %></td>
-    <td><%= @group.competitions %></td>
-    <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
-  </tr>
-  <% end %>
-</table>
-<br />
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h1>Group Information</h1>
+  </div>
+</div>
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2>Your Group Information</h2>
+    <table class='table table-hover'>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Mentor</th>
+          <th>Admin</th>
+          <th>Members</th>
+          <th>Available time</th>
+          <th>Competition</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @group.children.each do |child| %>
+          <tr>
+            <td><%= @group.id %></td>
+            <td><%= @group.title %></td>
+            <% if @group.mentor.nil? %>
+            <td> TBD </td>
+            <%else%>
+            <td><%= @group.mentor.name %></td>
+            <% end %>
+            <td><%= @group.admin.name %></td>
+            <td><%= child.name %></td>
+            <td><%= @group.time_slot %></td>
+            <td><%= @group.competitions %></td>
+            <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<hr>
   </div>
 </div>
 <div class='row'>
@@ -57,17 +63,12 @@
               <% if rinv.status == "Pending" %>
                <td><%= link_to "Accept", groupinvs_accept_inv_group_path(rinv)%></td>
                <td><%= link_to "Decline", groupinvs_decline_inv_path(rinv)%></td>
-               <% end %>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
       </table>
     <% end %>
-    <hr>
-  </div>
-</div>
- 
- <hr>
   </div>
 </div>
 <div class='row'>
@@ -99,7 +100,6 @@
         </tbody>
       </table>
     <% end %>
-    <hr>
   </div>
 </div>
 <% session[:group_id] = @group.id %>
@@ -107,7 +107,7 @@
 <% if @group.mentor.nil? %>
   <%= link_to "Browse mentors", mentors_path %><br />
 <%end%>
-
+<% session[:child_id] = @child.id %>
 <%= link_to "Browse members", child_index_path%><br />
 <%= link_to "Close this group", { action: :destroy, id: @group.id }, data: {:confirm => 'Are you sure?'}, method: :delete %><br />
-<%= link_to "Back", parent_path %>
+<%= link_to "Back", parent_path %>      
