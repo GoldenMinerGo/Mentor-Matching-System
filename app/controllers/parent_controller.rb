@@ -19,8 +19,16 @@ class ParentController < ApplicationController
         else
             @children=@parent.children
         end
-        @rinv=Invitation.where(:receiver_id => @children)
-        @sinv=Invitation.where(:sender_id => @children)
+        #@mygroups = @parent.mygroups
+        #invitation received from group
+        @rinv=Invitation.where(:receiver_id => @children).where(:sender_id => nil)
+        #invitation sent from my group
+        @sinv=Invitation.where(:group_id => @groups).where(:sender_id => nil)
+        #request received from other child
+        @rrequest = Invitation.where(:group_id => @groups).where(:receiver_id => nil)
+        #request sent from my child
+        @srequest = Invitation.where(:sender_id => @children).where(:receiver_id => nil)
+        
     end
     
     def edit

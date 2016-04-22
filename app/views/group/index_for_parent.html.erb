@@ -14,6 +14,7 @@
     <th>Admin</th>
     <th>Available time</th>
     <th>Competition</th>
+    <th>More</th>
   </tr>
   <% @groups.each do |group| %>
   <tr>
@@ -31,6 +32,7 @@
     <td><%= group.admin.name %></td>
     <td><%= group.time_slot %></td>
     <td><%= group.competitions %></td>
+    <td><%= link_to "Send Invitation", {:controller => "invitation", :action => "child_send_request_to_group", :id => group.id, :sender_id => @child.id }%></td>
     
   </tr>
   <% end %>

@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   get "invitation/child_accept_group/:id" =>"invitation#child_accept_group", as: :invitation_child_accept_group
   get "invitation/cancel_inv/:id" => "invitation#cancel_inv", as: :invitation_cancel_inv
   get "invitation/decline_inv/:id" => "invitation#decline_inv", as: :invitation_decline_inv
+  get "invitation/child_send_request_to_group/:id" => "invitation#child_send_request_to_group", as: :invitation_child_send_request_to_group
+  
+  get "invitation/group_accept_child/:id" => "invitation#group_accept_child", as: :invitation_group_accept_child
   #get "group" => "group#index"
   #get "group/edit" => "group#edit"
   #put "group" => "group#update"
