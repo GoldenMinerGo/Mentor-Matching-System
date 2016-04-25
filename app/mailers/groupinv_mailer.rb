@@ -9,7 +9,7 @@ class GroupinvMailer < ApplicationMailer
     @groupinv = groupinv
     if @groupinv.send_by_mentor = false
       @name = @groupinv.group.name
-      mail to: @groupinv.mentor.email, subject: "Invitation received!"
+      mail to: @groupinv.mentor.email, subject: "A group has shown interest in you!"
     else
       @name = @groupinv.mentor.name
       mail to: @groupinv.group.admin.email, subject: "A mentor has sent you an invitation!"
