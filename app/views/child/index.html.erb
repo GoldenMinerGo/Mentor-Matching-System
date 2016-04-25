@@ -6,7 +6,7 @@
         <tr>
           <th>#</th>
           <th>Gender</th>
-          <th>Age</th>
+          <th><%= link_to 'Age', child_index_path(sort: 'age')%></th>
           <th>School</th>
           <th>Grade</th>
           <th>Time</th>
@@ -25,12 +25,8 @@
             <td><%= child.age %></td>
             <td><%= child.school %></td>
             <td><%= child.grade %></td>
-            <td><%= child.time_slot %></td>
-            <td>
-              <% child.competitions.each do |competition| %>
-                <span class="label label-primary"><%= competition %></span>
-              <% end %>
-            </td>
+            <td><%= child.competitions %></td>
+            <div class='time-board time-board-hover' value = '<%=child.time_slot%>' ></div>
             <td><%= child.description %></td>
             <% if child.group.nil? %>
               <td></td>

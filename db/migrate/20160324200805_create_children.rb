@@ -5,12 +5,11 @@ class CreateChildren < ActiveRecord::Migration
       t.string :firstname
       t.string :lastname
       t.string :gender
-      t.integer :age
+      t.date :date_of_birth
       t.string :school
       t.string :grade
       t.string :time_slot
-      t.text :competitions, array: true, default: []
-      t.string :str_com
+      t.string :competitions
       t.text :description
       t.boolean :visible
       t.timestamps null: false

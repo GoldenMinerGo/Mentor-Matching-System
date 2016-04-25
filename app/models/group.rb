@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
     belongs_to :mentor, class_name: "Mentor", foreign_key: "mentor_id"
     belongs_to :admin, class_name: "Parent", foreign_key: "admin_id"
     has_many :invitations
-    serialize :competitions
+
     def members
         list=[]
         self.children.each do |child|
@@ -20,12 +20,6 @@ class Group < ActiveRecord::Base
             child.group_id = 0
             child.save!
         end
-    end
-    
-    before_save do
-        self.competitions = self.str_com.split(/\s*,\s*/)
-        self.competitions.uniq!
-        self.str_com = self.competitions.join(',')
     end
     
 end

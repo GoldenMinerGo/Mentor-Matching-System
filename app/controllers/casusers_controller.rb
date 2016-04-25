@@ -5,10 +5,11 @@ before_filter CASClient::Frameworks::Rails::Filter, :except => [:cas_logout]
   def cas_login
     casuser = Casuser.find_by_cas_user_name(session[:cas_user])
     if !casuser.nil? && !casuser.user_id.nil?
-      session[:user_id] = casuser.user.id
+      user = casuser.user
+      session[:user_id] = user.id
       session[:expires_at] = Time.current + 2.hours
-      casuser.user.last_login_time=Time.zone.now
-      casuser.user.save
+      user.last_login_time = Time.zone.now
+      user.save
       redirect_to mentor_path(casuser.user) and return
     end
     new_casuser = Casuser.new
@@ -19,15 +20,14 @@ before_filter CASClient::Frameworks::Rails::Filter, :except => [:cas_logout]
     user.last_login_time=Time.zone.now
     user.save
     new_casuser.user_id = user.id    
-    casuser.save
+    new_casuser.save
     session[:user_id] = user.id
     session[:expires_at] = Time.current + 2.hours
-    redirect_to mentor_path(casuser.user)
+    redirect_to mentor_path(new_casuser.user)
   end
 
   def cas_logout
-    session[:user_id] = nil
+    reset_session
     CASClient::Frameworks::Rails::Filter.logout(self)
-    redirect_to welcome_index_path
   end
 end

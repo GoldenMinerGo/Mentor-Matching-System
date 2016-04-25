@@ -1,21 +1,17 @@
 class Mentor < ActiveRecord::Base
-    belongs_to :user
+    belongs_to :user, class_name: "User", foreign_key: "user_id"
     has_many :groups
     serialize :competitions
+    
     def name
         self.firstname+' '+self.lastname
     end
     
-    def self.all_genders
-        %w(Male Female Unknown)
-    end
-    
     def age 
-       dob = self.date_of_birth
-       now = Time.now.utc.to_date
-       now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+        dob = self.date_of_birth
+        now = Time.now.utc.to_date
+        now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
     end
-
     
     EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i
     validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
@@ -35,7 +31,9 @@ class Mentor < ActiveRecord::Base
     end
     
     private
-      def is_valid_dob?
-        errors.add(:dob, "Invalid date of birth") unless date_of_birth.past?
-      end
+    
+    def is_valid_dob?
+      errors.add(:dob, "Invalid date of birth") unless date_of_birth.past?
+    end
+    
 end
