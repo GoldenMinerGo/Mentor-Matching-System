@@ -76,8 +76,10 @@ class MentorsController < ApplicationController
   
   def quit_group
     @mentor = check_user_and_return_mentor(session)
+    GroupMailer.mentor_quit_notify(@mentor)
     @group = Group.find_by_id(params[:id])
     @group.mentor_id = 0
+    @group.need_mentor = true
     @group.save!
     redirect_to mentor_path(@mentor)
   end

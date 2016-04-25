@@ -21,9 +21,14 @@ class InvitationsMailer < ApplicationMailer
   #
   #   en.invitations_mailer.invitation_accepted.subject
   #
-  def invitation_accepted
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  def invitation_accepted(invitation)
+    @invitation = invitation
+    if @invitation.receiver_id.nil?
+      @name = @invitation.sender.name
+      mail to: @invitation.sender.email, subject: "Your invitation has been accepted"
+    else
+      @name = @invitation.group.admin.name
+      mail to: @invitation.group.admin.name, subject: "Your invitation has been accepted"
+    end
   end
 end

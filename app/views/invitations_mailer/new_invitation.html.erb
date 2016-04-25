@@ -1,5 +1,15 @@
-<h1>InvitationsMailer#new_invitation</h1>
+<h1>Invitaion received</h1>
+
+<% if !@invitation.receiver_id.nil? %>
+  <p>Group <% @name %> is currently interested in you</p>
+<% else %>
+  <p>Child <% @name %> is currently interested in you</p>
+<% end %>
+
+<p> Log in and have a LOOK!</p>
+
+<%= link_to "Log in", welcome_index_url %>
 
 <p>
-  <%= @greeting %>, find me in app/views/invitations_mailer/new_invitation.html.erb
+If you did not register for the system, please ignore this email and contact ### immediately.
 </p>

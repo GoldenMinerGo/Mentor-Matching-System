@@ -1,5 +1,15 @@
-<h1>GroupMailer#new_mentor_added</h1>
+<h1>New Mentor Joined!</h1>
 
 <p>
-  <%= @greeting %>, find me in app/views/group_mailer/new_mentor_added.html.erb
+  <% @mentor.name %> has joined your group <% @group.title%>. 
+  
+  Click on the link below to log into the system:
+</p>
+
+<p>
+  <%= link_to "Log in", welcome_index_url  %>,
+</p>
+
+<p>
+If you did not register for the system, please ignore this email and contact ### immediately.
 </p>
