@@ -8,6 +8,8 @@ class CreateGroups < ActiveRecord::Migration
       t.text :description
       t.boolean :visible
       t.timestamps null: false
+      t.boolean :completed
+      t.boolean :need_mentor
       
       t.references :mentor
       t.references :admin

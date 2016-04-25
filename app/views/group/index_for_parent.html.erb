@@ -32,7 +32,7 @@
     <td><%= group.admin.name %></td>
     <td><%= group.time_slot %></td>
     <td><%= group.competitions %></td>
-    <td><%= link_to "Send Invitation", {:controller => "invitation", :action => "child_send_request_to_group", :id => group.id, :sender_id => @child.id }%></td>
+    <td><%= link_to "Send Request", {:controller => "invitation", :action => "child_send_request_to_group", :id => group.id, :sender_id => @child.id }%></td>
     
   </tr>
   <% end %>

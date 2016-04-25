@@ -1,4 +1,4 @@
-
+<% if @user.role == 'Parent'%>
 <div class='row'>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <h1>Group Information</h1>
@@ -111,3 +111,36 @@
 <%= link_to "Browse members", child_index_path%><br />
 <%= link_to "Close this group", { action: :destroy, id: @group.id }, data: {:confirm => 'Are you sure?'}, method: :delete %><br />
 <%= link_to "Back", parent_path %>      
+
+<% else %>
+
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2>Group Information</h2>
+    <table class='table table-hover'>
+      <thead>
+        <tr>
+          
+          <th>Members</th>
+          <th>Available time</th>
+          <th>Competition</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+            
+          <td><%= @group.members %></td>
+          <td><%= @group.time_slot %></td>
+          <td><%= @group.competitions %></td>
+          <td><%= @group.description  %></td>
+        </tr>
+        
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<%= link_to "Back", group_index_path %> 
+<% end %>

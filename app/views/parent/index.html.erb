@@ -69,7 +69,8 @@
             <th>Title</th>
             <th>Mentor</th>
             <th>Members</th>
-            <th></th>
+            <th>Complete</th>
+            <th>Need_mentor</th>
             <th></th>
           </tr>
         </thead>
@@ -84,7 +85,8 @@
                 <td><%= group.mentor.name %></td>
               <% end %>
               <td><%= group.members %>  (<%= group.children.count%>)</td>
-              <td></td>
+              <td><%= group.completed %></td>
+              <td><%= group.need_mentor %></td>
               <td><%#= link_to "More", group_path(group)%></td>
             </tr>
           <% end %>

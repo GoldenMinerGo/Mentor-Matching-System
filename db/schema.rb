@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20160418014442) do
     t.boolean  "visible"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.boolean  "completed"
+    t.boolean  "need_mentor"
     t.integer  "mentor_id"
     t.integer  "admin_id"
   end

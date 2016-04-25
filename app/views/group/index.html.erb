@@ -4,33 +4,23 @@
 <table>
   <tr>
 
-    <th><%= link_to 'ID', group_index_path(sort: 'id')%></th>
+    <th><%= link_to 'Group ID', group_index_path(sort: 'id')%></th>
     <th><%= link_to 'Title', group_index_path(sort: 'title')%></th>
-    <th>Mentor</th>
-    
-    <th>Members</th>
-    <th><%= link_to '#Members', group_index_path(sort: 'num')%></th>
-
     <th>Admin</th>
-    <th>Available time</th>
+    <th><%= link_to '#Members', group_index_path(sort: 'num')%></th>
     <th>Competition</th>
+    <th><%= link_to "Time", group_index_path(sort: 'time') %></th>
+    <th></th>
   </tr>
   <% @groups.each do |group| %>
   <tr>
     <td><%= group.id %></td>
-    <td><%= group.title %></td>
-    <% if group.mentor.nil? %>
-      <td>TBD</td>
-    <% else %>
-      <td><%= group.mentor.name %></td>
-    <% end %>
+    <td><%= link_to group.title, group_path(group) %></td>
     
-    <td><%= group.members %></td>
-    <td><%= group.children.count%></td>
-    <%#= group.members.count %>
-    <td><%= Parent.find(group.admin_id).name %></td>
-    <td><%= group.time_slot %></td>
+    <td><%= group.admin.name %></td>
+    <td><%= group.children.count %></td>
     <td><%= group.competitions %></td>
+    <td></td>
     <%if !@mentor.nil?%>
     <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => group.id, :mentor_id => @mentor.id, :send_by_mentor => true) %></td>
     <%end%>

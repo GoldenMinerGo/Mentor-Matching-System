@@ -4,15 +4,17 @@ class GroupController < ApplicationController
         @mentor = Mentor.find_by_id(session[:mentor_id])
         case params[:sort]
         when 'id'
-            @groups = Group.where(:visible => true).order('id ASC')
+            @groups = Group.where(:need_mentor => true, :completed => true).order('id ASC')
         when 'title'
-            @groups = Group.where(:visible => true).order('title ASC')
+            @groups = Group.where(:need_mentor => true, :completed => true).order('title ASC')
         when 'num'
-            @groups = Group.where(:visible => true).sort_by{|g| g.children.count}
+            @groups = Group.where(:need_mentor => true).sort_by{|g| g.children.count}
+        when 'time'
+            
         else
             
         #@groups = Group.where(:visible => true).where.not(:admin_id => @parent)
-            @groups = Group.where(:visible => true)
+            @groups = Group.where(:need_mentor => true)
         #@members = @groups.members
 
             
@@ -44,17 +46,26 @@ class GroupController < ApplicationController
     
     def show
         #@group = Group.find_by_id(params[:id])
-        if !params[:child_id].nil?
-            @child = Child.find_by_id(params[:child_id])
-            session[:child_id] = @child.id
+        @user = User.whois(session)
+        if @user.role == 'Parent'
+            if !params[:child_id].nil?
+                @child = Child.find_by_id(params[:child_id])
+                session[:child_id] = @child.id
+            else
+                @child = Child.find_by_id(session[:child_id])
+            end
+            @group = @child.group
+            @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
+            #sinv means send invitation
+            @rinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => true)
+            #rinv means receive invitation
         else
-            @child = Child.find_by_id(session[:child_id])
+            @group = Group.find_by_id(params[:id])
+            @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
+            #sinv means send invitation
+            @rinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => true)
+            #rinv means receive invitation
         end
-        @group = @child.group
-        @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
-        #sinv means send invitation
-        @rinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => true)
-        #rinv means receive invitation
     end
     
     def edit
