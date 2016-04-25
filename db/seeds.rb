@@ -30,9 +30,9 @@ end
 
 
 mentors = [
-	{:user_id => User.find(5).id, :firstname => 'Meimei', :lastname => 'Han', :phone => '9796760002', :email => 'user2@tamu.edu', :gender => 'male', :date_of_birth => '1993-06-18', :school => 'School 5', :grade => 'U1', :time_slot => '12:00 - 13:00 Mon', :competitions => 'FIRST', :description => '...', :visible => true},
+	{:user_id => User.find(5).id, :firstname => 'Meimei', :lastname => 'Han', :phone => '9796760002', :email => 'user2@tamu.edu', :gender => 'male', :date_of_birth => '1993-06-18', :school => 'School 5', :grade => 'U1', :time_slot => '0xFF0,0xABF05,0x123456,0x3BCA05,0xABBDA6,0x142857,0x285714', :competitions => 'FLL', :description => '...', :visible => true},
 	
-	{:user_id => User.find(6).id, :firstname => 'Hua', :lastname => 'Wang', :phone => '9796760003', :email => 'user3@tamu.edu', :gender => 'female', :date_of_birth => '1993-06-18', :school => 'School 6', :grade => 'U3', :time_slot => '12:00 - 13:00 Mon', :competitions => 'BEST', :description => '...', :visible => true}
+	{:user_id => User.find(6).id, :firstname => 'Hua', :lastname => 'Wang', :phone => '9796760003', :email => 'user3@tamu.edu', :gender => 'female', :date_of_birth => '1993-06-18', :school => 'School 6', :grade => 'U3', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'Junior FLL', :description => '...', :visible => true}
 ]
 
 mentors.each do |mentor|
@@ -56,9 +56,11 @@ end
 
 
 groups = [
-	{:title => 'group 1', :admin_id => Parent.find(1).id, :mentor_id => Mentor.find(1).id, :time_slot => '12:00 - 13:00 Mon', :competitions => ['FIRST'],:str_com => 'FIRST', :description => '...', :visible => true, :completed => false, :need_mentor => true},
+
+	{:title => 'group 1', :admin_id => Parent.find(1).id, :mentor_id => Mentor.find(1).id, :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'FLL', :description => '...', :visible => true, :completed => false, :need_mentor => true},
 	
-	{:title => 'group 2', :admin_id => Parent.find(2).id, :mentor_id => Mentor.find(2).id, :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST'],:str_com => 'BEST', :description => '...', :visible => true, :completed => false, :need_mentor => true}
+	{:title => 'group 2', :admin_id => Parent.find(2).id, :mentor_id => Mentor.find(2).id, :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'Junior FLL', :description => '...', :visible => true, :completed => false, :need_mentor => true}
+
 ]
 
 groups.each do |group|
@@ -67,15 +69,15 @@ end
 
 
 children = [
-	{:parent_id => Parent.find(1).id, :firstname =>'Alei', :lastname => 'Lei', :gender => 'male', :age => 5, :school => 'School 1', :grade => 'G1', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST', 'FIRST'], :str_com => 'BEST,FIRST', :description => '...', :visible => true, :group_id => Group.find(1).id },
+	{:parent_id => Parent.find(1).id, :firstname =>'Alei', :lastname => 'Lei', :gender => 'male', :date_of_birth => '2008-06-18', :school => 'School 1', :grade => 'G1', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'FLL', :description => '...', :visible => true, :group_id => Group.find(1).id },
 	
-	{:parent_id => Parent.find(1).id, :firstname =>'Haha', :lastname => 'Oh', :gender => 'female', :age => 7, :school => 'School 2', :grade => 'G1', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST'], :str_com => 'BEST', :description => '...', :visible => true, :group_id => Group.find(2).id },
+	{:parent_id => Parent.find(1).id, :firstname =>'Haha', :lastname => 'Oh', :gender => 'female', :date_of_birth => '2009-03-20', :school => 'School 2', :grade => 'G1', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'Junior FLL', :description => '...', :visible => true, :group_id => Group.find(2).id },
 	
-	{:parent_id => Parent.find(1).id, :firstname =>'Yeh', :lastname => 'Yeh', :gender => 'male', :age => 3, :school => 'School 1', :grade => 'G2', :time_slot => '12:00 - 13:00 Mon', :competitions => ['FIRST'], :str_com => 'FIRST', :description => '...', :visible => false, :group_id => Group.find(1).id },
+	{:parent_id => Parent.find(1).id, :firstname =>'Yeh', :lastname => 'Yeh', :gender => 'male', :date_of_birth => '2010-05-15', :school => 'School 1', :grade => 'G2', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'FLL', :description => '...', :visible => false, :group_id => Group.find(1).id },
 	
-	{:parent_id => Parent.find(2).id, :firstname =>'Heihei', :lastname => 'Hei', :gender => 'female', :age => 5, :school => 'School 2', :grade => 'G2', :time_slot => '12:00 - 13:00 Mon', :competitions => ['BEST', 'FIRST'], :str_com => 'BEST,FIRST', :description => '...', :visible => true, :group_id => Group.find(2).id },
+	{:parent_id => Parent.find(2).id, :firstname =>'Heihei', :lastname => 'Hei', :gender => 'female', :date_of_birth => '2009-08-01', :school => 'School 2', :grade => 'G2', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'Junior FLL', :description => '...', :visible => true, :group_id => Group.find(2).id },
 	
-	{:parent_id => Parent.find(2).id, :firstname =>'Hehe', :lastname => 'Le', :gender => 'male', :age => 7, :school => 'School 1', :grade => 'G2', :time_slot => '12:00 - 13:00 Mon', :competitions => [], :str_com => '', :description => '...', :visible => false}
+	{:parent_id => Parent.find(2).id, :firstname =>'Hehe', :lastname => 'Le', :gender => 'male', :date_of_birth => '2007-09-25', :school => 'School 1', :grade => 'G2', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'FLL', :description => '...', :visible => true}
 ]
 
 children.each do |child|

@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-tokenfield
+//= require timeslot
 //= require_tree .

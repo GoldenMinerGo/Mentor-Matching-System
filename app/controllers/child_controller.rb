@@ -6,7 +6,6 @@ class ChildController < ApplicationController
             
             @child = Child.find_by_id(session[:child_id])
             @group = @child.group
-            session.delete(:child_id)
         else
             flash[:warning] = "Invalid user!"
             reset_session
@@ -14,9 +13,11 @@ class ChildController < ApplicationController
         end
         
         if !@user.nil? && @user.role == "Parent"
-            
-            
-            @children=Child.where(:visible => true)
+            if params[:sort] == 'age'
+                @children=Child.where(:visible => true).order(date_of_birth: :desc)
+            else 
+                @children = Child.where(:visible => true)
+            end
         else
             flash[:warning] = "Invalid user!"
             session[:user_id] = nil
@@ -97,6 +98,6 @@ class ChildController < ApplicationController
     private
     
     def child_params
-        params.require(:child).permit(:firstname, :lastname, :gender, :age, :school, :grade, :time_slot, :competitions, :str_com, :description, :visible)
+        params.require(:child).permit(:firstname, :lastname, :gender, :date_of_birth, :school, :grade, :time_slot, :competitions, :description, :visible)
     end
 end

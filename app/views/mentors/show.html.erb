@@ -92,6 +92,12 @@ Description: <%= @mentor.description %><br />
     <hr>
   </div>
 </div>
+
+<div class='row'>
+  <div class='col-sm-8'>
+    <div class='time-board time-board-hover' value = '<%=@mentor.time_slot%>' ></div>
+  </div>      
+</div>
 <% session[:mentor_id] = @mentor.id %>
 <% if @groups.empty? %>
   <%= link_to "Browse Groups", group_index_path %>

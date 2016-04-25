@@ -10,10 +10,11 @@
     <p> Date of Birth:</br> <%= f.date_field :date_of_birth%></p>
     <p> School:</br> <%= f.text_field :school%></p>
     <p> Grade:</br> <%= f.select :grade, ['Freshman' , 'Sophomore' , 'Junior' , 'Senior' , 'Graduate' , 'Teacher']%></p>
-    <p> Time_slot:</br> <%= f.text_field :time_slot%></p>
+    <div class="form-group">
+        <div class='time-board time-board-input time-board-hover' value='' inputname='mentor[time_slot]'></div>
+    </div>
     <p> Competitions:</br> <%= f.text_field :competitions%></p>
     <p> More About Yourself:</br> <%= f.text_field :description%></p>
-    <p> Visible: <%= f.check_box :visible %><br />
     <%= f.submit "Create" %>
   <% end %>
   <%= link_to "Log out", welcome_logout_path%>

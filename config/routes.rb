@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   post "welcome/login_attempt" => "welcome#login_attempt"
   resources :mentors
+  get "mentors/detail/:id" => "mentors#detail", as: :mentors_detail
 
   get "welcome/forget_password" => "welcome#forget_password"
   resources :password_resets,     only: [:new, :create, :edit, :update]
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   get "welcome/parent_signin" => "welcome#parent_signin"
   get "welcome/logout" => "welcome#logout"
   get "mentors_new" => "mentors#new"
-  get "groupinvs/send_inv/:id" =>"groupinvs#send_inv", as: :groupinvs_send_inv
+  get "groupinvs/send_inv/:id" => "groupinvs#send_inv", as: :groupinvs_send_inv
   get "groupinvs/accept_inv_mentor/:id" => "groupinvs#accept_inv_mentor", as: :groupinvs_accept_inv_mentor
   get "groupinvs/accept_inv_group/:id" => "groupinvs#accept_inv_group", as: :groupinvs_accept_inv_group
   get "groupinvs/cancel_inv/:id" => "groupinvs#cancel_inv", as: :groupinvs_cancel_inv

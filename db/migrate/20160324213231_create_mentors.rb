@@ -10,7 +10,7 @@ class CreateMentors < ActiveRecord::Migration
       t.string :school
       t.string :grade
       t.string :time_slot
-      t.text :competitions, array: true, default: []
+      t.string :competitions
       t.text :description
       t.boolean :visible
       t.timestamps null: false

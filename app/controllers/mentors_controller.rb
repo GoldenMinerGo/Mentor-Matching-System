@@ -8,13 +8,13 @@ class MentorsController < ApplicationController
       @mentor = Mentor.new(mentor_params)
       @mentor.user_id = session[:user_id]
       @mentor.visible = true
-        if @mentor.save
-          flash[:success] = "You have successfully filled your mentor file"
-          redirect_to mentor_path(@mentor) and return
-        else
-          flash[:warning] = "Form is invalid"
-          redirect_to new_mentor_path and return
-        end
+      if @mentor.save
+        flash[:success] = "You have successfully filled your mentor file"
+        redirect_to mentor_path(@mentor) and return
+      else
+        flash[:warning] = "Form is invalid"
+        redirect_to new_mentor_path and return
+      end
   end
     
   def index
@@ -80,6 +80,16 @@ class MentorsController < ApplicationController
     @group.mentor_id = 0
     @group.save!
     redirect_to mentor_path(@mentor)
+  end
+  
+  def detail
+    @mentor = Mentor.find_by_id(params[:id])
+    if @mentor.nil?
+      redirect_to welcome_logout_path and return
+    end
+    @age = @mentor.age
+    @user = @mentor.user
+    @group = @mentor.groups.first
   end
     
     

@@ -1,0 +1,13 @@
+<h1>Mentor Dashboard</h1>
+
+ID: <%= @mentor.id %><br />
+Name: <%= @mentor.name %><br />
+Phone: <%= @mentor.phone %><br />
+Email: <%= @mentor.email %><br />
+Age: <%= @age %><br />
+Last Login at: <%= @user.last_login_time %><br />
+Classification: <%= @mentor.grade %><br />
+Department: <%= @mentor.school %><br />
+Description: <%= @mentor.description %><br />
+
+<%=link_to "Back" , group_path(session[:group_id])%>

@@ -28,18 +28,8 @@
             <td>Grade</td>
             <td><%= @child.grade %></td>
           </tr>
-          <tr>
-            <td>Time</td>
-            <td><%= @child.time_slot %></td>
-          </tr>
-          <tr>
-            <td>Competitions</td>
-            <td>
-              <% @child.competitions.each do |competition| %>
-                <span class="label label-primary"><%= competition %></span>
-              <% end %>
-            </td>
-          </tr>
+          <td><%= @child.competitions %></td>
+          <div class='time-board time-board-hover' value = '<%=@child.time_slot%>' ></div>
           <tr>
             <td>Description</td>
             <td><%= @child.description %></td>

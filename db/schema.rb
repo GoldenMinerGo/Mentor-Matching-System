@@ -25,16 +25,15 @@ ActiveRecord::Schema.define(version: 20160418014442) do
     t.string   "firstname"
     t.string   "lastname"
     t.string   "gender"
-    t.integer  "age"
+    t.date     "date_of_birth"
     t.string   "school"
     t.string   "grade"
     t.string   "time_slot"
-    t.text     "competitions", default: "--- []\n"
-    t.string   "str_com"
+    t.string   "competitions"
     t.text     "description"
     t.boolean  "visible"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "group_id"
   end
 
@@ -61,14 +60,15 @@ ActiveRecord::Schema.define(version: 20160418014442) do
   create_table "groups", force: :cascade do |t|
     t.string   "title"
     t.string   "time_slot"
-    t.text     "competitions", default: "--- []\n"
-    t.string   "str_com"
+    t.string   "competitions"
     t.text     "description"
     t.boolean  "visible"
+
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.boolean  "completed"
     t.boolean  "need_mentor"
+
     t.integer  "mentor_id"
     t.integer  "admin_id"
   end
