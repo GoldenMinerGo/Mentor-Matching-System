@@ -30,7 +30,7 @@
     <td><%= group.children.count%></td>
     <%#= group.members.count %>
     <td><%= group.admin.name %></td>
-    <td><%= group.time_slot %></td>
+    <td><%= group.time_compare(@child.time_slot) %></td>
     <td><%= group.competitions %></td>
     <td><%= link_to "Send Request", {:controller => "invitation", :action => "child_send_request_to_group", :id => group.id, :sender_id => @child.id }%></td>
     

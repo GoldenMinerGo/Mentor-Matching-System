@@ -63,12 +63,10 @@ ActiveRecord::Schema.define(version: 20160418014442) do
     t.string   "competitions"
     t.text     "description"
     t.boolean  "visible"
-
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.boolean  "completed"
     t.boolean  "need_mentor"
-
     t.integer  "mentor_id"
     t.integer  "admin_id"
   end
@@ -92,11 +90,11 @@ ActiveRecord::Schema.define(version: 20160418014442) do
     t.string   "school"
     t.string   "grade"
     t.string   "time_slot"
-    t.text     "competitions",  default: "--- []\n"
+    t.string   "competitions"
     t.text     "description"
     t.boolean  "visible"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "user_id"
   end
 

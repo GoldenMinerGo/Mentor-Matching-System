@@ -28,8 +28,10 @@
             <td>Grade</td>
             <td><%= @child.grade %></td>
           </tr>
-          <td><%= @child.competitions %></td>
-          <div class='time-board time-board-hover' value = '<%=@child.time_slot%>' ></div>
+          <tr>
+            <td>Competition</td>
+            <td><%= @child.competitions %></td>
+          </tr>
           <tr>
             <td>Description</td>
             <td><%= @child.description %></td>
@@ -78,6 +80,8 @@
           <% end %>
         </tbody>
       </table>
+      <div class='time-board time-board-hover' value = '<%=@child.time_slot%>' ></div>
+      <hr>
       <% if @mychild %>
         <%= link_to "Edit", edit_child_path(@child) , :class => 'btn btn-block btn-success'%>
         <%= link_to "Delete", child_path(@child), :class => 'btn btn-block btn-danger', data: {:confirm => 'Are you sure?'}, method: :delete %>
