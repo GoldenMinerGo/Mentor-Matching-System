@@ -7,7 +7,7 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
   </head>
-  <body class="background">
+  <body>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -19,7 +19,7 @@
               <span class="icon-bar"></span>
             </button>
           <% end %>
-          <%= link_to '<i class="fa fa-users fa-fw"></i> Mentor Matching System'.html_safe, root_path, :class => 'navbar-brand push' %>
+          <%= link_to '<i class="fa fa-users fa-fw"></i> Mentor Matching System'.html_safe, root_path, :class => 'navbar-brand' %>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -45,6 +45,7 @@
     </nav>
     <div class="container animated fadeIn">
       <div class="row animated slideInDown">
+        <div class="col-sm-12">
         <% flash.each do |message_type, message| %>
           <div class="alert alert-<%= message_type %> alert-dismissible fade in">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -53,6 +54,7 @@
             <%= message %>
           </div>
         <% end %>
+        </div>
       </div>
       <%= yield %>
       <!--<%= debug(params) if Rails.env.development? %>-->

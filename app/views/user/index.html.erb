@@ -1,14 +1,39 @@
-<%= link_to "Regular Signup", new_rgluser_path(:role => @role) %>
+<!--<%= link_to "Regular Signup", new_rgluser_path(:role => @role) %> -->
 
-<% if @role=="Parent" %>
-<div id="user-widget">
-  <% if current_user %>
-    Welcome <strong><%= current_user.name %></strong>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  <% else %>
+<!-- <div id="user-widget">
+    <%= link_to "Parent Sign In", welcome_parent_signin_path %><br/>
+    
     <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-  <% end %>
+</div>  -->
+
+  <div class="row animated fadeIn">
+      <div class="col-sm-12">
+         <div class="parent-login">
+            <ul class="list-inline intro-social-buttons">
+                <li>
+                  <!-- <%= link_to "Parent", new_user_path(:role => 'Parent') %> -->
+                   <%= link_to '<i class="fa fa-user-plus fa-fw"></i><span class="network-name"> Sign up</span>'.html_safe,  new_rgluser_path(:role => @role) , :class => 'btn btn-default btn-lg'%>
+                </li>
+                <br/>
+                <li>
+                    <%= link_to '<i class="fa fa-sign-in fa-fw"></i><span class="network-name"> Sign In</span>'.html_safe, welcome_parent_signin_path , :class => 'btn btn-default btn-lg'%>
+                </li>
+                <br/>
+                <li>
+               <!--     <%= link_to '<i class="fa fa-facebook fa-fw"></i><span class="network-name"> Sign up/in with facebook</span>'.html_safe, "/auth/facebook", id: "sign_in" , :class => 'btn btn-default btn-lg', :style => "background-color:#3B5998;color:white;border-color:#2B4988;"%> -->
+                </li>
+            </ul>
+          </div>
+                <!-- <li> <%= link_to "Parent Sign In", welcome_parent_signin_path %> </li>-->
+      </ul>
+    </div>
+  </div>
 </div>
-<% else %>
-<!--<%= link_to "Sign in with TAMU UIN" %>-->
-<% end %>
+
+
+
+<script>
+$(document).ready(function() {
+    $('body').addClass('parentbg');
+});
+</script>

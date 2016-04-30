@@ -7,6 +7,7 @@
  @import "animate";
  @import "hover";
  @import "timeslot";
+ @import "landing-page";
  
 body { 
     padding-top: 70px;
@@ -17,37 +18,8 @@ html {
   height: 100%;
 }
 
-.blurry-text {
-   color: transparent;
-   text-shadow: 0 0 5px rgba(0,0,0,0.5);
-}
-
-.shadow {
-  -moz-box-shadow: 5px 5px 5px #ccc;
-  -webkit-box-shadow: 5px 5px 5px #ccc;
-  box-shadow: 5px 5px 5px #ccc;
-}
-
-.rgba {
-  background-color: transparent;
-  background-color: rgba(200,200,200,0.8);
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99dddddd,endColorstr=#99dddddd);
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99dddddd,endColorstr=#99dddddd)";
-  
-
-
-
-
-
-
-background: white; /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #DAD299 , #B0DAB9); /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #DAD299 , #B0DAB9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        
-}
- 
 h1 {
-	font-family: times, Times New Roman, times-roman, georgia, serif;
+	
 	margin: 0;
 	padding: 0px 0px 6px 0px;
 	font-size: 51px;
@@ -57,13 +29,12 @@ h1 {
 }
 
 h2 {
-	font-family: Gill Sans, Verdana;
 	font-size: 23px;
 	line-height: 23px;
-	text-transform: uppercase;
 	letter-spacing: 2px;
 	font-weight: bold;
 }
+
 
 th {
     font-family: Gill Sans, Verdana;
@@ -120,6 +91,28 @@ table {
     background: azure;
   }
 
-.background{
-    background: gainsboro;
+.background_image{
+    background: url('background.jpg') no-repeat right bottom fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+ }
+ 
+ .parentbg{
+    background: url('parentbg.jpg') no-repeat right bottom fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+ }
+ 
+ @media only screen and (max-width: 767px) {
+  .background_image{
+    background: url('background-mobile.jpg') no-repeat center bottom fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
 }

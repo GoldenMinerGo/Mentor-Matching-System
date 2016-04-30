@@ -10,6 +10,13 @@ Rails.application.routes.draw do
   get "welcome/forget_password" => "welcome#forget_password"
   resources :password_resets,     only: [:new, :create, :edit, :update]
   
+  get "administrators/new" => "administrators#new"
+  get "administrators/create/:id" => "administrators#create", as: :administrators_create
+  get "administrators/index" => "administrators#index"
+  get "administrators/delete_one/:id" => "administrators#delete_one", as: :administrators_delete_one
+  get "administrators/drop_table" => "administrators#drop_table"
+  get "administrators/drop_all_mentor" => "administrators#drop_all_mentor"
+  
   get "welcome/index" => "welcome#index"
   get "welcome/parent_signin" => "welcome#parent_signin"
   get "welcome/logout" => "welcome#logout"

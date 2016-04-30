@@ -5,7 +5,8 @@ users = [
 	{:role => 'Parent', :username => 'Jiang', :last_login_time => DateTime.strptime("12/01/2015 01:00", "%m/%d/%Y %H:%M")},
 	{:role => 'Mentor', :username => 'Runkun', :last_login_time => DateTime.strptime("10/01/2015 17:05", "%m/%d/%Y %H:%M")},
 	{:role => 'Mentor', :username => 'Lijin', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")},
-	{:role => 'Mentor', :username => 'Bing', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")}
+	{:role => 'Mentor', :username => 'Bing', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")},
+	{:role => 'Administrator', :username => 'Malini', :last_login_time => DateTime.strptime("11/01/2015 17:00", "%m/%d/%Y %H:%M")}
 ]
 users.each do |user|
   User.create!(user)
@@ -21,7 +22,9 @@ rglusers = [
 	
 	{:user_id => User.find(3).id, :username => 'user5', :password => '123456', :encrypted_password => 'g3fw4f43rf', :role => 'Parent'},
 	
-	{:user_id => User.find(6).id,:username => 'user6', :password => '123456', :encrypted_password => 'TrrtVDttv', :role => 'Mentor'}
+	{:user_id => User.find(6).id,:username => 'user6', :password => '123456', :encrypted_password => 'TrrtVDttv', :role => 'Mentor'},
+	
+	{:user_id => User.find(8).id,:username => 'Malini', :password => '123456', :encrypted_password => 'TrrtVDttv', :role => 'Administrator'}
 ]
 
 rglusers.each do |rgluser|
@@ -105,4 +108,14 @@ groupinvs = [
 
 groupinvs.each do |groupinv|
   Groupinv.create!(groupinv)
+end
+
+administrators = [
+	{:user_id => User.find(8).id, :name => 'Malini'},
+
+]
+
+
+administrators.each do |administrator|
+  Administrator.create!(administrator)
 end
