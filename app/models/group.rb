@@ -17,7 +17,7 @@ class Group < ActiveRecord::Base
         time_2 = time_2.split(/,/)
         combine_time_sum = ''
         for i in 0..6
-            combine_time = (time_1[i].to_i(16) & time_2.to_i(16)).to_s(16)
+            combine_time = (time_1[i].to_i & time_2[i].to_i).to_s(16)
             combine_time_sum = [combine_time_sum, combine_time].join(',')
         end
         combine_time_sum
