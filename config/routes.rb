@@ -60,7 +60,8 @@ Rails.application.routes.draw do
   end
     
   get 'group/:id/change' => 'group#change', as: :change_group
-  
+  get "group/set_complete/:id" => "group#set_complete", as: :group_set_complete
+  get "group/set_need_mentor/:id" => "group#set_need_mentor", as: :group_set_need_mentor
   # get "delmem/:id" => "group#del_member", as: 'deletemember'
   #resources :group
   # You can have the root of your site routed with "root"

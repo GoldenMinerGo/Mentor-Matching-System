@@ -105,7 +105,9 @@ class GroupController < ApplicationController
         redirect_to root_path and return if @user.nil?
         @group = Group.new(group_params)
         @group.admin_id = @user.parent.id
-        @group.visible = 'true'
+        @group.visible = true
+        @group.completed = false
+        @group.need_mentor = false
         @child = Child.find_by_id(session[:child_id])
         if @group.save
             @child.group_id = @group.id
@@ -139,6 +141,19 @@ class GroupController < ApplicationController
         flash[:success] = "Your group deleted."
     end
     
+    def set_complete
+        @group = Group.find_by_id(params[:id])
+        @group.completed = true
+        @group.save
+        redirect_to parent_path
+    end
+    
+    def set_need_mentor
+        @group = Group.find_by_id(params[:id])
+        @group.need_mentor = true
+        @group.save
+        redirect_to parent_path
+    end
     
     private
     

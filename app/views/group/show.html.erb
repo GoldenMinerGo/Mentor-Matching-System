@@ -18,7 +18,7 @@
           <th>Members</th>
           <th>Available time</th>
           <th>Competition</th>
-          <th>Delete</th>
+          <th>More</th>
         </tr>
       </thead>
       <tbody>
@@ -35,15 +35,21 @@
             <td><%= child.name %></td>
             <td><%= @group.time_slot %></td>
             <td><%= @group.competitions %></td>
-            <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
+            <% if @user.parent.id == @group.admin_id %>
+              <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
+            <% else %>
+              <td></td>
+            <% end %>
           </tr>
+          
         <% end %>
       </tbody>
     </table>
-
-
   </div>
 </div>
+
+
+<% if @user.parent.id == @group.admin_id %>
 <div class='row'>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <h2>Sent In</h2>
@@ -106,13 +112,24 @@
 </div>
 <% session[:group_id] = @group.id %>
 <%= link_to "Update Group Information", edit_group_path(@group) %><br />
-<% if @group.mentor.nil? %>
+<% if @group.mentor.nil? and @group.need_mentor == true %>
   <%= link_to "Browse mentors", mentors_path %><br />
 <%end%>
 <% session[:child_id] = @child.id %>
-<%= link_to "Browse members", child_index_path%><br />
+<% if @group.completed == false %>
+<%= link_to "Browse children", child_index_path%><br />
+<% end %>
 <%= link_to "Close this group", { action: :destroy, id: @group.id }, data: {:confirm => 'Are you sure?'}, method: :delete %><br />
-<%= link_to "Back", parent_path %>      
+<% if @group.completed == false %>
+<%= link_to "Complete",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members.'} %><br/>  
+<% else if @group.need_mentor == false%>
+<%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors and mentors can find your group." } %><br/>
+<% end %>
+<% end %>
+<% else %>
+<%= link_to "Quit this group", data: {:confirm => 'Are you sure?'} %><br/>
+<% end %>
+<%= link_to "Back", parent_path %> 
 
 <% else %>
 
@@ -144,5 +161,6 @@
 
   </div>
 </div>
+
 <%= link_to "Back", group_index_path %> 
 <% end %>
