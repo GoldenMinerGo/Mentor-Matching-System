@@ -21,7 +21,6 @@ class MentorsController < ApplicationController
     user = User.whois(session)
     if !session[:group_id].nil? 
       @group = Group.find_by_id(session[:group_id])
-      session.delete(:group_id)
     else
       flash[:warning] = "Invalid user!"
       reset_session
@@ -31,7 +30,7 @@ class MentorsController < ApplicationController
       @mentors = Mentor.where(:visible => true)
     else
       flash[:warning] = "Invalid user!"
-      session[:user_id] = nil
+      reset_session
       redirect_to welcome_index_path and return
     end
   end
@@ -58,7 +57,7 @@ class MentorsController < ApplicationController
         redirect_to mentor_path(@mentor) and return
       else
         flash[:warning] = "Invalid input form"
-        redirect_to edit_mentor_path(@mentor) and return
+        render edit_mentor_path(@mentor) and return
       end
   end
   
@@ -91,7 +90,10 @@ class MentorsController < ApplicationController
     end
     @age = @mentor.age
     @user = @mentor.user
-    @group = @mentor.groups.first
+    if @mentor.groups.present?
+      @group = @mentor.groups.first
+      @time_slot = [@mentor.time_slot , @group.time_slot].join(',')
+    end
   end
     
     

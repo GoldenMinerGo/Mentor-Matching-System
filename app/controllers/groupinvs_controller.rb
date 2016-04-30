@@ -19,7 +19,7 @@ class GroupinvsController < ApplicationController
         GroupinvMailer.groupinv_received(@groupinv)
         if User.whois(session).role == "Parent"
           redirect_to group_path(params[:id]) and return
-        elsif User.whois(session).role == "Mentor" || User.whois(session).role == "mentor" 
+        elsif User.whois(session).role == "Mentor"
           redirect_to mentor_path(@groupinv.mentor_id) and return
         end  
       else
@@ -81,8 +81,8 @@ class GroupinvsController < ApplicationController
     else
       flash[:warning] = "Oops!Try again!"
       redirect_to group_path(@groupinv.group_id) and return 
-   end
-end 
+    end
+  end 
  
   def cancel_inv
     @groupinv_cancel = Groupinv.find_by_id(params[:id])

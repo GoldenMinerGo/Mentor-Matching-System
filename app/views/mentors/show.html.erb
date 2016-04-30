@@ -1,36 +1,48 @@
-<h1>Mentor Dashboard</h1>
-
-ID: <%= @mentor.id %><br />
-Name: <%= @mentor.name %><br />
-Phone: <%= @mentor.phone %><br />
-Email: <%= @mentor.email %><br />
-Age: <%= @age %><br />
-Last Login at: <%= @user.last_login_time %><br />
-Description: <%= @mentor.description %><br />
-
-<h2>Group</h2>
-<% if @groups.empty? %>
-  
-<% else %>
-<table>
-  <tr>
-    <th>Group</th>
-    <th></th>
-  </tr>
-<% @groups.each do |group| %>
-  <tr>
-    <td><%= group.title %></td>
-    <td><%= link_to "Quit the group", mentor_quit_group_path(group), data: {:confirm => 'Are you sure?'} %></td>
-  </tr>
-<% end %>
-</table>
-<% end %>
-
-<hr>
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+    <div class="jumbotron other-color" id="boxshadow">
+      <h1 align= "center" class="animated fadeInDown"><%= @mentor.name%>'s Dashboard</h1>
+      <br>
+      <p align="right"><i class="fa fa-envelope grow"> <%= @mentor.email %></i></p>
+      <p align="right"><i class="fa fa-phone grow"> <%= @mentor.phone %></i></p>
+     <p align="right"><i class="fa fa-github-alt grow">Age: <%= @age %></i></p>
+     <p align="center"><i class="fa fa-gittip grow">Description: <%= @mentor.description %></i></p>
+     <p align="right"><%= link_to "Update Your Profile", edit_mentor_path(@mentor) , :class => 'btn btn-primary hover-shadow'%></p>
+    </div>
   </div>
 </div>
+
+<hr>
+
 <div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+<h2>Group</h2>
+   <% if @groups.empty? %>
+      <p align=center><%= link_to "Browse Groups", group_index_path %></p>
+   <% else %>
+      <table class='table table-hover' >
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th></th>
+          </tr>
+       </thead>
+       <tbody>
+          <% @groups.each do |group| %>
+            <tr>
+             <td><%= group.title %></td>
+             <td><%= link_to "Quit the group", mentor_quit_group_path(group), data: {:confirm => 'Are you sure?'} %></td>
+           </tr>
+        <% end %>
+      </tbody>
+     </table>
+    <% end %>
+   <hr>
+  </div>
+</div>
+<% if !@rinvs.empty? %>
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2"> <!--xs (phones), sm (tablets), md (desktops), and lg (larger desktops) -->
     <h2>Inbox</h2>
     <% if @rinvs.empty? %>
       <p align=center>None</p>
@@ -40,6 +52,8 @@ Description: <%= @mentor.description %><br />
           <tr>
             <th>Sender</th>
             <th>Status</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -49,8 +63,11 @@ Description: <%= @mentor.description %><br />
               <td><%= rinv.status %></td>
               <% if rinv.status == 'Pending' %>
               <td><%= link_to "Accept", groupinvs_accept_inv_mentor_path(rinv)%></td>
-              <td><%= link_to "Declined", groupinvs_decline_inv_path(rinv)%></td>
-            <% end %>
+              <td><%= link_to "Decline", groupinvs_decline_inv_path(rinv)%></td>
+              <% else %>
+              <td></td>
+              <td></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
@@ -59,15 +76,13 @@ Description: <%= @mentor.description %><br />
     <hr>
   </div>
 </div>
-
-<hr>
-  </div>
-</div>
+<% end %>
+<% if !@sinvs.empty? %>
 <div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
     <h2>Sent Out</h2>
     <% if @sinvs.empty? %>
-      <p align=center>None</p>
+      <p align=center> None </p>
     <% else %>
       <table class='table table-hover'>
         <thead>
@@ -92,16 +107,14 @@ Description: <%= @mentor.description %><br />
     <hr>
   </div>
 </div>
+<% end %>
 
 <div class='row'>
-  <div class='col-sm-8'>
+  <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
     <div class='time-board time-board-hover' value = '<%=@mentor.time_slot%>' ></div>
   </div>      
 </div>
 <% session[:mentor_id] = @mentor.id %>
-<% if @groups.empty? %>
-  <%= link_to "Browse Groups", group_index_path %>
-<% end %>
-<%= link_to "Update Personal Information", edit_mentor_path(@mentor) %>
+
 <%= link_to "Delete", mentor_path(@mentor), data: {:confirm => 'Are you sure?'}, method: :delete %>
 <%= link_to "Log out", welcome_logout_path(@mentor) %>

@@ -13,12 +13,12 @@
   </tr>
   <% @mentors.each do |mentor| %>
   <tr>
-    <td><%= mentor.id %></td>
+    <td><%= link_to mentor.id,  mentors_detail_path(mentor)%></td>
     <td><%= mentor.gender %></td>
     <td><%= mentor.age %></td>
     <td><%= mentor.school %></td>
     <td><%= mentor.grade %></td>
-    <td><%= mentor.time_slot %></td>
+    <td><%= @group.time_compare(mentor.time_slot)%>
     <td><%= mentor.competitions %></td>
     <td><%= mentor.description %></td>
     <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => @group.id, :mentor_id => mentor.id, :send_by_mentor => false) %></td>

@@ -8,7 +8,7 @@
   Date of Birth: <%= f.date_field :date_of_birth %><br />
   School: <%= f.text_field :school %><br />
   grade: <%= f.text_field :grade %><br />
-  Time Slot: <%= f.text_field :time_slot %><br />
+  Time Slot: <div class='time-board time-board-input time-board-hover' value='<%= @mentor.time_slot %>' inputname='mentor[time_slot]'></div>
   Description: <%= f.text_field :description %><br />
   Visible: <%= f.check_box :visible %><br />
   <%= f.submit "Update"%>

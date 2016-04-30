@@ -30,9 +30,9 @@ end
 
 
 mentors = [
-	{:user_id => User.find(5).id, :firstname => 'Meimei', :lastname => 'Han', :phone => '9796760002', :email => 'user2@tamu.edu', :gender => 'male', :date_of_birth => '1993-06-18', :school => 'School 5', :grade => 'U1', :time_slot => '0xFF0,0xABF05,0x123456,0x3BCA05,0xABBDA6,0x142857,0x285714', :competitions => 'FLL', :description => '...', :visible => true},
+	{:user_id => User.find(5).id, :firstname => 'Meimei', :lastname => 'Han', :phone => '9796760002', :email => 'user2@tamu.edu', :gender => 'male', :date_of_birth => '1993-06-18', :school => 'School 5', :grade => 'U1', :time_slot => '14285713,23132131,32435223,12313143,43276874,2473627,342425672', :competitions => 'FLL', :description => '...', :visible => true},
 	
-	{:user_id => User.find(6).id, :firstname => 'Hua', :lastname => 'Wang', :phone => '9796760003', :email => 'user3@tamu.edu', :gender => 'female', :date_of_birth => '1993-06-18', :school => 'School 6', :grade => 'U3', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'Junior FLL', :description => '...', :visible => true}
+	{:user_id => User.find(6).id, :firstname => 'Hua', :lastname => 'Wang', :phone => '9796760003', :email => 'user3@tamu.edu', :gender => 'female', :date_of_birth => '1993-06-18', :school => 'School 6', :grade => 'U3', :time_slot => '2317516241,23115644,3474325248,283745265,78245674,24384672,2376428', :competitions => 'Junior FLL', :description => '...', :visible => true}
 ]
 
 mentors.each do |mentor|
@@ -57,9 +57,9 @@ end
 
 groups = [
 
-	{:title => 'group 1', :admin_id => Parent.find(1).id, :mentor_id => Mentor.find(1).id, :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'FLL', :description => '...', :visible => true, :completed => false, :need_mentor => true},
+	{:title => 'group 1', :admin_id => Parent.find(1).id, :mentor_id => Mentor.find(1).id, :time_slot => '123214,132144235,23489362,89236572,892364278,372846423,9862347', :competitions => 'FLL', :description => '...', :visible => true, :completed => false, :need_mentor => true},
 	
-	{:title => 'group 2', :admin_id => Parent.find(2).id, :mentor_id => Mentor.find(2).id, :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'Junior FLL', :description => '...', :visible => true, :completed => false, :need_mentor => true}
+	{:title => 'group 2', :admin_id => Parent.find(2).id, :mentor_id => Mentor.find(2).id, :time_slot => '21893617,2319761,321673871,83927532,389426347,6543572,23742675', :competitions => 'Junior FLL', :description => '...', :visible => true, :completed => false, :need_mentor => true}
 
 ]
 
@@ -69,15 +69,15 @@ end
 
 
 children = [
-	{:parent_id => Parent.find(1).id, :firstname =>'Alei', :lastname => 'Lei', :gender => 'male', :date_of_birth => '2008-06-18', :school => 'School 1', :grade => 'G1', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'FLL', :description => '...', :visible => true, :group_id => Group.find(1).id },
+	{:parent_id => Parent.find(1).id, :firstname =>'Alei', :lastname => 'Lei', :gender => 'male', :date_of_birth => '2008-06-18', :school => 'School 1', :grade => 'G1', :time_slot => '123256167,2983648276,237866526,7234562,78324536,73284562,78234326', :competitions => 'FLL', :description => '...', :visible => true, :group_id => Group.find(1).id },
 	
-	{:parent_id => Parent.find(1).id, :firstname =>'Haha', :lastname => 'Oh', :gender => 'female', :date_of_birth => '2009-03-20', :school => 'School 2', :grade => 'G1', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'Junior FLL', :description => '...', :visible => true, :group_id => Group.find(2).id },
+	{:parent_id => Parent.find(1).id, :firstname =>'Haha', :lastname => 'Oh', :gender => 'female', :date_of_birth => '2009-03-20', :school => 'School 2', :grade => 'G1', :time_slot => '3265422654,122165416,8239742734,273843625,728354625,62345652,2176361537', :competitions => 'Junior FLL', :description => '...', :visible => true, :group_id => Group.find(2).id },
 	
-	{:parent_id => Parent.find(1).id, :firstname =>'Yeh', :lastname => 'Yeh', :gender => 'male', :date_of_birth => '2010-05-15', :school => 'School 1', :grade => 'G2', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'FLL', :description => '...', :visible => false, :group_id => Group.find(1).id },
+	{:parent_id => Parent.find(1).id, :firstname =>'Yeh', :lastname => 'Yeh', :gender => 'male', :date_of_birth => '2010-05-15', :school => 'School 1', :grade => 'G2', :time_slot => '261521673,178231642,7823462,2376842,783264,392764,78326425', :competitions => 'FLL', :description => '...', :visible => false, :group_id => Group.find(1).id },
 	
-	{:parent_id => Parent.find(2).id, :firstname =>'Heihei', :lastname => 'Hei', :gender => 'female', :date_of_birth => '2009-08-01', :school => 'School 2', :grade => 'G2', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'Junior FLL', :description => '...', :visible => true, :group_id => Group.find(2).id },
+	{:parent_id => Parent.find(2).id, :firstname =>'Heihei', :lastname => 'Hei', :gender => 'female', :date_of_birth => '2009-08-01', :school => 'School 2', :grade => 'G2', :time_slot => '748543656,129836217,324672,27185146,82196381,9725461,19823621', :competitions => 'Junior FLL', :description => '...', :visible => true, :group_id => Group.find(2).id },
 	
-	{:parent_id => Parent.find(2).id, :firstname =>'Hehe', :lastname => 'Le', :gender => 'male', :date_of_birth => '2007-09-25', :school => 'School 1', :grade => 'G2', :time_slot => '0x857142,0x571428,0x714285,0x428571,0xFABC0,0xEAE990,0xABACADA', :competitions => 'FLL', :description => '...', :visible => true}
+	{:parent_id => Parent.find(2).id, :firstname =>'Hehe', :lastname => 'Le', :gender => 'male', :date_of_birth => '2007-09-25', :school => 'School 1', :grade => 'G2', :time_slot => '129621264,92374682,3276488623,732854632,237845326,916231,892161', :competitions => 'FLL', :description => '...', :visible => true}
 ]
 
 children.each do |child|

@@ -49,7 +49,7 @@ class InvitationController < ApplicationController
         @invitation.receiver.update(:group_id => @invitation.group_id)
         #状态置为accepted
         @invitation.status = "Accepted"
-        @invitation.group.update(:time_slot => time_combine(@invitation.receiver.time_slot, @invitation.group.time_slot))
+        @invitation.group.update(:time_slot => @invitation.group.time_combine(@invitation.sender.time_slot))
         
         if @invitation.save!
             InvitationsMailer.invitation_accepted(@invitation)
@@ -80,7 +80,7 @@ class InvitationController < ApplicationController
         @invitation.sender.update(:group_id => @invitation.group_id)
         #状态置为accepted
         @invitation.status = "Accepted"
-        @invitation.group.update(:time_slot => time_combine(@invitation.sender.time_slot, @invitation.group.time_slot))
+        @invitation.group.update(:time_slot => @invitation.group.time_combine(@invitation.sender.time_slot))
         
         if @invitation.save!
             InvitationsMailer.invitation_accepted(@invitation)
