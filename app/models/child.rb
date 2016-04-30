@@ -40,6 +40,6 @@ class Child < ActiveRecord::Base
     
     private 
       def is_valid_dob?
-        errors.add(:dob, "Invalid date of birth") unless date_of_birth.past?
+          errors.add(:dob, "Invalid date of birth") unless !date_of_birth.nil? && date_of_birth.past?
       end
 end

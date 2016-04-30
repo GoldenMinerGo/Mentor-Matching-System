@@ -1,0 +1,118 @@
+/*!
+ * Start Bootstrap - Landing Page Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+.intro-message > h1,
+.intro-message > h2,
+.intro-message > h3,
+.intro-message > h4,
+.intro-message > h5,
+.intro-message > h6 {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 10%;
+    padding-bottom: 20%;
+}
+
+.intro-message > h1 {
+    font-family: verdana, Arial,sans-serif;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    color: rgba(255,255,255,1);
+    text-align: center;
+}
+
+
+.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    color: rgba(255,255,255,1);
+    text-align: center;
+    font-style: oblique;
+}
+
+.intro-message > .list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+    text-align: center;
+}
+
+.intro-message > .list-inline > li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px
+}
+
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+ul.intro-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+}
+
+ul.intro-social-buttons > li:last-child {
+        margin-bottom: 0;
+}
+
+@media(max-width:767px) {
+    .intro-message {
+        padding-bottom: 15%;
+    }
+
+    .intro-message > h1 {
+        font-size: 3em;
+    }
+
+    .intro-message > h2 {
+        font-size: 1.8em;
+    }
+
+    .intro-message > h3 {
+        font-size: 1.3em;
+    }
+    
+    ul.intro-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.intro-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+
+    .intro-divider {
+        width: 100%;
+    }
+}
+
+.network-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.parent-login{
+    position: relative;
+    padding-top: 15%;
+    padding-bottom: 20%;
+}
+
+.parent-login > .list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+    text-align: center;
+}

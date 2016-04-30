@@ -10,7 +10,13 @@
   grade: <%= f.text_field :grade %><br />
   Time Slot: <div class='time-board time-board-input time-board-hover' value='<%= @mentor.time_slot %>' inputname='mentor[time_slot]'></div>
   Description: <%= f.text_field :description %><br />
-  Visible: <%= f.check_box :visible %><br />
+  <div class="form-group">
+    <label for="inputCompetitions" class="col-sm-4 control-label">Competitions:</label>
+    <div class="col-sm-8 col-lg-6 col-lg-offset-1">
+      <label class="radio-inline"><%= g.radio_button :competitions, 'FLL'%> FIRST LEGO League</label>
+      <label class="radio-inline"><%= g.radio_button :competitions, 'Junior FLL'%> FIRST LEGO League Jr.</label>
+    </div>
+  </div>
   <%= f.submit "Update"%>
 <% end %>
 <%= link_to "Back", mentor_path %>
