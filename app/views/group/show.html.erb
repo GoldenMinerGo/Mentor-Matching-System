@@ -16,7 +16,7 @@
           <th>Mentor</th>
           <th>Admin</th>
           <th>Members</th>
-          <th>Available time</th>
+          
           <th>Competition</th>
           <th>More</th>
         </tr>
@@ -33,7 +33,7 @@
             <% end %>
             <td><%= @group.admin.name %></td>
             <td><%= child.name %></td>
-            <td><%= @group.time_slot %></td>
+            
             <td><%= @group.competitions %></td>
             <% if @user.parent.id == @group.admin_id %>
               <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
@@ -47,7 +47,11 @@
     </table>
   </div>
 </div>
-
+<div class='row'>
+  <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+    <div class='time-board time-board-hover' value = '<%=@group.time_slot%>' ></div>
+  </div>      
+</div>
 
 <% if @user.parent.id == @group.admin_id %>
 <div class='row'>
@@ -110,6 +114,7 @@
     <% end %>
   </div>
 </div>
+
 <% session[:group_id] = @group.id %>
 <%= link_to "Update Group Information", edit_group_path(@group) %><br />
 <% if @group.mentor.nil? and @group.need_mentor == true %>
