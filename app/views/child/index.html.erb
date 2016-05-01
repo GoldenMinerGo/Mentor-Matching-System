@@ -4,38 +4,38 @@
     <table class='table table-hover'>
       <thead>
         <tr>
-          <th>#</th>
+          <th><%= link_to 'ID', child_index_path(sort: 'id') %></th>
           <th>Gender</th>
           <th><%= link_to 'Age', child_index_path(sort: 'age')%></th>
           <th>School</th>
           <th>Grade</th>
-          <th>Time</th>
           <th>Competitions</th>
-          <th>Description</th>
-          <th>Group #</th>
-          <th>Title</th>
+          <th>Group</th>
+          <th>Available Time</th>
           <th>More</th>
         </tr>
       </thead>
       <tbody>
         <% @children.each do |child| %>
           <tr>
-            <td><%= child.id %></td>
+            <td><%= link_to child.id, child_detail_path(child) %></td>
             <td><i class="fa fa-<%= child.gender %>"></i></td>
             <td><%= child.age %></td>
             <td><%= child.school %></td>
             <td><%= child.grade %></td>
+            
             <td><%= child.competitions %></td>
-            <div class='time-board time-board-hover' value = '<%=child.time_slot%>' ></div>
-            <td><%= child.description %></td>
-            <% session[:child_id] = @child.id %>
+            
+            
             <% if child.group.nil? %>
+              
               <td></td>
-              <td></td>
+              <td><%= @group.time_compare(child.time_slot) %></td>
               <td><%= link_to "Send invitation", {:controller => 'invitation', :action => 'group_send_inv_to_child', :id => @group.id, :rec_id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
             <% else %>
-              <td><%= child.group_id %></td>
+              
               <td><%= child.group.title %></td>
+              <td></td>
               <td></td>
             <% end %>
           </tr>

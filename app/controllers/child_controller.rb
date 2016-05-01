@@ -1,11 +1,10 @@
 class ChildController < ApplicationController
     def index
-        @user=User.whois(session)
-        
-        if !session[:child_id].nil?
+        @user = User.whois(session)
+        redirect_to root_path and return if @user.nil?
+        if !session[:group_id].nil?
             
-            @child = Child.find_by_id(session[:child_id])
-            @group = @child.group
+            @group = Group.find_by_id(session[:group_id])
         else
             flash[:warning] = "Invalid user!"
             reset_session
@@ -28,15 +27,23 @@ class ChildController < ApplicationController
     def show
         @user=User.whois(session)
         redirect_to root_path and return if @user.nil?
-        rinv = Invitation.where(:sender_id => params[:id], :receiver_id => @user.parent.children)
+        #rinv = Invitation.where(:sender_id => params[:id], :receiver_id => @user.parent.children)
         
         @child = Child.find_by_id(params[:id])
-        if (@child.nil? || (rinv.empty? && @child.parent.user_id != @user.id))
-            flash[:warning] = "Sorry, your user account is not allowed to access this information."
-            redirect_to parent_path and return
-        end
+        #if (@child.nil? || (rinv.empty? && @child.parent.user_id != @user.id))
+            #flash[:warning] = "Sorry, your user account is not allowed to access this information."
+            #redirect_to parent_path and return
+        #end
         @mychild = @child.parent.user_id == @user.id
     end
+    
+    def detail
+        @user=User.whois(session)
+        redirect_to root_path and return if @user.nil?
+        @child = Child.find_by_id(params[:id])
+        @mychild = @child.parent.user_id == @user.id
+    end
+    
     
     def edit
         @user=User.whois(session)

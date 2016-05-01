@@ -19,7 +19,7 @@
   <% @groups.each do |group| %>
   <tr>
     <td><%= group.id %></td>
-    <td><%= group.title %></td>
+    <td><%= link_to group.title , group_detail_path(group)%></td>
     <% if group.mentor.nil? %>
       <td>TBD</td>
     <% else %>

@@ -13,14 +13,14 @@ class Group < ActiveRecord::Base
     end
     
     def time_combine(time_2)
-        time_1 = self.time_slot.split(/,/)
+        time_1 = time_slot.split(/,/)
         time_2 = time_2.split(/,/)
         combine_time_sum = ''
         for i in 0..6
-            combine_time = (time_1[i].to_i & time_2[i].to_i).to_s(16)
+            combine_time = (time_1[i].to_i & time_2[i].to_i).to_s
             combine_time_sum = [combine_time_sum, combine_time].join(',')
         end
-        combine_time_sum
+        combine_time_sum.reverse.chop.reverse
     end
     
     def time_compare(time_2)

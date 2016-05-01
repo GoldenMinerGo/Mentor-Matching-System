@@ -53,6 +53,9 @@ Rails.application.routes.draw do
   get 'casusers/cas_login' => 'casusers#cas_login', as: :cas_login
   get 'casusers/cas_logout' => 'casusers#cas_logout', as: :cas_logout
   resources :child
+  get "child/detail/:id" => "child#detail", as: :child_detail
+  
+  
   resources :group do
     collection do
       get 'index_for_parent'
@@ -62,6 +65,7 @@ Rails.application.routes.draw do
   get 'group/:id/change' => 'group#change', as: :change_group
   get "group/set_complete/:id" => "group#set_complete", as: :group_set_complete
   get "group/set_need_mentor/:id" => "group#set_need_mentor", as: :group_set_need_mentor
+  get "group/detail/:id" => "group#detail", as: :group_detail
   # get "delmem/:id" => "group#del_member", as: 'deletemember'
   #resources :group
   # You can have the root of your site routed with "root"

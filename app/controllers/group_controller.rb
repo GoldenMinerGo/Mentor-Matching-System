@@ -47,33 +47,31 @@ class GroupController < ApplicationController
     def show
         #@group = Group.find_by_id(params[:id])
         @user = User.whois(session)
-        if @user.role == 'Parent'
-            if !params[:child_id].nil?
-                @child = Child.find_by_id(params[:child_id])
-                session[:child_id] = @child.id
-            else
-                @child = Child.find_by_id(session[:child_id])
-            end
-            @group = @child.group
-            @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
-            #sinv means send invitation
-            @rinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => true)
-            #rinv means receive invitation
-        else
-            @group = Group.find_by_id(params[:id])
-            @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
-            #sinv means send invitation
-            @rinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => true)
-            #rinv means receive invitation
-        end
+        redirect_to root_path and return if @user.nil?
+        @group = Group.find_by_id(params[:id])
+        @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
+        #sinv means send invitation
+        @rinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => true)
+        
+        #rinv means receive invitation
+        @sinvs_to_children = Invitation.where(:group_id => @group.id, :sender_id => nil)
+        @rrequest = Invitation.where(:group_id => @group.id, :receiver_id => nil)
+        
     end
+    
+    def detail
+        @user = User.whois(session)
+        redirect_to root_path and return if @user.nil?
+        @group = Group.find_by_id(params[:id])
+        
+    end
+    
     
     def edit
         #group 
         #user = User.find(1)
         #@parent = user.parent
-        @child = Child.find_by_id(session[:child_id])
-        @group = @child.group
+        @group = Group.find_by_id(params[:id])
     end
     
     def update

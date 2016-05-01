@@ -1,80 +1,160 @@
 
-<% if @user.role == 'Parent'%>
-<div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h1>Group Information</h1>
-  </div>
-</div>
-<div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2>Your Group Information</h2>
-    <table class='table table-hover'>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Title</th>
-          <th>Mentor</th>
-          <th>Admin</th>
-          <th>Members</th>
-          
-          <th>Competition</th>
-          <th>More</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @group.children.each do |child| %>
-          <tr>
-            <td><%= @group.id %></td>
-            <td><%= @group.title %></td>
-            <% if @group.mentor.nil? %>
-            <td> TBD </td>
-            <%else%>
-            <td><%= @group.mentor.name %></td>
-            <% end %>
-            <td><%= @group.admin.name %></td>
-            <td><%= child.name %></td>
-            
-            <td><%= @group.competitions %></td>
-            <% if @user.parent.id == @group.admin_id %>
-              <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
-            <% else %>
-              <td></td>
-            <% end %>
-          </tr>
-          
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-<div class='row'>
-  <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-    <div class='time-board time-board-hover' value = '<%=@group.time_slot%>' ></div>
-  </div>      
-</div>
 
-<% if @user.parent.id == @group.admin_id %>
-<div class='row'>
+  <div class='row'>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h1>Group Information</h1>
+    </div>
+  </div>
+  <div class='row'>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h2>Your Group Information</h2>
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>Members</th>
+            
+            <th>Parent</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Group</th>
+            <th>Mentor</th>
+            <th>Competition</th>
+            <th>More</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @group.children.each do |child| %>
+            <tr>
+              <td><%= child.name %></td>
+              <td><%= child.parent.name %></td>
+              <td><%= child.parent.phone %></td>
+              <td><%= child.parent.email %></td>
+              <td><%= @group.title %></td>
+              <% if @group.mentor.nil? %>
+                <td> TBD </td>
+              <%else%>
+                <td><%= @group.mentor.name %></td>
+              <% end %>
+              
+              <td><%= @group.competitions %></td>
+              <% if @user.parent.id == @group.admin_id %>
+                <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
+              <% else %>
+                <td></td>
+              <% end %>
+            </tr>
+          
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+      <div class='time-board time-board-hover' value = '<%=@group.time_slot%>' ></div>
+    </div>      
+  </div>
+
+  <% if @user.parent.id == @group.admin_id %>
+    <% if @group.need_mentor == true %>
+    <div class='row'>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2>Sent In</h2>
+        <% if @rinvs.empty? %>
+          <p align=center>None</p>
+        <% else %>
+          <table class='table table-hover'>
+            <thead>
+              <tr>
+                <th>Sender</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @rinvs.each do |rinv| %>
+              <tr>
+                <td><%= rinv.mentor_id %></td>
+                <td><%= rinv.status %></td>
+                <% if rinv.status == "Pending" %>
+                 <td><%= link_to "Accept", groupinvs_accept_inv_group_path(rinv)%></td>
+                 <td><%= link_to "Decline", groupinvs_decline_inv_path(rinv)%></td>
+                <% end %>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2>Sent Out</h2>
+        <% if @sinvs.empty? %>
+          <p align=center>None</p>
+        <% else %>
+          <table class='table table-hover'>
+            <thead>
+              <tr>
+                <th>Receiver</th>
+                <th>Status</th>
+                <th>dsfdsf</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @sinvs.each do |sinv| %>
+              <tr>
+                <td><%= sinv.mentor_id %></td>
+                <td><%= sinv.status %></td>
+                <% if sinv.status == "Pending" %>
+                <td><%= link_to "Cancel Invitation", groupinvs_cancel_inv_path(sinv)%></td>
+                <% end %> 
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
+    </div>
+    <% else %>
+    <div class='row'>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2>Sent In</h2>
-    <% if @rinvs.empty? %>
+    <h2>Sent Invitations from my group</h2>
+    <% if @sinvs_to_children.empty? %>
       <p align=center>None</p>
     <% else %>
       <table class='table table-hover'>
         <thead>
           <tr>
-            <th>Sender</th>
+            <th>Receiver</th>
+            <th>Group</th>
+            <th>Mentor</th>
+            <th>Member</th>
+            <th></th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          <% @rinvs.each do |rinv| %>
+          <% @sinvs_to_children.each do |inv| %>
             <tr>
-              <td><%= rinv.mentor_id %></td>
-              <td><%= rinv.status %></td>
-              <% if rinv.status == "Pending" %>
-               <td><%= link_to "Accept", groupinvs_accept_inv_group_path(rinv)%></td>
-               <td><%= link_to "Decline", groupinvs_decline_inv_path(rinv)%></td>
+              <td><%= inv.receiver.name %></td>
+              <% if inv.group.nil? %>
+                <td></td>
+                <td></td>
+                <td></td>
+              <% else %>
+                <td><%= inv.group.title %></td>
+                <% if inv.group.mentor.nil? %>
+                  <td></td>
+                <% else %>
+                  <td><%= inv.group.mentor.name %></td>
+                <% end %>
+                <td><%= inv.group.members %></td>
+              <% end %>
+              <td></td>
+              <% if inv.status == "Pending"%>
+              <td><%= link_to "Cancel", invitation_cancel_inv_path(inv) %></td>
+              <% else %>
+              <td><%= inv.status %></td>
               <% end %>
             </tr>
           <% end %>
@@ -85,28 +165,46 @@
 </div>
 <div class='row'>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2>Sent Out</h2>
-    <% if @sinvs.empty? %>
+    <h2>Received request to my group</h2>
+    <% if @rrequest.empty? %>
       <p align=center>None</p>
     <% else %>
       <table class='table table-hover'>
         <thead>
           <tr>
-            <th>Receiver</th>
+            <th>Sender</th>
+            <th>Group</th>
+            <th>Mentor</th>
+            <th>Member</th>
+            <th></th>
             <th>Status</th>
-            <th>dsfdsf</th>
           </tr>
         </thead>
         <tbody>
-          <% @sinvs.each do |sinv| %>
+          <% @rrequest.each do |r| %>
             <tr>
-              <td><%= sinv.mentor_id %></td>
-              <td><%= sinv.status %></td>
-
-              <% if sinv.status == "Pending" %>
-
-              <td><%= link_to "Cancel Invitation", groupinvs_cancel_inv_path(sinv)%></td>
-              <% end %> 
+              <td><%= r.sender.name %></td>
+              <% if r.group.nil? %>
+                <td></td>
+                <td></td>
+                <td></td>
+              <% else %>
+                <td><%= r.group.title %></td>
+                <% if r.group.mentor.nil? %>
+                  <td></td>
+                <% else %>
+                  <td><%= r.group.mentor.name %></td>
+                <% end %>
+                <td><%= r.group.members %></td>
+              <% end %>
+              <td></td>
+              <% if r.status == "Pending"%>
+              <td><%= link_to "Accept", invitation_group_accept_child_path(r) %> or <%= link_to "Decline", invitation_decline_inv_path(r) %></td>
+              <% else %>
+              <td><%= r.status %></td>
+              <% end %>
+              
+              
             </tr>
           <% end %>
         </tbody>
@@ -114,58 +212,25 @@
     <% end %>
   </div>
 </div>
+    <% end %>
+    <% session[:group_id] = @group.id %>
+    <%= link_to "Update Group Information", edit_group_path(@group) %><br />
+    <% if @group.mentor.nil? and @group.need_mentor == true %>
+      <%= link_to "Browse mentors", mentors_path %><br />
+    <%end%>
+    <%# session[:child_id] = @child.id %>
+    <% if @group.completed == false %>
+      <%= link_to "Browse children", child_index_path%><br />
+    <% end %>
+    <%= link_to "Close this group", { action: :destroy, id: @group.id }, data: {:confirm => 'Are you sure?'}, method: :delete %><br />
+    <% if @group.completed == false %>
+      <%= link_to "Complete",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members.'} %><br/>  
+    <% else if @group.need_mentor == false%>
+      <%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors and mentors can find your group." } %><br/>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= link_to "Quit this group", data: {:confirm => 'Are you sure?'} %><br/>
+  <% end %>
+  <%= link_to "Back", parent_path %> 
 
-<% session[:group_id] = @group.id %>
-<%= link_to "Update Group Information", edit_group_path(@group) %><br />
-<% if @group.mentor.nil? and @group.need_mentor == true %>
-  <%= link_to "Browse mentors", mentors_path %><br />
-<%end%>
-<% session[:child_id] = @child.id %>
-<% if @group.completed == false %>
-<%= link_to "Browse children", child_index_path%><br />
-<% end %>
-<%= link_to "Close this group", { action: :destroy, id: @group.id }, data: {:confirm => 'Are you sure?'}, method: :delete %><br />
-<% if @group.completed == false %>
-<%= link_to "Complete",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members.'} %><br/>  
-<% else if @group.need_mentor == false%>
-<%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors and mentors can find your group." } %><br/>
-<% end %>
-<% end %>
-<% else %>
-<%= link_to "Quit this group", data: {:confirm => 'Are you sure?'} %><br/>
-<% end %>
-<%= link_to "Back", parent_path %> 
-
-<% else %>
-
-<div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2>Group Information</h2>
-    <table class='table table-hover'>
-      <thead>
-        <tr>
-          
-          <th>Members</th>
-          <th>Available time</th>
-          <th>Competition</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-        <tr>
-            
-          <td><%= @group.members %></td>
-          <div class='time-board time-board-hover' value = '<%=@group.time_slot%>' ></div>
-          <td><%= @group.competitions %></td>
-          <td><%= @group.description  %></td>
-        </tr>
-        
-      </tbody>
-    </table>
-
-  </div>
-</div>
-
-<%= link_to "Back", group_index_path %> 
-<% end %>
