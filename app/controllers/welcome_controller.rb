@@ -17,12 +17,12 @@ class WelcomeController < ApplicationController
       end
     else
       flash[:warning] = "Invalid Username or Password"
-      redirect_to welcome_index_path
+      redirect_to welcome_parent_signin_path
     end
   end
   
   def logout
-    if !User.find_by_id(session[:user_id]).nil? && User.find_by_id(session[:user_id]).role == "Mentor"
+    if !User.whois(session).nil? && User.whois(session).role == "Mentor"
       redirect_to cas_logout_path
     else
       reset_session

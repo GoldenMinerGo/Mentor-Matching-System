@@ -7,28 +7,20 @@
 </div>  -->
 
   <div class="row animated fadeIn">
-      <div class="col-sm-12">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 col-sm-offset-2 col-md-offset-3 col-lg-offset-4">
          <div class="parent-login">
             <ul class="list-inline intro-social-buttons">
                 <li>
-                  <!-- <%= link_to "Parent", new_user_path(:role => 'Parent') %> -->
-                   <%= link_to '<i class="fa fa-user-plus fa-fw"></i><span class="network-name"> Sign up</span>'.html_safe,  new_rgluser_path(:role => @role) , :class => 'btn btn-default btn-lg'%>
+                    <%= link_to '<i class="fa fa-user-plus fa-fw"></i><span class="network-name"> Sign up</span>'.html_safe,  new_rgluser_path(:role => @role) , :class => 'btn btn-default btn-lg btn-block '%>
                 </li>
-                <br/>
                 <li>
-                    <%= link_to '<i class="fa fa-sign-in fa-fw"></i><span class="network-name"> Sign In</span>'.html_safe, welcome_parent_signin_path , :class => 'btn btn-default btn-lg'%>
-                </li>
-                <br/>
-                <li>
-               <!--     <%= link_to '<i class="fa fa-facebook fa-fw"></i><span class="network-name"> Sign up/in with facebook</span>'.html_safe, "/auth/facebook", id: "sign_in" , :class => 'btn btn-default btn-lg', :style => "background-color:#3B5998;color:white;border-color:#2B4988;"%> -->
+                    <%= link_to '<i class="fa fa-sign-in fa-fw"></i><span class="network-name"> Sign In</span>'.html_safe, welcome_parent_signin_path , :class => 'btn btn-default btn-lg btn-block'%>
                 </li>
             </ul>
           </div>
-                <!-- <li> <%= link_to "Parent Sign In", welcome_parent_signin_path %> </li>-->
-      </ul>
-    </div>
+     </div>
   </div>
-</div>
+
 
 
 

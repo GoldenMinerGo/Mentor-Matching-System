@@ -9,8 +9,12 @@ class AdministratorsController < ApplicationController
         user = rgluser.user
         rgluser.role = "Administrator"
         user.role = "Administrator"
+        administrator = Administrator.new
+        administrator.name = user.uername
+        administrator.user_id = user.id
         rgluser.save
         user.save
+        administrator.save
         redirect_to administrators_index_path
     end
     

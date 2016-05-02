@@ -15,7 +15,7 @@ before_filter CASClient::Frameworks::Rails::Filter, :except => [:cas_logout]
     new_casuser = Casuser.new
     new_casuser.cas_user_name = session[:cas_user]
     user=User.new
-    user.role='Mentor'
+    user.role="Mentor"
     user.username = new_casuser.cas_user_name
     user.last_login_time=Time.zone.now
     user.save
@@ -27,7 +27,6 @@ before_filter CASClient::Frameworks::Rails::Filter, :except => [:cas_logout]
   end
 
   def cas_logout
-    reset_session
     CASClient::Frameworks::Rails::Filter.logout(self)
   end
 end

@@ -1,6 +1,6 @@
 <div class='row'>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div class="jumbotron" id="boxshadow">
+    <div class="jumbotron jumbotron-bg">
       <h1 align= "center" class="animated fadeInDown"><%= @parent.name %>'s Dashboard</h1>
       <br>
       <p align="right"><i class="fa fa-envelope grow"> <%= @parent.email %></i></p>
@@ -18,8 +18,8 @@
       <table class='table table-hover'>
         <thead>
           <tr>
-            <th><%= link_to "#", parent_path(sort: '#') %></th>
-            <th><%= link_to "Name", parent_path(sort: 'name') %></th>
+            <th>#</th>
+            <th>Name</th>
             
             <th>Group<%#= link_to "Group", parent_path(sort: 'group') %></th>
             <th>Mentor</th>

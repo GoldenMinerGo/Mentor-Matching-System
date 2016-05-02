@@ -1,28 +1,29 @@
 <div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
-    <h1>New Parent</h1>
+  <div class="col-xs-12 col-sm-12 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
+    <h1 align="center" class="animated fadeInDown" style=color:#339900>Create Account</h1>
+    <br>
+    <br>
     <div class="Sign_Form">
       <%= form_for(:parent, :url => {:controller => 'parent', :action => 'create'}, :html => {:class => "form-horizontal"}) do |f| %>
-        <div class="form-group">
-          <label for="inputFirstName" class="col-sm-4 control-label">First Name:</label>
-          <div class="col-sm-8"><%= f.text_field :firstname, :class => 'form-control'%></div>
+       <div class="form-group">
+           <label class="control-label">All fields are required</label>
         </div>
         <div class="form-group">
-          <label for="inputLastName" class="col-sm-4 control-label">Last Name:</label>
-          <div class="col-sm-8"><%= f.text_field :lastname, :class => 'form-control' %></div>
+          <%= f.text_field :firstname, :placeholder =>'Firstname',:class => 'form-control'%>
         </div>
         <div class="form-group">
-          <label for="inputPhone" class="col-sm-4 control-label">Phone:</label>
-          <div class="col-sm-8"><%= f.telephone_field :phone, :class => 'form-control'%></div>
+         <%= f.text_field :lastname, :placeholder =>'Lastname',:class => 'form-control' %>
         </div>
         <div class="form-group">
-          <label for="inputEmail" class="col-sm-4 control-label">Email:</label>
-          <div class="col-sm-8"><%= f.email_field :email, :class => 'form-control'%></div>
+         <%= f.telephone_field :phone, :placeholder =>'Phone',:class => 'form-control'%>
         </div>
         <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.submit "Create" , :class => 'btn btn-block btn-primary'%>
-          </div>
+          <%= f.email_field :email, :placeholder =>'Email', :class => 'form-control'%>
+        </div>
+        <br/>
+        <div class="form-group">
+          
+            <%= f.submit "CREATE" , :class => 'btn btn-block btn-success'%>
         </div>
       <% end %>
     </div>

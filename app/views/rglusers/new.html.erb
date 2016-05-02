@@ -1,18 +1,40 @@
 <!--<% @page_title = "UserAuth | Signup" %>-->
-<div class="col-lg-12">
-    <div class="parent-login">
-      <ul class="list-inline intro-social-buttons">
-       <%= link_to '<i class="fa fa-facebook fa-fw"></i><span class="network-name"> Sign up with facebook</span>'.html_safe, "/auth/facebook", id: "sign_in" , :class => 'btn btn-default btn-lg.round', :style => "background-color:#3B5998;color:white;border-color:#2B4988;"%>
-          <hr class="intro-divider">
+<div class='row'>
+    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 col-sm-offset-2 col-md-offset-3 col-lg-offset-4">
+    <div class="parent-login", style="padding-top:15%;">
+      <div class="list-inline">
+           <%= link_to '<i class="fa fa-facebook fa-fw"></i><span class="network-name"> Sign up with facebook</span>'.html_safe, "/auth/facebook", id: "sign_in" , :class => 'btn btn-default btn-block', :style => "background-color:#3B5998;color:white;border-color:#2B4988;" %>
+
+        <div style="width: 100%; height:18px;"></div>
+        <div style="width: 100%; height:13px; border-bottom: 1px solid silver; text-align: center;">
+           <span style="font-size: 15px; background-color: white; padding: 0 10px;">
+              or
+           </span>
+        </div>
+        <div style="padding:15px;">
+            <h4>Sign up with a username</h4>
+        </div>
           <div class="Sign_Form">
-              <h1 style="font-size:2em;">sign up with a username</h1>
-                 <%= form_for(:rgluser, :url => {:controller => 'rglusers', :action => 'create'}) do |f| %>
-                   <p> Username:</br> <%= f.text_field :username%> </p>
-                   <p> Password:</br> <%= f.password_field :password%></p>
-                   <p> Password Confirmation:</br> <%= f.password_field :password_confirmation%> </p>
-             <%= f.submit :Signup %>
+              
+                 <%= form_for(:rgluser, :url => {:controller => 'rglusers', :action => 'create'}, :html => {:class => "form-horizontal"}) do |f| %>
+                  <div class="form-group">
+                    <div class="col-sm-12"> <%= f.text_field :username, :placeholder =>'username',:class => 'form-control'%> </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">  <%= f.password_field :password, :placeholder => 'password',:class => 'form-control'%></div>
+                  </div>   
+                  <div class="form-group">
+                   <div class="col-sm-12">  <%= f.password_field :password_confirmation, :placeholder => 'password confirmation',:class => 'form-control'%> </div>
+                 </div>
+                 <div class="form-group">
+                  <div class="col-sm-12">
+             <%= f.submit "SIGN UP", :class => 'btn btn-block btn-success' %>
+             </div>
+             </div>
+             <h3 style="text-align:center;font-size:100%;"> Already have an account? <%= link_to "Log in", welcome_parent_signin_path, :style => "color:#339900;" %></h3>
            <% end %>
         </div>
-      </ul>
+      </div>
     </div>
+  </div>
   </div>

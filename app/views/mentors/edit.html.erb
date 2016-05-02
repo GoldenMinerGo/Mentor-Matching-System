@@ -1,22 +1,87 @@
-<h1>Mentor Update Panel</h1>
-
-<%= form_for @mentor, :method => :put do |f| %>
-  First Name: <%= f.text_field :firstname %><br />
-  Last Name: <%= f.text_field :lastname %><br />
-  Phone: <%= f.telephone_field :phone %><br />
-  Email: <%= f.email_field :email %><br />
-  Date of Birth: <%= f.date_field :date_of_birth %><br />
-  School: <%= f.text_field :school %><br />
-  grade: <%= f.text_field :grade %><br />
-  Time Slot: <div class='time-board time-board-input time-board-hover' value='<%= @mentor.time_slot %>' inputname='mentor[time_slot]'></div>
-  Description: <%= f.text_field :description %><br />
-  <div class="form-group">
-    <label for="inputCompetitions" class="col-sm-4 control-label">Competitions:</label>
-    <div class="col-sm-8 col-lg-6 col-lg-offset-1">
-      <label class="radio-inline"><%= g.radio_button :competitions, 'FLL'%> FIRST LEGO League</label>
-      <label class="radio-inline"><%= g.radio_button :competitions, 'Junior FLL'%> FIRST LEGO League Jr.</label>
+<div class="row">
+<div class="col-sm-12">
+  <h1 align="center" class="animated fadeInDown" style=color:#339900>Edit your profile</h1>
+    <br/>
+    <br/>
+  <div class="Sign_Form">
+      
+     <%= form_for @mentor, :method => :put , :html => {:class => "form-horizontal"} do |f| %>
+       <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
+         <div class="form-group">
+           <label class="control-label">All fields are required unless marked as 'Optional'</label>
+        </div>
+        <div class="form-group">
+          <label for="inputFirstname" class="control-label edit-font">Firstname</label>
+          <%= f.text_field :firstname, :class => 'form-control'%>
+          </div>
+            
+        <div class="form-group">
+           <label for="inputLastname" class="control-label edit-font">Lastname</label>
+           <%= f.text_field :lastname, :class => 'form-control'%>
+       </div>
+       
+       <div class="form-group">
+        <label for="inputGender" class="control-label edit-font">Gender</label>
+        <%= f.select(:gender, ['Male' , 'Female'], {},{:class => 'form-control'})%> 
+      </div>
+      
+       <div class="form-group">
+          <label for="inputPhone" class="control-label edit-font">Phone</label>
+            <%= f.telephone_field :phone, :class => 'form-control'%>
+       </div>
+      
+      <div class="form-group">
+         <label for="inputPhone" class="control-label edit-font">Email</label>
+         <%= f.email_field :email, :class => 'form-control'%>
+      </div>
+      
+      
+      <div class="form-group">
+        <label for="inputDOB" class="control-label edit-font">Date of Birth</label>
+           <%= f.date_field :date_of_birth, :class => 'form-control'%>
+      </div>
+      
+      <div class="form-group">
+        <label for="inputSchool" class="control-label edit-font">School</label>
+            <%= f.text_field :school, :placeholder =>'School',:class => 'form-control'%>
+      </div>
+      
+      <div class="form-group">
+        <label for="inputGrade" class="control-label edit-font">Grade</label>
+        <%= f.select(:grade, ['Freshman' , 'Sophomore' , 'Junior' , 'Senior' , 'Graduate' , 'Teacher'], {},{:class => 'form-control'})%> 
+      </div>
+      
+       <div class="form-group">
+           <label for="inputCompetitions" class="control-label edit-font">Competitions</label>
+           <br/>
+           <label class="radio-inline"><%= f.radio_button :competitions, 'FLL'%> FIRST LEGO League</label>
+           <label class="radio-inline"><%= f.radio_button :competitions, 'Junior FLL'%> FIRST LEGO League Jr.</label>
+      </div>
+      
+      <div class="form-group">
+        <label for="inputDescription" class="control-label edit-font">Description(Optional):</label>
+           <%= f.text_area :description, :class => 'form-control'%>
+      </div>
+      
     </div>
-  </div>
-  <%= f.submit "Update"%>
-<% end %>
-<%= link_to "Back", mentor_path %>
+    
+       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <div class="form-group">
+          <label for="inputTimeslot" class="control-label edit-font">Time Available</label>
+          <br/>
+          <div class='time-board time-board-input time-board-hover' value='<%= @mentor.time_slot %>' inputname='mentor[time_slot]'></div>
+        </div>
+       </div>
+       
+      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+       <div class="form-group">
+        <br/>
+        <br/>
+         <%= f.submit "UPDATE",:class => 'btn btn-block btn-success'%>
+         <%= link_to "CANCEL", mentor_path,:class => 'btn btn-block btn-default'%>
+        </div>
+       </div>
+        <% end %>
+      </div>
+</div>
+</div>
