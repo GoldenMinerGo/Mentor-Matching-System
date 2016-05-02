@@ -1,21 +1,25 @@
-<h1>Group Information</h1>
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h1>Group List</h1>
+    <br/>
+    <table class='table table-hover'>
+      <thead>
+        <tr>
 
-<h2>All Groups</h2>
-<table>
-  <tr>
-
-    <th><%= link_to 'ID', group_index_path(sort: 'id')%></th>
-    <th><%= link_to 'Title', group_index_path(sort: 'title')%></th>
+    <th><%= link_to 'ID', {:controller => "group", :action => "index_for_parent", :sort => "id"}%></th>
+    <th><%= link_to 'Title', {:controller => "group", :action => "index_for_parent", :sort => "title"}%></th>
     <th>Mentor</th>
     
     <th>Members</th>
-    <th><%= link_to '#Members', group_index_path(sort: 'num')%></th>
+    <th><%= link_to '#Members', {:controller => "group", :action => "index_for_parent", :sort => "num"}%></th>
 
     <th>Admin</th>
-    <th>Available time</th>
+    <th><%= link_to 'Available Time',{:controller => "group", :action => "index_for_parent", :sort => "time"} %> </th>
     <th>Competition</th>
     <th>More</th>
   </tr>
+  </thead>
+  <tbody>
   <% @groups.each do |group| %>
   <tr>
     <td><%= group.id %></td>
@@ -30,13 +34,15 @@
     <td><%= group.children.count%></td>
     <%#= group.members.count %>
     <td><%= group.admin.name %></td>
-    <td><%= group.time_compare(@child.time_slot) %></td>
+    <td><%= group.time_compare(@child.time_slot) %>hr</td>
     <td><%= group.competitions %></td>
     <td><%= link_to "Send Request", {:controller => "invitation", :action => "child_send_request_to_group", :id => group.id, :sender_id => @child.id }%></td>
     
   </tr>
   <% end %>
-</table>
+</tbody>
+    </table>
+  </div>
+</div>
 
-<br/>
 <%= link_to "Back", parent_path %>

@@ -11,7 +11,7 @@
           <th>Grade</th>
           <th>Competitions</th>
           <th>Group</th>
-          <th>Available Time</th>
+          <th><%= link_to 'Available Time', child_index_path(sort: 'time')%></th>
           <th>More</th>
         </tr>
       </thead>
@@ -44,3 +44,4 @@
     </table>
   </div>
 </div>
+<%= link_to "Back", group_path(@group) %>

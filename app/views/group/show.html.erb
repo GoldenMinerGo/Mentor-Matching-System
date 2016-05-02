@@ -1,46 +1,16 @@
 <div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
-      <h1 align="center" class="animated fadeInDown">Your Group</h1><br><br>
-    <div class='col-sm-12'>
-      <table class='table'>
-        <tbody>
-          <tr>
-            <td>ID</td>
-            <td><%= @group.id %></td>
-          </tr>
-          
-          <tr>
-            <td>Group</td>
-            <td><%= @group.title %></td>
-          </tr>
-          <tr>
-            <td>Competition</td>
-            <td><%= @group.competitions %></td>
-          </tr>
-           <tr>
-            <td>Admin</td>
-            <td><%= @group.admin.name %></td>
-          </tr>
-          <tr>
-            <td>Mentor</td>
-            <% if !@group.mentor.nil? %>
-            <td><%= @group.mentor.name %></td>
-            <% else %>
-            <td>TBD</td>
-            <% end %>
-          </tr>
-          
-          
-        </tbody>
-      </table>
-      
-      <hr>
-      
-      
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="jumbotron jumbotron-bg">
+      <h1 align= "center" class="animated fadeInDown">Your Group Information</h1>
+      <br>
+      <p align="right"><i class="animated fadeInDown">ID: <%= @group.id %></i></p>
+      <p align="right"><i class="animated fadeInDown">Title: <%= @group.title %></i></p>
+      <p align="right"><i class="animated fadeInDown">Competition: <%= @group.competitions %></i></p>
+      <p align="right"><i class="animated fadeInDown">Admin: <%= @group.admin.name %></i></p>
+      <p align="right"><i class="animated fadeInDown">Mentor: <%= @group.mentor.name %></i></p>
     </div>
   </div>
 </div>
-
   
   <div class='row'>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -65,7 +35,7 @@
               <td><%= child.parent.phone %></td>
               <td><%= child.parent.email %></td>
               
-              <% if @user.parent.id == @group.admin_id %>
+              <% if ((@user.parent.id == @group.admin_id)  and !(child.parent.id == @user.parent.id) )%>
                 <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
               <% else %>
                 <td></td>
@@ -77,31 +47,36 @@
       </table>
     </div>
   </div>
+  <br/>
   <div class='row'>
     <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
       <div class='time-board time-board-hover' value = '<%=@group.time_slot%>' ></div>
     </div>      
   </div>
-
+  <br/>
+<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="form-group">
   <% if @user.parent.id == @group.admin_id %>
     
     <% session[:group_id] = @group.id %>
-    <%= link_to "Update Group Information", edit_group_path(@group) %><br />
+    <p align="center"><%= link_to 'Update Group Information',edit_group_path(@group) , :class => 'btn btn-block btn-default'%></p>
     <% if @group.mentor.nil? and @group.need_mentor == true %>
-      <%= link_to "Browse mentors", mentors_path %><br />
+    <p align="center"><%= link_to 'Browse mentors',mentors_path , :class => 'btn btn-block btn-default'%></p>
     <%end%>
     <%# session[:child_id] = @child.id %>
     <% if @group.completed == false %>
-      <%= link_to "Browse children", child_index_path%><br />
+    <p align="center"><%= link_to 'Browse children',child_index_path , :class => 'btn btn-block btn-default'%></p>
     <% end %>
-    <%= link_to "Close this group", { action: :destroy, id: @group.id }, data: {:confirm => 'Are you sure?'}, method: :delete %><br />
+    <p align="center"><%= link_to "Close this group", { action: :destroy, id: @group.id }, :class => 'btn btn-block btn-default', data: {:confirm => 'Are you sure?'}, method: :delete %></p>
     <% if @group.completed == false %>
-      <%= link_to "Complete",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members.'} %><br/>  
+    <p align="center"><%= link_to "Complete",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members.'},:class => 'btn btn-block btn-default' %></p>  
     <% else if @group.need_mentor == false%>
-      <%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors and mentors can find your group." } %><br/>
+      <p align="center"><%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors and mentors can find your group." },:class => 'btn btn-block btn-default' %>
       <% end %>
     <% end %>
   
   <% end %>
-  <%= link_to "Back", parent_path %> 
+    <p align="center"><%= link_to "Back", parent_path, :class => 'btn btn-block btn-default' %></p>
+        </div>
+</div>
 

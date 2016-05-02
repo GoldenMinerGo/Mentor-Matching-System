@@ -12,10 +12,13 @@ class ChildController < ApplicationController
         end
         
         if !@user.nil? && @user.role == "Parent"
-            if params[:sort] == 'age'
-                @children=Child.where(:visible => true).order(date_of_birth: :desc)
-            else 
-                @children = Child.where(:visible => true)
+            case params[:sort]
+            when 'age'
+                @children=Child.where(:visible => true, :group => nil).order(date_of_birth: :desc)
+            when 'time'
+                @children=Child.where(:visible => true, :group => nil).sort_by{|c| @group.time_compare(c.time_slot)}.reverse
+            else
+                @children = Child.where(:visible => true, :group => nil)
             end
         else
             flash[:warning] = "Invalid user!"
@@ -48,6 +51,10 @@ class ChildController < ApplicationController
         @user = User.whois(session)
         redirect_to root_path and return if @user.nil?
         @child = Child.find_by_id(params[:id])
+        if (@child.nil? ||  @child.parent.user_id != @user.id)
+            flash[:warning] = "Sorry, your user account is not allowed to access this information."
+            redirect_to parent_path and return
+        end
         @rinv=Invitation.where(:receiver_id => @child).where(:sender_id => nil)
         @srequest = Invitation.where(:sender_id => @child).where(:receiver_id => nil)
     end
@@ -92,7 +99,7 @@ class ChildController < ApplicationController
         @child=Child.new(child_params)
         @child.parent_id = @user.parent.id
         if @child.save
-            flash[:success] = "Your child Information has been created successfully"
+            flash[:success] = "Your child has been created successfully"
             redirect_to parent_path and return
         else
             flash[:danger] = "The information you put is invalid"
@@ -105,15 +112,30 @@ class ChildController < ApplicationController
         @user=User.whois(session)
         redirect_to root_path and return if @user.nil?
         @child=Child.find_by_id(params[:id])
-        @child.destroy
-        flash[:success]="You have deleted a child information"
-        redirect_to parent_path
+        if @child.group.nil?
+            @rinv = Invitation.where(:receiver => @child, :status => 'Pending')
+            @rinv.each do |ri|
+                ri.status = "Declined"
+                ri.save!
+            end
+            @srequest = Invitation.where(:sender => @child, :status => 'Pending')
+            @srequest.each do |sr|
+                sr.destroy
+            end
+            @child.destroy
+            
+            redirect_to parent_path
+            flash[:success]="You have deleted a child successfully!"
+        else
+            redirect_to parent_path
+            flash[:warning]="Your child cannot be deleted before quitting the group!"
+        end
     end
     
     def quit_group
         
         @child = Child.find_by_id(params[:id])
-        GroupMailer.member_quit_notify(@child)
+        GroupMailer.child_quit_request(@child)
         redirect_to parent_path
         flash[:success] = "An email has been sent to the coach"
     end

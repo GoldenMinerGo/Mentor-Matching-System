@@ -31,7 +31,7 @@ class Group < ActiveRecord::Base
             same_time = (time_1[i].to_i & time_2[i].to_i).to_s(2).count('1')
             same_time_sum = same_time_sum + same_time
         end
-        same_time_sum
+        same_time_sum * 0.5
     end
     
     #before_show do
