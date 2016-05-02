@@ -23,7 +23,13 @@ class GroupMailer < ApplicationMailer
     @coach = @group.admin
     mail to: @coach.email, subject: "A mentor has chosen to leave your group."
   end
-
+  
+  def member_quit_notify(child)
+    @child = child
+    @group = @child.group
+    @coach = @group.admin
+    mail to: @coach.emal, subject: "Member xxx wants to quit your group, please log on the website to delete this member if you agree."
+  end
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #

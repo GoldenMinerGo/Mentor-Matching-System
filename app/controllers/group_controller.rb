@@ -48,6 +48,7 @@ class GroupController < ApplicationController
         #@group = Group.find_by_id(params[:id])
         @user = User.whois(session)
         redirect_to root_path and return if @user.nil?
+        
         @group = Group.find_by_id(params[:id])
         @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
         #sinv means send invitation
@@ -57,6 +58,19 @@ class GroupController < ApplicationController
         @sinvs_to_children = Invitation.where(:group_id => @group.id, :sender_id => nil)
         @rrequest = Invitation.where(:group_id => @group.id, :receiver_id => nil)
         
+    end
+    
+    def message
+        @user = User.whois(session)
+        redirect_to root_path and return if @user.nil?
+        @group = Group.find_by_id(params[:id])
+        @sinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => false)
+        #sinv means send invitation
+        @rinvs = Groupinv.where(:group_id => @group.id).where(:send_by_mentor => true)
+        
+        #rinv means receive invitation
+        @sinvs_to_children = Invitation.where(:group_id => @group.id, :sender_id => nil)
+        @rrequest = Invitation.where(:group_id => @group.id, :receiver_id => nil)
     end
     
     def detail
@@ -73,6 +87,8 @@ class GroupController < ApplicationController
         #@parent = user.parent
         @group = Group.find_by_id(params[:id])
     end
+    
+    
     
     def update
         @user = User.whois(session)

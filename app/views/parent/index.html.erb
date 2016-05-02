@@ -23,6 +23,7 @@
             
             <th>Group<%#= link_to "Group", parent_path(sort: 'group') %></th>
             <th>Mentor</th>
+            <th>Message</th>
             <th></th>
             <th></th>
           </tr>
@@ -38,13 +39,14 @@
                 <td></td>
               <% else %>
                 
-                <td><%= link_to child.group.title, group_path(:id => child.group.id) %></td>
+                <td><%= link_to child.group.title, group_path(:id => child.group.id, :child_id => child.id) %></td>
                 <% if child.group.mentor.nil? %>
                   <td></td>
                 <% else %>
                   <td><%= child.group.mentor.name %></td>
                 <% end %>
               <% end %>
+              <td><%= link_to "Messages", child_message_path(child) %></td>
               <td><i class='fa fa-eye<%= "-slash" if !child.visible %>'></i></td>
               <td><%= link_to "More", child_path(child) %></td>
             </tr>
@@ -56,105 +58,6 @@
   </div>
 </div>
 
-
-<div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2>Invitations to my children </h2>
-    <% if @rinv.empty? %>
-      <p align=center>None</p>
-    <% else %>
-      <table class='table table-hover'>
-        <thead>
-          <tr>
-            
-            <th>Receiver</th>
-            <th>Group</th>
-            <th>Mentor</th>
-            <th>Member</th>
-            <th></th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @rinv.each do |inv| %>
-            <tr>
-              
-              <td><%= inv.receiver.name %></td>
-              <% if inv.group.nil? %>
-                <td></td>
-                <td></td>
-                <td></td>
-              <% else %>
-                <td><%= inv.group.title %></td>
-                <% if inv.group.mentor.nil? %>
-                  <td></td>
-                <% else %>
-                  <td><%= inv.group.mentor.name %></td>
-                <% end %>
-                <td><%= inv.group.members %></td>
-              <% end %>
-              <td></td>
-              <% if inv.status == "Pending"%>
-              <td><%= link_to "Accept", invitation_child_accept_group_path(inv) %> or <%= link_to "Decline", invitation_decline_inv_path(inv) %></td>
-              <% else %>
-              <td><%= inv.status %></td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
-  </div>
-</div>
-
-
-<div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2>Sent Request from my children</h2>
-    <% if @srequest.empty? %>
-      <p align=center>None</p>
-    <% else %>
-      <table class='table table-hover'>
-        <thead>
-          <tr>
-            <th>Sender</th>
-            <th>Group</th>
-            <th>Mentor</th>
-            <th>Member</th>
-            <th></th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @srequest.each do |r| %>
-            <tr>
-              <td><%= r.sender.name %></td>
-              <% if r.group.nil? %>
-                <td></td>
-                <td></td>
-                <td></td>
-              <% else %>
-                <td><%= r.group.title %></td>
-                <% if r.group.mentor.nil? %>
-                  <td></td>
-                <% else %>
-                  <td><%= r.group.mentor.name %></td>
-                <% end %>
-                <td><%= r.group.members %></td>
-              <% end %>
-              <td></td>
-              <% if r.status == "Pending"%>
-              <td><%= link_to "Cancel", invitation_cancel_inv_path(r) %></td>
-              <% else %>
-              <td><%= r.status %></td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
-  </div>
-</div>
 
 
 <div class='row'>
@@ -172,6 +75,7 @@
             <th>#Members</th>
             <th>Complete</th>
             <th>Need_mentor</th>
+            <th>Message</th>
             <th></th>
           </tr>
         </thead>
@@ -188,6 +92,7 @@
               <td><%= group.children.count %></td>
               <td><%= group.completed %></td>
               <td><%= group.need_mentor %></td>
+              <td><%= link_to "Messages", group_message_path(group) %></td>
               <td><%= link_to "More", group_path(group)%></td>
             </tr>
           <% end %>
@@ -199,99 +104,3 @@
 </div>
 
 
-<div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2>Sent Invitations from my groups</h2>
-    <% if @sinv.empty? %>
-      <p align=center>None</p>
-    <% else %>
-      <table class='table table-hover'>
-        <thead>
-          <tr>
-            <th>Receiver</th>
-            <th>Group</th>
-            <th>Mentor</th>
-            <th>Member</th>
-            <th></th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @sinv.each do |inv| %>
-            <tr>
-              <td><%= inv.receiver.name %></td>
-              <% if inv.group.nil? %>
-                <td></td>
-                <td></td>
-                <td></td>
-              <% else %>
-                <td><%= inv.group.title %></td>
-                <% if inv.group.mentor.nil? %>
-                  <td></td>
-                <% else %>
-                  <td><%= inv.group.mentor.name %></td>
-                <% end %>
-                <td><%= inv.group.members %></td>
-              <% end %>
-              <td></td>
-              <% if inv.status == "Pending"%>
-              <td><%= link_to "Cancel", invitation_cancel_inv_path(inv) %></td>
-              <% else %>
-              <td><%= inv.status %></td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
-  </div>
-</div>
-<div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2>Received Request from children</h2>
-    <% if @rrequest.empty? %>
-      <p align=center>None</p>
-    <% else %>
-      <table class='table table-hover'>
-        <thead>
-          <tr>
-            <th>Sender</th>
-            <th>Group</th>
-            <th>Mentor</th>
-            <th>Member</th>
-            <th></th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @rrequest.each do |r| %>
-            <tr>
-              <td><%= r.sender.name %></td>
-              <% if r.group.nil? %>
-                <td></td>
-                <td></td>
-                <td></td>
-              <% else %>
-                <td><%= r.group.title %></td>
-                <% if r.group.mentor.nil? %>
-                  <td></td>
-                <% else %>
-                  <td><%= r.group.mentor.name %></td>
-                <% end %>
-                <td><%= r.group.members %></td>
-              <% end %>
-              <td></td>
-              <% if r.status == "Pending"%>
-              <td><%= link_to "Accept", invitation_group_accept_child_path(r) %> or <%= link_to "Decline", invitation_decline_inv_path(r) %></td>
-              <% else %>
-              <td><%= r.status %></td>
-              <% end %>
-              
-              
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
-  </div>
-</div>

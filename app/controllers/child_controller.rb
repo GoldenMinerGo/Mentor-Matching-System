@@ -44,6 +44,14 @@ class ChildController < ApplicationController
         @mychild = @child.parent.user_id == @user.id
     end
     
+    def message
+        @user = User.whois(session)
+        redirect_to root_path and return if @user.nil?
+        @child = Child.find_by_id(params[:id])
+        @rinv=Invitation.where(:receiver_id => @child).where(:sender_id => nil)
+        @srequest = Invitation.where(:sender_id => @child).where(:receiver_id => nil)
+    end
+    
     
     def edit
         @user=User.whois(session)
@@ -101,6 +109,15 @@ class ChildController < ApplicationController
         flash[:success]="You have deleted a child information"
         redirect_to parent_path
     end
+    
+    def quit_group
+        
+        @child = Child.find_by_id(params[:id])
+        GroupMailer.member_quit_notify(@child)
+        redirect_to parent_path
+        flash[:success] = "An email has been sent to the coach"
+    end
+    
     
     private
     
