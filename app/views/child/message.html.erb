@@ -1,0 +1,79 @@
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2>Invitations to my child </h2>
+    <% if @rinv.empty? %>
+      <p align=center>None</p>
+    <% else %>
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>Group</th>
+            
+            
+            <th>Competition</th>
+            <th>Member</th>
+            <th></th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @rinv.each do |inv| %>
+            <tr>
+              <td><%= link_to inv.group.title, group_detail_path(inv.group) %></td>
+              <td><%= inv.group.competitions %></td>
+              <td><%= inv.group.members %></td>
+              
+              <td></td>
+              <% if inv.status == "Pending"%>
+              <td><%= link_to "Accept", invitation_child_accept_group_path(inv) %> or <%= link_to "Decline", invitation_decline_inv_path(inv) %></td>
+              <% else %>
+              <td><%= inv.status %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
+
+
+<div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2>Sent Request from my child</h2>
+    <% if @srequest.empty? %>
+      <p align=center>None</p>
+    <% else %>
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            
+            <th>Group</th>
+            <th>Competition</th>
+            <th>Member</th>
+            <th></th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @srequest.each do |r| %>
+            <tr>
+              <td><%= link_to r.group.title, group_detail_path(r.group) %></td>
+              <td><%= r.group.competitions %></td>
+              <td><%= r.group.members %></td>
+              <td></td>
+              <% if r.status == "Pending"%>
+              <td><%= link_to "Cancel", invitation_cancel_inv_path(r) %></td>
+              <% else %>
+              <td><%= r.status %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
+
+
+<%= link_to "Back", parent_path %>

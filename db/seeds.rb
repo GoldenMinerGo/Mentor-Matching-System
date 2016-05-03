@@ -60,9 +60,9 @@ end
 
 groups = [
 
-	{:title => 'group 1', :admin_id => Parent.find(1).id, :mentor_id => Mentor.find(1).id, :time_slot => '123214,132144235,23489362,89236572,892364278,372846423,9862347', :competitions => 'FLL', :description => '...', :visible => true, :completed => false, :need_mentor => true},
+	{:title => 'group 1', :admin_id => Parent.find(1).id, :mentor_id => Mentor.find(1).id, :time_slot => '123214,132144235,23489362,89236572,892364278,372846423,9862347', :competitions => 'FLL', :description => '...', :visible => true, :completed => false, :need_mentor => false},
 	
-	{:title => 'group 2', :admin_id => Parent.find(2).id, :mentor_id => Mentor.find(2).id, :time_slot => '21893617,2319761,321673871,83927532,389426347,6543572,23742675', :competitions => 'Junior FLL', :description => '...', :visible => true, :completed => false, :need_mentor => true}
+	{:title => 'group 2', :admin_id => Parent.find(2).id, :mentor_id => Mentor.find(2).id, :time_slot => '21893617,2319761,321673871,83927532,389426347,6543572,23742675', :competitions => 'Junior FLL', :description => '...', :visible => true, :completed => false, :need_mentor => false}
 
 ]
 

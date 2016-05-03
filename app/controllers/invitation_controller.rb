@@ -46,12 +46,13 @@ class InvitationController < ApplicationController
     def child_accept_group
         #把child存进组里
         @invitation = Invitation.find_by_id(params[:id])
-        @invitation.receiver.update(:group_id => @invitation.group_id)
+        @invitation.receiver.group_id = @invitation.group_id
         #状态置为accepted
         @invitation.status = "Accepted"
-        @invitation.group.update(:time_slot => @invitation.group.time_combine(@invitation.sender.time_slot))
+        @invitation.group.update(:time_slot => @invitation.group.time_combine(@invitation.receiver.time_slot))
         
         if @invitation.save!
+            @invitation.receiver.save!
             InvitationsMailer.invitation_accepted(@invitation)
             GroupMailer.new_child_added(@invitation, @invitation.receiver)
             flash[:success] = "You have a group now!"
@@ -77,12 +78,13 @@ class InvitationController < ApplicationController
     def group_accept_child
         #把child存进组里
         @invitation = Invitation.find_by_id(params[:id])
-        @invitation.sender.update(:group_id => @invitation.group_id)
+        @invitation.sender.group_id = @invitation.group_id
         #状态置为accepted
         @invitation.status = "Accepted"
         @invitation.group.update(:time_slot => @invitation.group.time_combine(@invitation.sender.time_slot))
         
         if @invitation.save!
+            @invitation.sender.save!
             InvitationsMailer.invitation_accepted(@invitation)
             GroupMailer.new_child_added(@invitation, @invitation.sender)
             flash[:success] = "Your group have a new member now!"

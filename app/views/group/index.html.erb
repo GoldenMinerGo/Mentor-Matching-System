@@ -20,7 +20,7 @@
     <td><%= group.admin.name %></td>
     <td><%= group.children.count %></td>
     <td><%= group.competitions %></td>
-    <td><%= group.time_compare(@mentor.time_slot)%></td>
+    <td><%= group.time_compare(@mentor.time_slot)%>hr</td>
     <%if @mentor.nil?%>
     <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => group.id, :mentor_id => @mentor.id, :send_by_mentor => true) %></td>
     <%end%>

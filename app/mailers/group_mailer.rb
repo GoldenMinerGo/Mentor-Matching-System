@@ -23,7 +23,8 @@ class GroupMailer < ApplicationMailer
     @coach = @group.admin
     mail to: @coach.email, subject: "A mentor has chosen to leave your group."
   end
-
+  
+  
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
