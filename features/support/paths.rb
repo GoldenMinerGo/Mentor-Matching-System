@@ -66,7 +66,11 @@ module NavigationHelpers
     when /^the Yibi page$/
       '/mentors/3'
 
-
+    when/^the signin page$/
+      '/user'
+    
+    when/^the login page$/
+      '/welcome/parent_signin'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
