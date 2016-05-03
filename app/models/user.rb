@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
     
     def self.whois(session)
         session[:user_id] = nil if !session.key?(:expires_at) || session[:expires_at] < Time.current
-        nil if !session.key?(:user_id)
+        session[:user_id] = nil if !session.key?(:user_id)
+        session[:user_id] = nil if User.find_by_id(session[:user_id]).nil?
+        nil if session[:user_id] == nil
         User.find_by_id(session[:user_id])
     end
     

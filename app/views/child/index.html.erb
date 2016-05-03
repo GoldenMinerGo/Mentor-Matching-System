@@ -9,8 +9,7 @@
           <th><%= link_to 'Age', child_index_path(sort: 'age')%></th>
           <th>School</th>
           <th>Grade</th>
-          <th>Competitions</th>
-          <th>Group</th>
+          <th>Competition</th>
           <th><%= link_to 'Available Time', child_index_path(sort: 'time')%></th>
           <th>More</th>
         </tr>
@@ -18,26 +17,14 @@
       <tbody>
         <% @children.each do |child| %>
           <tr>
-            <td><%= child.id %></td>
-            <td><i class="fa fa-<%= child.gender.downcase %>"></i></td>
+            <td><%= link_to child.id, child_detail_path(child) %></td>
+            <td><i class="fa fa-<%= child.gender %>"></i></td>
             <td><%= child.age %></td>
             <td><%= child.school %></td>
             <td><%= child.grade %></td>
-            <td><%= @group.time_compare(child.time_slot) %></td>
             <td><%= child.competitions %></td>
-            <td><%= child.description %></td>
-            <% session[:child_id] = @child.id %>
-            <% if child.group.nil? %>
-              
-              <td></td>
-              <td><%= @group.time_compare(child.time_slot) %></td>
-              <td><%= link_to "Send invitation", {:controller => 'invitation', :action => 'group_send_inv_to_child', :id => @group.id, :rec_id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
-            <% else %>
-              
-              <td><%= child.group.title %></td>
-              <td></td>
-              <td></td>
-            <% end %>
+            <td><%= @group.time_compare(child.time_slot) %>hrs</td>
+            <td><%= link_to "Send invitation", {:controller => 'invitation', :action => 'group_send_inv_to_child', :id => @group.id, :rec_id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
           </tr>
         <% end %>
       </tbody>

@@ -60,10 +60,11 @@ class GroupinvsController < ApplicationController
     @groupinv.status = "Accepted"
     @groupinv.group.update(:mentor_id => @groupinv.mentor_id)
     @groupinv.mentor.update(:visible => false)
-    @groupinv.group.update(:visible => false)
+    @groupinv.group.update(:visible => false, :need_mentor => false)
     if @groupinv.save
       changed_by_mentor = false
       GroupinvMailer.groupinv_changed(@groupinv, changed_by_mentor)
+      GroupMailer.new_mentor_added(@groupinv)
       flash[:success] = "You have a mentor now!"
       redirect_to group_path(@groupinv.group_id) and return
     else

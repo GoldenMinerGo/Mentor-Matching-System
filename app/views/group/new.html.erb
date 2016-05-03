@@ -2,10 +2,10 @@
 <div class='row'>
   <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-2">
     <div class="col-sm-8 col-sm-offset-4">
-      <h1 align="center" class="animated fadeInDown">Create Group</h1><br><br>
+      <h1 align="center" class="animated fadeInDown">Create Group</h1>
+      <br>
+      <br>
     </div>
-
-    
     <div class="Sign_Form">
       <%= form_for(:group, :url => {:controller => 'group', :action => 'create'}, :html => {:class => "form-horizontal"}) do |g| %>
         <div class="form-group">
@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
           <label for="inputCompetitions" class="col-sm-4 control-label">Competitions:</label>
-           <div class="col-sm-8 col-lg-6 col-lg-offset-1">
+          <div class="col-sm-8 col-lg-6 col-lg-offset-1">
             <label class="radio-inline"><%= g.radio_button :competitions, 'FLL'%> FIRST LEGO League</label>
             <label class="radio-inline"><%= g.radio_button :competitions, 'Junior FLL'%> FIRST LEGO League Jr.</label>
           </div>

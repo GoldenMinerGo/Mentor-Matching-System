@@ -1,34 +1,31 @@
 <div class='row jumbotron'>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-     <div class = "col-xs-12 col-sm-12 col-md-6 col-lg-6">
-      <h1 align="left" style="color:white;font-size:400%;" class="animated bounce"><b>Connect without limits</b></h1> 
+    <div class = "col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h1 align="left" style="color:white;font-size:400%;" class="animated bounce"><b>Connect without limits</b></h1>
       <h2 align="left" style="color:white;font-size:150%;line-height:200%;">Find your like-minded teammates and experienced Aggie mentors here!  Connection has never been this easy.</h2>
+    </div>
+  </div>
 </div>
-
-</div>
-</div>
-
-
-
-
 <div class='row'>
   <div id="content col-sm-12" style="overflow:hidden;">
     <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="background-color:#262626;margin-bottom:-99984px;padding-bottom:99999px;padding-top:15px;">
       <ul id="tabs" class="nav nav-pills nav-stacked" data-tabs="tabs">
         <li class="active"><a href="#account1" data-toggle="tab">Account Overview</a></li>
-        <li><a href="#child" data-toggle="tab">Children</a></li>
-        <li><a href="#group1" data-toggle="tab">Groups</a></li>
-        <li><a href="#g_notification" data-toggle="tab">Group Notification<span class="badge pull-right">2</span></a></li>
-        <li><a href="#child_notify" data-toggle="tab">Children Notification<span class="badge pull-right">2</span></a></li>
+        <li><a href="#child" data-toggle="tab">Your Children</a></li>
+        <li><a href="#group1" data-toggle="tab">Your Groups</a></li>
+        <li><a href="#child_notify" data-toggle="tab">Children Notification<span class="badge pull-right"><%if !(@gn == 0) %><%= @gn %><% end %></span></a></li>
+        <li><a href="#g_notification" data-toggle="tab">Group Notification<span class="badge pull-right"><%if !(@cn == 0) %><%= @cn %><% end %></span></a></li>
       </ul>
     </div>
     <div id="my-tab-content" class="tab-content">
       <div class="tab-pane fade in active" id="account1">
         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
           <div class='col-sm-12'>
-          <h2><div style="color:#339900">Account Overview</div></h2>
-          <hr class="overview-divider">
-          <br/>
+            <h2>
+              <div style="color:#339900">Account Overview</div>
+            </h2>
+            <hr class="overview-divider">
+            <br/>
             <table class='table'>
               <tbody>
                 <tr>
@@ -38,324 +35,328 @@
                 <tr>
                   <td><i class="fa fa-phone fa-fw"></i> Phone</td>
                   <td><%= @parent.phone %></td>
-              </tr>
-              <tr>
-                <td><i class="fa fa-envelope fa-fw"></i> Email</td>
-                <td><%= @parent.email %></td>
-            </tr>
-          </tbody>
-        </table>
-        <p align="right"><%= link_to "Update Your Profile", parent_edit_path , :class => 'btn btn-primary'%></p>
+                </tr>
+                <tr>
+                  <td><i class="fa fa-envelope fa-fw"></i> Email</td>
+                  <td><%= @parent.email %></td>
+                </tr>
+              </tbody>
+            </table>
+            <p align="right"><%= link_to "Update Your Profile", parent_edit_path , :class => 'btn btn-primary'%></p>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="child">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
+          <div class="col-sm-12">
+            <h2>
+              <div style="color:#339900">Children</div>
+            </h2>
+            <hr class="overview-divider">
+            <br/>
+            <% if @children.empty? %>
+              <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/>
+                <b>No children.</b></p>
+            <% else %>
+              <table class='table table-hover'>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Message</th>
+                    <th>Group<%#= link_to "Group", parent_path(sort: 'group') %></th>
+                    <th>Mentor</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @children.each do |child| %>
+                    <tr>
+                      <td><%= child.name %></td>
+                      <td><%= link_to "Messages", child_message_path(child) %></td>
+                      <% if child.group.nil? %>
+                        <td><%= link_to "Search group", {:controller => "group", :action => "index_for_parent", :child_id => child.id}%> or <%= link_to "Create group", new_group_path(:child_id => child.id)%></td>
+                        <td></td>
+                      <% else %>
+                        <td><%= link_to child.group.title, group_path(:id => child.group.id, :child_id =>child.id) %></td>
+                        <% if child.group.mentor.nil? %>
+                          <td></td>
+                        <% else %>
+                          <td><%= child.group.mentor.name %></td>
+                        <% end %>
+                      <% end %>
+                      <td><i class='fa fa-eye<%= "-slash" if !child.visible %>'></i></td>
+                      <td><%= link_to "More", child_path(child) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+            <div class="col-sm-12">
+              <p align="right"><%= link_to '<i class="fa fa-plus"></i> Add Child'.html_safe, new_child_path , :class => 'btn btn-primary'%></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="group1">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
+          <div class="col-sm-12">
+            <h2>
+              <div style="color:#339900">Groups</div>
+            </h2>
+            <hr class="overview-divider">
+            <br/>
+            <% if @groups.empty? %>
+              <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/>
+                <b>No groups.</b></p>
+            <% else %>
+              <table class='table table-hover'>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Message</th>
+                    <th>#Members</th>
+                    <th>Mentor</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @groups.each do |group| %>
+                    <tr>
+                      <td><%= group.title %></td>
+                      <td><%= link_to "Messages", group_message_path(group) %></td>
+                      <td><%= group.children.count %></td>
+                      <% if group.mentor.nil? %>
+                        <td></td>
+                      <% else %>
+                        <td><%= group.mentor.name %></td>
+                      <% end %>
+                      <td></td>
+                      <td><%= link_to "More", group_path(group)%></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+            <div class="col-sm-12">
+              <p align="right"><%#= link_to '<i class="fa fa-plus"></i> Add Group'.html_safe, new_group_path , :class => 'btn btn-primary'%></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="g_notification">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
+          <div class="col-sm-12">
+            <h2>
+              <div style="color:#339900">Group Notification</div>
+            </h2>
+            <hr class="overview-divider">
+            <br/>
+            <h2 style="font-size:150%;"><b>Invitations Received</b></h2>
+            <% if @rinv.empty? %>
+              <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/>
+                <b>No invitations.</b></p>
+            <% else %>
+              <table class='table table-hover'>
+                <thead>
+                  <tr>
+                    <th>Receiver</th>
+                    <th>Group</th>
+                    <th>Mentor</th>
+                    <th>Member</th>
+                    <th></th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @rinv.each do |inv| %>
+                    <tr>
+                      <td><%= inv.receiver.name %></td>
+                      <% if inv.group.nil? %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      <% else %>
+                        <td><%= inv.group.title %></td>
+                        <% if inv.group.mentor.nil? %>
+                          <td></td>
+                        <% else %>
+                          <td><%= inv.group.mentor.name %></td>
+                        <% end %>
+                        <td><%= inv.group.members %></td>
+                      <% end %>
+                      <td></td>
+                      <% if inv.status == "Pending"%>
+                        <td><%= link_to "Accept", invitation_child_accept_group_path(inv) %> or <%= link_to "Decline", invitation_decline_inv_path(inv) %></td>
+                      <% else %>
+                        <td><%= inv.status %></td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+          </div>
+          <br/>
+           <br/>
+           <br/>
+          <div class="col-sm-12">
+            <h2 style="font-size:150%;"><b>Requests Sent</b></h2>
+            <% if @srequest.empty? %>
+              <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/>
+                <b>No requests.</b></p>
+            <% else %>
+              <table class='table table-hover'>
+                <thead>
+                  <tr>
+                    <th>Sender</th>
+                    <th>Group</th>
+                    <th>Mentor</th>
+                    <th>Member</th>
+                    <th></th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @srequest.each do |r| %>
+                    <tr>
+                      <td><%= r.sender.name %></td>
+                      <% if r.group.nil? %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      <% else %>
+                        <td><%= r.group.title %></td>
+                        <% if r.group.mentor.nil? %>
+                          <td></td>
+                        <% else %>
+                          <td><%= r.group.mentor.name %></td>
+                        <% end %>
+                        <td><%= r.group.members %></td>
+                      <% end %>
+                      <td></td>
+                      <% if r.status == "Pending"%>
+                        <td><%= link_to "Cancel", invitation_cancel_inv_path(r) %></td>
+                      <% else %>
+                        <td><%= r.status %></td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+            
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="child_notify">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
+          <div class="col-sm-12">
+            <h2>
+              <div style="color:#339900">Child Notification</div>
+            </h2>
+            <hr class="overview-divider">
+            <br/>
+            <h2 style="font-size:150%;"><b>Request Received</b></h2>
+            <% if @rrequest.empty? %>
+              <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/>
+                <b>No requests.</b></p>
+            <% else %>
+              <table class='table table-hover'>
+                <thead>
+                  <tr>
+                    <th>Sender</th>
+                    <th>Group</th>
+                    <th>Mentor</th>
+                    <th>Member</th>
+                    <th></th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @rrequest.each do |r| %>
+                    <tr>
+                      <td><%= r.sender.name %></td>
+                      <% if r.group.nil? %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      <% else %>
+                        <td><%= r.group.title %></td>
+                        <% if r.group.mentor.nil? %>
+                          <td></td>
+                        <% else %>
+                          <td><%= r.group.mentor.name %></td>
+                        <% end %>
+                        <td><%= r.group.members %></td>
+                      <% end %>
+                      <td></td>
+                      <% if r.status == "Pending"%>
+                        <td><%= link_to "Accept", invitation_group_accept_child_path(r) %> or <%= link_to "Decline", invitation_decline_inv_path(r) %></td>
+                      <% else %>
+                        <td><%= r.status %></td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+          </div>
+          <div class="col-sm-12">
+            <h2 style="font-size:150%;"><b>Invitations Sent</b></h2>
+            <% if @sinv.empty? %>
+              <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/>
+                <b>No invitations.</b></p>
+            <% else %>
+              <table class='table table-hover'>
+                <thead>
+                  <tr>
+                    <th>Receiver</th>
+                    <th>Group</th>
+                    <th>Mentor</th>
+                    <th>Member</th>
+                    <th></th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @sinv.each do |inv| %>
+                    <tr>
+                      <td><%= inv.receiver.name %></td>
+                      <% if inv.group.nil? %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      <% else %>
+                        <td><%= inv.group.title %></td>
+                        <% if inv.group.mentor.nil? %>
+                          <td></td>
+                        <% else %>
+                          <td><%= inv.group.mentor.name %></td>
+                        <% end %>
+                        <td><%= inv.group.members %></td>
+                      <% end %>
+                      <td></td>
+                      <% if inv.status == "Pending"%>
+                        <td><%= link_to "Cancel", invitation_cancel_inv_path(inv) %></td>
+                      <% else %>
+                        <td><%= inv.status %></td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
-  <div class="tab-pane fade" id="child">
-    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
-        <div class="col-sm-12">
-          <h2><div style="color:#339900">Children</div></h2>
-          <hr class="overview-divider">
-          <br/>
-          <% if @children.empty? %>
-            <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/><b>No children.</b></p>
-          <% else %>
-            <table class='table table-hover'>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Group<%#= link_to "Group", parent_path(sort: 'group') %></th>
-                  <th>Mentor</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @children.each do |child| %>
-                  <tr>
-                    <td><%= child.id %></td>
-                    <td><%= child.name %></td>
-                    <% if child.group.nil? %>
-                      <td><%= link_to "Search group", {:controller => "group", :action => "index_for_parent", :child_id => child.id}%> or <%= link_to "Create group", new_group_path(:child_id => child.id)%></td>
-                      <td></td>
-                    <% else %>
-                      <td><%= link_to child.group.title, group_path(:id => child.group.id, :child_id =>child.id) %></td>
-                      <% if child.group.mentor.nil? %>
-                        <td></td>
-                      <% else %>
-                        <td><%= child.group.mentor.name %></td>
-                      <% end %>
-                    <% end %>
-                    <td><i class='fa fa-eye<%= "-slash" if !child.visible %>'></i></td>
-                    <td><%= link_to "More", child_path(child) %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          <% end %>
-          <div class="col-sm-12">
-          <p align="right"><%= link_to '<i class="fa fa-plus"></i> Add Child'.html_safe, new_child_path , :class => 'btn btn-primary'%></p>
-          </div>
-        </div>
-    </div>
-  </div>
-  
-  
-  <div class="tab-pane fade" id="group1">
-    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
-        <div class="col-sm-12">
-          <h2><div style="color:#339900">Groups</div></h2>
-          <hr class="overview-divider">
-          <br/>
-          <% if @groups.empty? %>
-            <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/><b>No groups.</b></p>
-          <% else %>
-            <table class='table table-hover'>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Title</th>
-                  <th>Mentor</th>
-                  <th>Members</th>
-                  <th>Complete</th>
-                  <th>Need_mentor</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @groups.each do |group| %>
-                  <tr>
-                    <td><%= group.id %></td>
-                    <td><%= group.title %></td>
-                    <% if group.mentor.nil? %>
-                      <td></td>
-                    <% else %>
-                      <td><%= group.mentor.name %></td>
-                    <% end %>
-                    <td><%= group.members %>  (<%= group.children.count%>)</td>
-                    <td><%= group.completed %></td>
-                    <td><%= group.need_mentor %></td>
-                    <td><%#= link_to "More", group_path(group)%></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          <% end %>
-          <div class="col-sm-12">
-          <p align="right"><%#= link_to '<i class="fa fa-plus"></i> Add Group'.html_safe, new_group_path , :class => 'btn btn-primary'%></p>
-          </div>
-        </div>
-    </div>
-  </div>
-  
-  
-  <div class="tab-pane fade" id="g_notification">
-    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
-        <div class="col-sm-12">
-           <h2><div style="color:#339900">Group Notification</div></h2>
-          <hr class="overview-divider">
-          <br/>
-          <h2 style="font-size:150%;"><b>Invitations Received</b></h2>
-          <% if @rinv.empty? %>
-            <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/><b>No invitations.</b></p>
-          <% else %>
-            <table class='table table-hover'>
-              <thead>
-                <tr>
-                  <th>Receiver</th>
-                  <th>Group</th>
-                  <th>Mentor</th>
-                  <th>Member</th>
-                  <th></th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @rinv.each do |inv| %>
-                  <tr>
-                    <td><%= inv.receiver.name %></td>
-                    <% if inv.group.nil? %>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    <% else %>
-                      <td><%= inv.group.title %></td>
-                      <% if inv.group.mentor.nil? %>
-                        <td></td>
-                      <% else %>
-                        <td><%= inv.group.mentor.name %></td>
-                      <% end %>
-                      <td><%= inv.group.members %></td>
-                    <% end %>
-                    <td></td>
-                    <% if inv.status == "Pending"%>
-                      <td><%= link_to "Accept", invitation_child_accept_group_path(inv) %> or <%= link_to "Decline", invitation_decline_inv_path(inv) %></td>
-                    <% else %>
-                      <td><%= inv.status %></td>
-                    <% end %>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          <% end %>
-        </div>
-        
-        <br/> <br/> <br/>
-        
-        
-        <div class="col-sm-12">
-          <h2 style="font-size:150%;"><b>Invitations Sent</b></h2>
-          <% if @sinv.empty? %>
-            <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/><b>No invitations.</b></p>
-          <% else %>
-            <table class='table table-hover'>
-              <thead>
-                <tr>
-                  <th>Receiver</th>
-                  <th>Group</th>
-                  <th>Mentor</th>
-                  <th>Member</th>
-                  <th></th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @sinv.each do |inv| %>
-                  <tr>
-                    <td><%= inv.receiver.name %></td>
-                    <% if inv.group.nil? %>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    <% else %>
-                      <td><%= inv.group.title %></td>
-                      <% if inv.group.mentor.nil? %>
-                        <td></td>
-                      <% else %>
-                        <td><%= inv.group.mentor.name %></td>
-                      <% end %>
-                      <td><%= inv.group.members %></td>
-                    <% end %>
-                    <td></td>
-                    <% if inv.status == "Pending"%>
-                      <td><%= link_to "Cancel", invitation_cancel_inv_path(inv) %></td>
-                    <% else %>
-                      <td><%= inv.status %></td>
-                    <% end %>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          <% end %>
-        </div>
-    </div>
-  </div>
-  
-  
-  <div class="tab-pane fade" id="child_notify">
-    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
-        <div class="col-sm-12">
-          <h2><div style="color:#339900">Children Notification</div></h2>
-          <hr class="overview-divider">
-          <br/>
-          <h2 style="font-size:150%;"><b>Request Received</b></h2>
-          <% if @rrequest.empty? %>
-            <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/><b>No requests.</b></p>
-          <% else %>
-            <table class='table table-hover'>
-              <thead>
-                <tr>
-                  <th>Sender</th>
-                  <th>Group</th>
-                  <th>Mentor</th>
-                  <th>Member</th>
-                  <th></th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @rrequest.each do |r| %>
-                  <tr>
-                    <td><%= r.sender.name %></td>
-                    <% if r.group.nil? %>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    <% else %>
-                      <td><%= r.group.title %></td>
-                      <% if r.group.mentor.nil? %>
-                        <td></td>
-                      <% else %>
-                        <td><%= r.group.mentor.name %></td>
-                      <% end %>
-                      <td><%= r.group.members %></td>
-                    <% end %>
-                    <td></td>
-                    <% if r.status == "Pending"%>
-                      <td><%= link_to "Accept", invitation_group_accept_child_path(r) %> or <%= link_to "Decline", invitation_decline_inv_path(r) %></td>
-                    <% else %>
-                      <td><%= r.status %></td>
-                    <% end %>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          <% end %>
-        </div>
-        <div class="col-sm-12">
-          <h2 style="font-size:150%;"><b>Request Sent</b></h2>
-          <% if @srequest.empty? %>
-            <p align=center style="color:lightgrey;padding-top:25px;padding-bottom:25px;"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i><br/><b>No requests.</b></p>
-          <% else %>
-            <table class='table table-hover'>
-              <thead>
-                <tr>
-                  <th>Sender</th>
-                  <th>Group</th>
-                  <th>Mentor</th>
-                  <th>Member</th>
-                  <th></th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @srequest.each do |r| %>
-                  <tr>
-                    <td><%= r.sender.name %></td>
-                    <% if r.group.nil? %>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    <% else %>
-                      <td><%= r.group.title %></td>
-                      <% if r.group.mentor.nil? %>
-                        <td></td>
-                      <% else %>
-                        <td><%= r.group.mentor.name %></td>
-                      <% end %>
-                      <td><%= r.group.members %></td>
-                    <% end %>
-                    <td></td>
-                    <% if r.status == "Pending"%>
-                      <td><%= link_to "Cancel", invitation_cancel_inv_path(r) %></td>
-                    <% else %>
-                      <td><%= r.status %></td>
-                    <% end %>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          <% end %>
-        </div>
-    </div>
-  </div>
 </div>
-</div>
-</div>
-
 <script>
-$(document).ready(function() {
-    $('body').addClass('parent_bg');
-    $('#tabs').tab();
-});
+  $(document).ready(function() {
+      $('body').addClass('parent_bg');
+      $('#tabs').tab();
+  });
 </script>

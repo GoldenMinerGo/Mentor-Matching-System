@@ -5,28 +5,26 @@
     <br>
     <div class="Sign_Form">
       <%= form_for(:parent, :url => {:controller => 'parent', :action => 'create'}, :html => {:class => "form-horizontal"}) do |f| %>
-       <div class="form-group">
-           <label class="control-label">All fields are required</label>
+        <div class="form-group">
+          <label class="control-label">All fields are required</label>
         </div>
         <div class="form-group">
           <%= f.text_field :firstname, :placeholder =>'Firstname',:class => 'form-control'%>
         </div>
         <div class="form-group">
-         <%= f.text_field :lastname, :placeholder =>'Lastname',:class => 'form-control' %>
+          <%= f.text_field :lastname, :placeholder =>'Lastname',:class => 'form-control' %>
         </div>
         <div class="form-group">
-         <%= f.telephone_field :phone, :placeholder =>'Phone',:class => 'form-control'%>
+          <%= f.telephone_field :phone, :placeholder =>'Phone',:class => 'form-control'%>
         </div>
         <div class="form-group">
           <%= f.email_field :email, :placeholder =>'Email', :class => 'form-control'%>
         </div>
         <br/>
         <div class="form-group">
-          
-            <%= f.submit "CREATE" , :class => 'btn btn-block btn-success'%>
+          <%= f.submit "CREATE" , :class => 'btn btn-block btn-success'%>
         </div>
       <% end %>
     </div>
-  
   </div>
 </div>

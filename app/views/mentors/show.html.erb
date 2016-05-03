@@ -5,118 +5,112 @@
       <br>
       <p align="right"><i class="fa fa-envelope"> <%= @mentor.email %></i></p>
       <p align="right"><i class="fa fa-phone"> <%= @mentor.phone %></i></p>
-     <p align="right"><i class="fa fa-github-alt">Age: <%= @age %></i></p>
-     <p align="center"><i class="fa fa-gittip">Description: <%= @mentor.description %></i></p>
-     <p align="right"><%= link_to "Update Your Profile", edit_mentor_path(@mentor) , :class => 'btn btn-primary'%></p>
+      <p align="right"><i class="fa fa-github-alt">Age: <%= @age %></i></p>
+      <p align="center"><i class="fa fa-gittip">Description: <%= @mentor.description %></i></p>
+      <p align="right"><%= link_to "Update Your Profile", edit_mentor_path(@mentor) , :class => 'btn btn-primary'%></p>
     </div>
   </div>
 </div>
-
 <hr>
-
 <div class='row'>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
-   <% if @groups.empty? %>
+    <% if @groups.empty? %>
       <p align=center><%= link_to "Browse Groups", group_index_path %></p>
-   <% else %>
-   <h2>Group</h2>
+    <% else %>
+      <h2>Group</h2>
       <table class='table table-hover' >
         <thead>
           <tr>
             <th>Group</th>
             <th></th>
           </tr>
-       </thead>
-       <tbody>
+        </thead>
+        <tbody>
           <% @groups.each do |group| %>
             <tr>
-             <td><%= group.title %></td>
-             <td><%= link_to "Quit the group", mentor_quit_group_path(group), data: {:confirm => 'Are you sure?'} %></td>
-           </tr>
-        <% end %>
-      </tbody>
-     </table>
+              <td><%= group.title %></td>
+              <td><%= link_to "Quit the group", mentor_quit_group_path(group), data: {:confirm => 'Are you sure?'} %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
-   <hr>
+    <hr>
   </div>
 </div>
 <% if !@rinvs.empty? %>
-<div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2"> <!--xs (phones), sm (tablets), md (desktops), and lg (larger desktops) -->
-    <h2>Inbox</h2>
-    <% if @rinvs.empty? %>
-      <p align=center>None</p>
-    <% else %>
-      <table class='table table-hover'>
-        <thead>
-          <tr>
-            <th>Sender</th>
-            <th>Status</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @rinvs.each do |rinv| %>
+  <div class='row'>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2"> <!--xs (phones), sm (tablets), md (desktops), and lg (larger desktops) -->
+      <h2>Inbox</h2>
+      <% if @rinvs.empty? %>
+        <p align=center>None</p>
+      <% else %>
+        <table class='table table-hover'>
+          <thead>
             <tr>
-
-              <td><%= link_to rinv.group_id, group_detail_path(rinv.group)%></td>
-
-              <td><%= rinv.status %></td>
-              <% if rinv.status == 'Pending' %>
-              <td><%= link_to "Accept", groupinvs_accept_inv_mentor_path(rinv)%></td>
-              <td><%= link_to "Decline", groupinvs_decline_inv_path(rinv)%></td>
-              <% else %>
-              <td></td>
-              <td></td>
-              <% end %>
+              <th>Sender</th>
+              <th>Status</th>
+              <th></th>
+              <th></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
-    <hr>
+          </thead>
+          <tbody>
+            <% @rinvs.each do |rinv| %>
+              <tr>
+                <td><%= link_to rinv.group_id, group_detail_path(rinv.group)%></td>
+                <td><%= rinv.status %></td>
+                <% if rinv.status == 'Pending' %>
+                  <td><%= link_to "Accept", groupinvs_accept_inv_mentor_path(rinv)%></td>
+                  <td><%= link_to "Decline", groupinvs_decline_inv_path(rinv)%></td>
+                <% else %>
+                  <td></td>
+                  <td></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+      <hr>
+    </div>
   </div>
-</div>
 <% end %>
 <% if !@sinvs.empty? %>
-<div class='row'>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
-    <h2>Sent Out</h2>
-    <% if @sinvs.empty? %>
-      <p align=center> None </p>
-    <% else %>
-      <table class='table table-hover'>
-        <thead>
-          <tr>
-            <th>Receiver</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @sinvs.each do |sinv| %>
+  <div class='row'>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+      <h2>Sent Out</h2>
+      <% if @sinvs.empty? %>
+        <p align=center> None </p>
+      <% else %>
+        <table class='table table-hover'>
+          <thead>
             <tr>
-              <td><%= link_to sinv.group_id, group_detail_path(sinv.group) %></td>
-              <td><%= sinv.status %></td>
-              <% if sinv.status == "Pending" %>
-              <td><%= link_to "Cancel Invitation", groupinvs_cancel_inv_path(sinv)%></td>
-              <% end %>
+              <th>Receiver</th>
+              <th>Status</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
-    <hr>
+          </thead>
+          <tbody>
+            <% @sinvs.each do |sinv| %>
+              <tr>
+                <td><%= link_to sinv.group_id, group_detail_path(sinv.group) %></td>
+                <td><%= sinv.status %></td>
+                <% if sinv.status == "Pending" %>
+                  <td><%= link_to "Cancel Invitation", groupinvs_cancel_inv_path(sinv)%></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+      <hr>
+    </div>
   </div>
-</div>
 <% end %>
-
 <div class='row'>
   <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
     <div class='time-board time-board-hover' value = '<%=@mentor.time_slot%>' ></div>
-  </div>      
+  </div>
 </div>
 <% session[:mentor_id] = @mentor.id %>
-
 <%= link_to "Delete", mentor_path(@mentor), data: {:confirm => 'Are you sure?'}, method: :delete %>
 <%= link_to "Log out", welcome_logout_path(@mentor) %>

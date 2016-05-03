@@ -1,9 +1,7 @@
 <h1>Group Information</h1>
-
 <h2>All Groups</h2>
 <table>
   <tr>
-
     <th><%= link_to 'Group ID', group_index_path(sort: 'id')%></th>
     <th><%= link_to 'Title', group_index_path(sort: 'title')%></th>
     <th>Admin</th>
@@ -13,25 +11,22 @@
     <th></th>
   </tr>
   <% @groups.each do |group| %>
-  <tr>
-    <td><%= group.id %></td>
-    <td><%= link_to group.title, group_path(group) %></td>
-    
-    <td><%= group.admin.name %></td>
-    <td><%= group.children.count %></td>
-    <td><%= group.competitions %></td>
-    <td><%= group.time_compare(@mentor.time_slot)%>hr</td>
-    <%if @mentor.nil?%>
-    <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => group.id, :mentor_id => @mentor.id, :send_by_mentor => true) %></td>
-    <%end%>
-  </tr>
+    <tr>
+      <td><%= group.id %></td>
+      <td><%= link_to group.title, group_path(group) %></td>
+      <td><%= group.admin.name %></td>
+      <td><%= group.children.count %></td>
+      <td><%= group.competitions %></td>
+      <td><%= group.time_compare(@mentor.time_slot)%>hr</td>
+      <%if @mentor.nil?%>
+        <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => group.id, :mentor_id => @mentor.id, :send_by_mentor => true) %></td>
+      <%end%>
+    </tr>
   <% end %>
 </table>
 <br/>
-
 <% if User.whois(session).role == "Parent" %>
-  <%= link_to "Back", parent_path %> 
+  <%= link_to "Back", parent_path %>
 <% elsif User.whois(session).role == "Mentor" %>
   <%= link_to "Back", mentor_path(@mentor) %>
 <% end %>
-

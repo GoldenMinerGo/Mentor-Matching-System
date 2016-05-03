@@ -33,7 +33,13 @@ class WelcomeController < ApplicationController
   def index
     @user = User.whois(session)
     if !@user.nil?
-      redirect_to parent_path and return if @user.role=='Parent'
+      if @user.role=='Parent'
+        if !@user.parent.nil?
+          redirect_to parent_path and return
+        else
+          redirect_to parent_new_path and return
+        end
+      end
       if @user.role=='Mentor'
         if !@user.mentor.nil?
           redirect_to mentor_path(@user.mentor) and return

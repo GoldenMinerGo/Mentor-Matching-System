@@ -21,13 +21,16 @@ class ParentController < ApplicationController
         end
         #@mygroups = @parent.mygroups
         #invitation received from group
-        @rinv=Invitation.where(:receiver_id => @children).where(:sender_id => nil)
+        @rinv=Invitation.where(:receiver_id => @children).where(:sender_id => nil).where(:status => 'Pending')
         #invitation sent from my group
-        @sinv=Invitation.where(:group_id => @groups).where(:sender_id => nil)
+        @sinv=Invitation.where(:group_id => @groups).where(:sender_id => nil).where(:status => 'Pending')
         #request received from other child
-        @rrequest = Invitation.where(:group_id => @groups).where(:receiver_id => nil)
+        @rrequest = Invitation.where(:group_id => @groups).where(:receiver_id => nil).where(:status => 'Pending')
         #request sent from my child
-        @srequest = Invitation.where(:sender_id => @children).where(:receiver_id => nil)
+        @srequest = Invitation.where(:sender_id => @children).where(:receiver_id => nil).where(:status => 'Pending')
+        
+        @cn = @rinv.count + @srequest.count
+        @gn = @sinv.count + @rrequest.count
         
     end
     
@@ -51,7 +54,8 @@ class ParentController < ApplicationController
     end
     
     def new
-
+        @user=User.whois(session)
+        redirect_to root_path and return if @user.nil? or !@user.parent.nil?
     end
     
     def create

@@ -1,19 +1,15 @@
 <h1>Mentor Quit Notification</h1>
-
 <p>
   Hi <%= @coach.name %>,
 </p>
-
 <p>
   <% @mentor.name %> has chosen to quit your group <% @group.title %>.
   
   Click on the link below to log into the system:
 </p>
-
 <p>
   <%= link_to "Log in", welcome_index_url  %>,
 </p>
-
 <p>
-If you did not register for the system, please ignore this email and contact ### immediately.
+  If you did not register for the system, please ignore this email and contact ### immediately.
 </p>

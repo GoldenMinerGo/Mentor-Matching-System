@@ -1,6 +1,8 @@
 <div class='row'>
   <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
-      <h1 align="center" class="animated fadeInDown" style="color:#339900;">Child Profile</h1><br><br>
+    <h1 align="center" class="animated fadeInDown" style="color:#339900;">Child Profile</h1>
+    <br>
+    <br>
     <div class='col-sm-12'>
       <table class='table'>
         <tbody>
@@ -86,8 +88,7 @@
         <%= link_to "Edit", edit_child_path(@child) , :class => 'btn btn-block btn-success'%>
         <%= link_to "Delete", child_path(@child), :class => 'btn btn-block btn-danger', data: {:confirm => 'Are you sure?'}, method: :delete %>
         <% if !@child.group.nil? %>
-        
-        <%= link_to "Quit this group", {:controller => "child", :action => "quit_group", :id => @child.id}, data: {:confirm => 'Are you sure?'}, :class => 'btn btn-block btn-danger' %><br/>
+          <%= link_to "Quit this group", {:controller => "child", :action => "quit_group", :id => @child.id}, data: {:confirm => 'Are you sure?'}, :class => 'btn btn-block btn-danger' %><br/>
         <% end %>
       <% end %>
       <%= link_to "Back", parent_path , :class => 'btn btn-block btn-default'%>

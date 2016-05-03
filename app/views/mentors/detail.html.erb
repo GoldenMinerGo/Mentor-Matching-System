@@ -1,5 +1,4 @@
 <h1>Mentor Dashboard</h1>
-
 ID: <%= @mentor.id %><br />
 Name: <%= @mentor.name %><br/>
 Phone: <%= @mentor.phone %><br />
@@ -9,6 +8,6 @@ Last Login at: <%= @user.last_login_time %><br />
 Classification: <%= @mentor.grade %><br />
 Department: <%= @mentor.school %><br />
 Description: <%= @mentor.description %><br />
-Time Available: <div class='time-board time-board-hover' value = '<%=@time_slot%>' ></div>
-
+Time Available: 
+<div class='time-board time-board-hover' value = '<%=@time_slot%>' ></div>
 <%=link_to "Back" , mentors_path%>
