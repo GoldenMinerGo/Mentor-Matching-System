@@ -1,16 +1,16 @@
 <div class='row'>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2>Invitations to my children </h2>
+    <h2>Invitations to my child </h2>
     <% if @rinv.empty? %>
       <p align=center>None</p>
     <% else %>
       <table class='table table-hover'>
         <thead>
           <tr>
-            
-            <th>Receiver</th>
             <th>Group</th>
-            <th>Mentor</th>
+            
+            
+            <th>Competition</th>
             <th>Member</th>
             <th></th>
             <th>Status</th>
@@ -19,21 +19,10 @@
         <tbody>
           <% @rinv.each do |inv| %>
             <tr>
+              <td><%= link_to inv.group.title, group_detail_path(inv.group) %></td>
+              <td><%= inv.group.competitions %></td>
+              <td><%= inv.group.members %></td>
               
-              <td><%= inv.receiver.name %></td>
-              <% if inv.group.nil? %>
-                <td></td>
-                <td></td>
-                <td></td>
-              <% else %>
-                <td><%= inv.group.title %></td>
-                <% if inv.group.mentor.nil? %>
-                  <td></td>
-                <% else %>
-                  <td><%= inv.group.mentor.name %></td>
-                <% end %>
-                <td><%= inv.group.members %></td>
-              <% end %>
               <td></td>
               <% if inv.status == "Pending"%>
               <td><%= link_to "Accept", invitation_child_accept_group_path(inv) %> or <%= link_to "Decline", invitation_decline_inv_path(inv) %></td>
@@ -51,16 +40,16 @@
 
 <div class='row'>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2>Sent Request from my children</h2>
+    <h2>Sent Request from my child</h2>
     <% if @srequest.empty? %>
       <p align=center>None</p>
     <% else %>
       <table class='table table-hover'>
         <thead>
           <tr>
-            <th>Sender</th>
+            
             <th>Group</th>
-            <th>Mentor</th>
+            <th>Competition</th>
             <th>Member</th>
             <th></th>
             <th>Status</th>
@@ -69,20 +58,9 @@
         <tbody>
           <% @srequest.each do |r| %>
             <tr>
-              <td><%= r.sender.name %></td>
-              <% if r.group.nil? %>
-                <td></td>
-                <td></td>
-                <td></td>
-              <% else %>
-                <td><%= r.group.title %></td>
-                <% if r.group.mentor.nil? %>
-                  <td></td>
-                <% else %>
-                  <td><%= r.group.mentor.name %></td>
-                <% end %>
-                <td><%= r.group.members %></td>
-              <% end %>
+              <td><%= link_to r.group.title, group_detail_path(r.group) %></td>
+              <td><%= r.group.competitions %></td>
+              <td><%= r.group.members %></td>
               <td></td>
               <% if r.status == "Pending"%>
               <td><%= link_to "Cancel", invitation_cancel_inv_path(r) %></td>

@@ -26,8 +26,3 @@
 
   </div>
 </div>
-<% if @user.role == 'Parent' %>
-<%= link_to "Back", {:controller => "group", :action => "index_for_parent"} %> 
-<% else %>
-<%= link_to "Back", group_index_path %> 
-<% end %>

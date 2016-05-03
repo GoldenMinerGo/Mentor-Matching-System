@@ -7,7 +7,11 @@
       <p align="right"><i class="animated fadeInDown">Title: <%= @group.title %></i></p>
       <p align="right"><i class="animated fadeInDown">Competition: <%= @group.competitions %></i></p>
       <p align="right"><i class="animated fadeInDown">Admin: <%= @group.admin.name %></i></p>
+      <% if !@group.mentor.nil? %>
       <p align="right"><i class="animated fadeInDown">Mentor: <%= @group.mentor.name %></i></p>
+      <% else %>
+      <p align="right"><i class="animated fadeInDown">Mentor: TBD</i></p>
+      <% end %>
     </div>
   </div>
 </div>
@@ -69,7 +73,7 @@
     <% end %>
     <p align="center"><%= link_to "Close this group", { action: :destroy, id: @group.id }, :class => 'btn btn-block btn-default', data: {:confirm => 'Are you sure?'}, method: :delete %></p>
     <% if @group.completed == false %>
-    <p align="center"><%= link_to "Complete",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members.'},:class => 'btn btn-block btn-default' %></p>  
+    <p align="center"><%= link_to "My group doesn't need any more members",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members.'},:class => 'btn btn-block btn-default' %></p>  
     <% else if @group.need_mentor == false%>
       <p align="center"><%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors and mentors can find your group." },:class => 'btn btn-block btn-default' %>
       <% end %>

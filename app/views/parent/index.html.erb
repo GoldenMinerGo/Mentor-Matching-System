@@ -18,12 +18,12 @@
       <table class='table table-hover'>
         <thead>
           <tr>
-            <th><%= link_to "#", parent_path(sort: '#') %></th>
-            <th><%= link_to "Name", parent_path(sort: 'name') %></th>
             
+            <th><%= link_to "Name", parent_path(sort: 'name') %></th>
+            <th>Message</th>
             <th>Group<%#= link_to "Group", parent_path(sort: 'group') %></th>
             <th>Mentor</th>
-            <th>Message</th>
+            
             <th></th>
             <th></th>
           </tr>
@@ -31,9 +31,9 @@
         <tbody>
           <% @children.each do |child| %>
             <tr>
-              <td><%= child.id %></td>
-              <td><%= child.name %></td>
               
+              <td><%= child.name %></td>
+              <td><%= link_to "Messages", child_message_path(child) %></td>
               <% if child.group.nil? %>
                 <td><%= link_to "Search group", {:controller => "group", :action => "index_for_parent", :child_id => child.id}%> or <%= link_to "Create group", new_group_path(:child_id => child.id)%></td>
                 <td></td>
@@ -46,7 +46,7 @@
                   <td><%= child.group.mentor.name %></td>
                 <% end %>
               <% end %>
-              <td><%= link_to "Messages", child_message_path(child) %></td>
+              
               <td><i class='fa fa-eye<%= "-slash" if !child.visible %>'></i></td>
               <td><%= link_to "More", child_path(child) %></td>
             </tr>
@@ -69,30 +69,32 @@
       <table class='table table-hover'>
         <thead>
           <tr>
-            <th>#</th>
+            
             <th>Title</th>
-            <th>Mentor</th>
-            <th>#Members</th>
-            <th>Complete</th>
-            <th>Need_mentor</th>
             <th>Message</th>
+            <th>#Members</th>
+            <th>Mentor</th>
+            <th></th>
+            
+            
             <th></th>
           </tr>
         </thead>
         <tbody>
           <% @groups.each do |group| %>
             <tr>
-              <td><%= group.id %></td>
+              
               <td><%= group.title %></td>
+              <td><%= link_to "Messages", group_message_path(group) %></td>
+              <td><%= group.children.count %></td>
               <% if group.mentor.nil? %>
                 <td></td>
               <% else %>
                 <td><%= group.mentor.name %></td>
               <% end %>
-              <td><%= group.children.count %></td>
-              <td><%= group.completed %></td>
-              <td><%= group.need_mentor %></td>
-              <td><%= link_to "Messages", group_message_path(group) %></td>
+              <td></td>
+              
+              
               <td><%= link_to "More", group_path(group)%></td>
             </tr>
           <% end %>

@@ -15,7 +15,7 @@
             <tbody>
             <% @rinvs.each do |rinv| %>
               <tr>
-                <td><%= rinv.mentor_id %></td>
+                <td><%= link_to rinv.mentor.name, mentors_detail_path(rinv.mentor)%></td>
                 <td><%= rinv.status %></td>
                 <% if rinv.status == "Pending" %>
                  <td><%= link_to "Accept", groupinvs_accept_inv_group_path(rinv)%></td>
@@ -45,7 +45,7 @@
             <tbody>
               <% @sinvs.each do |sinv| %>
               <tr>
-                <td><%= sinv.mentor_id %></td>
+                <td><%= link_to sinv.mentor.name, mentors_detail_path(sinv.mentor) %></td>
                 <td><%= sinv.status %></td>
                 <% if sinv.status == "Pending" %>
                 <td><%= link_to "Cancel Invitation", groupinvs_cancel_inv_path(sinv)%></td>
@@ -78,7 +78,7 @@
         <tbody>
           <% @sinvs_to_children.each do |inv| %>
             <tr>
-              <td><%= inv.receiver.name %></td>
+              <td><%= link_to inv.receiver.name, child_detail_path(inv.receiver) %></td>
               <% if inv.group.nil? %>
                 <td></td>
                 <td></td>
@@ -125,7 +125,7 @@
         <tbody>
           <% @rrequest.each do |r| %>
             <tr>
-              <td><%= r.sender.name %></td>
+              <td><%= link_to r.sender.name, child_detail_path(r.sender) %></td>
               <% if r.group.nil? %>
                 <td></td>
                 <td></td>
