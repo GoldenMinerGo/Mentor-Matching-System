@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
       session[:expires_at] = Time.current + 2.hours
       authorized_user.user.update_columns(:last_login_time => Time.zone.now)
       flash[:success] = "Wow Welcome again, you logged in as #{authorized_user.role} "
-      if authorized_user.role == 'Administrator'
+      if authorized_user.user.role == 'Administrator'
         redirect_to administrators_index_path and return
       else 
         redirect_to parent_path and return

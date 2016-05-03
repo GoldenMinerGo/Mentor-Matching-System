@@ -21,7 +21,7 @@
         <% @children.each do |child| %>
           <tr>
             <td><%= child.id %></td>
-            <td><i class="fa fa-<%= child.gender %>"></i></td>
+            <td><i class="fa fa-<%= child.gender.downcase %>"></i></td>
             <td><%= child.age %></td>
             <td><%= child.school %></td>
             <td><%= child.grade %></td>

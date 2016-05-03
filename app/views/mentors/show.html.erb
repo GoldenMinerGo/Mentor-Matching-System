@@ -3,11 +3,11 @@
     <div class="jumbotron">
       <h1 align= "center" class="animated fadeInDown"><%= @mentor.name%>'s Dashboard</h1>
       <br>
-      <p align="right"><i class="fa fa-envelope grow"> <%= @mentor.email %></i></p>
-      <p align="right"><i class="fa fa-phone grow"> <%= @mentor.phone %></i></p>
-     <p align="right"><i class="fa fa-github-alt grow">Age: <%= @age %></i></p>
-     <p align="center"><i class="fa fa-gittip grow">Description: <%= @mentor.description %></i></p>
-     <p align="right"><%= link_to "Update Your Profile", edit_mentor_path(@mentor) , :class => 'btn btn-primary hover-shadow'%></p>
+      <p align="right"><i class="fa fa-envelope"> <%= @mentor.email %></i></p>
+      <p align="right"><i class="fa fa-phone"> <%= @mentor.phone %></i></p>
+     <p align="right"><i class="fa fa-github-alt">Age: <%= @age %></i></p>
+     <p align="center"><i class="fa fa-gittip">Description: <%= @mentor.description %></i></p>
+     <p align="right"><%= link_to "Update Your Profile", edit_mentor_path(@mentor) , :class => 'btn btn-primary'%></p>
     </div>
   </div>
 </div>
@@ -59,7 +59,7 @@
         <tbody>
           <% @rinvs.each do |rinv| %>
             <tr>
-              <td><%= rinv.group_id %></td>
+              <td><%= link_to rinv.group_id, group_detail_path(rinv.group)%></td>
               <td><%= rinv.status %></td>
               <% if rinv.status == 'Pending' %>
               <td><%= link_to "Accept", groupinvs_accept_inv_mentor_path(rinv)%></td>

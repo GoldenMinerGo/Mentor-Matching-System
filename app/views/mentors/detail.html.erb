@@ -1,7 +1,7 @@
 <h1>Mentor Dashboard</h1>
 
 ID: <%= @mentor.id %><br />
-Name: <%= @mentor.name %><br />
+Name: <%= @mentor.name %><br/>
 Phone: <%= @mentor.phone %><br />
 Email: <%= @mentor.email %><br />
 Age: <%= @age %><br />
@@ -11,4 +11,4 @@ Department: <%= @mentor.school %><br />
 Description: <%= @mentor.description %><br />
 Time Available: <div class='time-board time-board-hover' value = '<%=@time_slot%>' ></div>
 
-<%=link_to "Back" , group_path(session[:group_id])%>
+<%=link_to "Back" , mentors_path%>

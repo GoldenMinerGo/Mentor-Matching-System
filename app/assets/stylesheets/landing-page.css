@@ -129,3 +129,43 @@ ul.intro-social-buttons > li:last-child {
     font-weight:normal; 
     font-family:Arial;
 }
+
+.tab-content{
+     padding-bottom: 30px;
+}
+
+.nav-pills > li > a{
+    color:#adad85;
+    
+}
+
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus {
+    color: #262626;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus{
+    background-color:#262626;
+    color:white;
+}
+
+.nav-pills > li > a > .badge{
+    background-color:red; color:white;
+}
+.nav-pills > li.active > a > .badge{
+    background-color:white; color:#262626;
+}
+
+.overview-divider {
+    width:900px;
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    border-width:thin;
+}
+
+.tab-pane-content{
+     background-color:#ffffe6;
+     padding-bottom: 50px;
+}

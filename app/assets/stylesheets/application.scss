@@ -5,15 +5,15 @@
  @import "font-awesome";
  @import "bootstrap-tokenfield";
  @import "animate";
- @import "hover";
  @import "timeslot";
  @import "landing-page";
- 
+
 body { 
     padding-top: 70px;
     margin: 0;
     min-height: 100%;
 }
+
 html {
   height: 100%;
 }
@@ -26,7 +26,7 @@ th {
 
 	margin-top: 5px; margin-bottom: 0px;
 	text-align: left;
-    background-color: maroon;
+    background-color: #99cccc;
     color: white;
     width: 15%;
     overflow: auto;
@@ -50,16 +50,14 @@ table {
 }
 
 .footer {
-  position: relative;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
+  padding-top: 50px;
+  padding-bottom: 10px;
   text-align: center;
+  color: grey;
 }
 
 .btn-primary:hover,.btn-primary {
-    background-color: maroon;
+    background-color: #339900;
 }
 
 .background_image{
@@ -98,8 +96,24 @@ table {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-    -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
-    -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-    -o-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    border-radius: 0 !important;
+    margin-bottom: 0;
 }
+
+.index_bg{
+    background: url('indexbg.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+ }
+ 
+ .parent_bg{
+    background: #485563; /* fallback for old browsers */  
+    background: -webkit-linear-gradient(to left, #485563 , #29323c); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #485563 , #29323c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ }
+ 
+ .alert{
+     border-radius: 0px;
+ }
