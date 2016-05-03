@@ -39,9 +39,14 @@ Feature: check group information
     |3      | Yibi     | keng    | 9796734502  | yibi@tamu.edu  | female  | 1993-06-18    | ecnu   | U2    |12345678          | Junior FLL   | heiheihei   | true    |
 
 Given I am on the home page of Mentor Matching System
-    When I fill in "username" with "user1"
-    And I fill in "login_password" with "1q2w3e"
-    And I press "Log In"
+When I follow "Parent"
+Then I should be on the signin page
+When I follow "Sign In"
+Then I should be on the login page
+When I fill in "username" with "user1"
+And I fill in "login_password" with "1q2w3e"
+And I press "Log In"
+#all above is where we start
 
 Scenario: see group information
 Then I should be on the parent page
