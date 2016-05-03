@@ -77,9 +77,10 @@ class MentorsController < ApplicationController
     @mentor = check_user_and_return_mentor(session)
     GroupMailer.mentor_quit_notify(@mentor)
     @group = Group.find_by_id(params[:id])
-    @group.mentor_id = 0
+    @group.mentor_id = nil
     @group.need_mentor = true
     @group.save!
+    @mentor.update(:visible => true)
     redirect_to mentor_path(@mentor)
   end
   
@@ -93,6 +94,8 @@ class MentorsController < ApplicationController
     if @mentor.groups.present?
       @group = @mentor.groups.first
       @time_slot = [@mentor.time_slot , @group.time_slot].join(',')
+    else
+      @time_slot = @mentor.time_slot
     end
   end
     

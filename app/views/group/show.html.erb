@@ -35,7 +35,7 @@
             <td><%= child.parent.name %></td>
             <td><%= child.parent.phone %></td>
             <td><%= child.parent.email %></td>
-            <% if ((@user.parent.id == @group.admin_id)  and !(child.parent.id == @user.parent.id) )%>
+            <% if !@user.parent.nil? and ((@user.parent.id == @group.admin_id)  and !(child.parent.id == @user.parent.id) )%>
               <td><%= link_to "Delete", {:controller => 'group', :action => 'change', :id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
             <% else %>
               <td></td>
@@ -55,24 +55,26 @@
 <br/>
 <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
   <div class="form-group">
-    <% if @user.parent.id == @group.admin_id %>
-      <% session[:group_id] = @group.id %>
-      <p align="center"><%= link_to 'Update Group Information',edit_group_path(@group) , :class => 'btn btn-block btn-default'%></p>
-      <% if @group.mentor.nil? and @group.need_mentor == true %>
-        <p align="center"><%= link_to 'Browse mentors',mentors_path , :class => 'btn btn-block btn-default'%></p>
-      <%end%>
-      <%# session[:child_id] = @child.id %>
-      <% if @group.completed == false %>
-        <p align="center"><%= link_to 'Browse children',child_index_path , :class => 'btn btn-block btn-default'%></p>
-      <% end %>
-      <p align="center"><%= link_to "Close this group", { action: :destroy, id: @group.id }, :class => 'btn btn-block btn-default', data: {:confirm => 'Are you sure?'}, method: :delete %></p>
-      <% if @group.completed == false %>
-        <p align="center"><%= link_to "My group doesn't need any more members",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members.'},:class => 'btn btn-block btn-default' %></p>
-      <% else if @group.need_mentor == false%>
-        <p align="center"><%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors and mentors can find your group." },:class => 'btn btn-block btn-default' %>
+    <%if !@user.parent.nil?%>
+      <% if @user.parent.id == @group.admin_id %>
+        <% session[:group_id] = @group.id %>
+        <p align="center"><%= link_to 'Update Group Information',edit_group_path(@group) , :class => 'btn btn-block btn-default'%></p>
+        <% if @group.mentor.nil? and @group.need_mentor == true %>
+          <p align="center"><%= link_to 'Browse mentors',mentors_path , :class => 'btn btn-block btn-default'%></p>
+        <%end%>
+        <%# session[:child_id] = @child.id %>
+        <% if @group.completed == false %>
+          <p align="center"><%= link_to 'Browse children',child_index_path , :class => 'btn btn-block btn-default'%></p>
+        <% end %>
+        <p align="center"><%= link_to "Close this group", { action: :destroy, id: @group.id }, :class => 'btn btn-block btn-default', data: {:confirm => 'Are you sure?'}, method: :delete %></p>
+        <% if @group.completed == false %>
+          <p align="center"><%= link_to "My group doesn't need any more members",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members.'},:class => 'btn btn-block btn-default' %></p>
+        <% else if @group.need_mentor == false%>
+          <p align="center"><%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors and mentors can find your group." },:class => 'btn btn-block btn-default' %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-    <p align="center"><%= link_to "Back", parent_path, :class => 'btn btn-block btn-default' %></p>
+      <p align="center"><%= link_to "Back", parent_path, :class => 'btn btn-block btn-default' %></p>
+    <%end%>
   </div>
 </div>

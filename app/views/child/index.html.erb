@@ -18,7 +18,7 @@
         <% @children.each do |child| %>
           <tr>
             <td><%= link_to child.id, child_detail_path(child) %></td>
-            <td><i class="fa fa-<%= child.gender %>"></i></td>
+            <td><i class="fa fa-<%= child.gender.downcase %>"></i></td>
             <td><%= child.age %></td>
             <td><%= child.school %></td>
             <td><%= child.grade %></td>

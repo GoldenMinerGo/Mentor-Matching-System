@@ -12,9 +12,9 @@
       <ul id="tabs" class="nav nav-pills nav-stacked" data-tabs="tabs">
         <li class="active"><a href="#account1" data-toggle="tab">Account Overview</a></li>
         <li><a href="#child" data-toggle="tab">Your Children</a></li>
-        <li><a href="#group1" data-toggle="tab">Your Groups</a></li>
-        <li><a href="#child_notify" data-toggle="tab">Children Notification<span class="badge pull-right"><%if !(@gn == 0) %><%= @gn %><% end %></span></a></li>
-        <li><a href="#g_notification" data-toggle="tab">Group Notification<span class="badge pull-right"><%if !(@cn == 0) %><%= @cn %><% end %></span></a></li>
+        <li><a href="#group" data-toggle="tab">Your Groups</a></li>
+        <li><a href="#child_notify" data-toggle="tab">Child Notification<span class="badge pull-right"><%if !(@cn == 0) %><%= @cn %><% end %></span></a></li>
+        <li><a href="#g_notification" data-toggle="tab">Group Notification<span class="badge pull-right"><%if !(@gn == 0) %><%= @gn %><% end %></span></a></li>
       </ul>
     </div>
     <div id="my-tab-content" class="tab-content">
@@ -22,7 +22,7 @@
         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
           <div class='col-sm-12'>
             <h2>
-              <div style="color:#339900">Account Overview</div>
+              <div style="color:#6699FF">Account Overview</div>
             </h2>
             <hr class="overview-divider">
             <br/>
@@ -52,7 +52,7 @@
         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
           <div class="col-sm-12">
             <h2>
-              <div style="color:#339900">Children</div>
+              <div style="color:#6699FF">Children</div>
             </h2>
             <hr class="overview-divider">
             <br/>
@@ -100,11 +100,11 @@
           </div>
         </div>
       </div>
-      <div class="tab-pane fade" id="group1">
+      <div class="tab-pane fade" id="group">
         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
           <div class="col-sm-12">
             <h2>
-              <div style="color:#339900">Groups</div>
+              <div style="color:#6699FF">Groups</div>
             </h2>
             <hr class="overview-divider">
             <br/>
@@ -153,7 +153,7 @@
         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
           <div class="col-sm-12">
             <h2>
-              <div style="color:#339900">Group Notification</div>
+              <div style="color:#6699FF">Child Notification</div>
             </h2>
             <hr class="overview-divider">
             <br/>
@@ -258,7 +258,7 @@
         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 tab-pane-content">
           <div class="col-sm-12">
             <h2>
-              <div style="color:#339900">Child Notification</div>
+              <div style="color:#6699FF">Group Notification</div>
             </h2>
             <hr class="overview-divider">
             <br/>

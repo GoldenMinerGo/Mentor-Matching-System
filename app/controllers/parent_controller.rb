@@ -55,7 +55,7 @@ class ParentController < ApplicationController
     
     def new
         @user=User.whois(session)
-        redirect_to root_path and return if @user.nil? or !@user.parent.nil?
+        redirect_to root_path and return if @user.nil? or @user.role != "Parent" or !@user.parent.nil?
     end
     
     def create
