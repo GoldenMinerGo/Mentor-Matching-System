@@ -30,8 +30,8 @@ class ParentController < ApplicationController
         #request sent from my child
         @srequest = Invitation.where(:sender_id => @children, :receiver_id => nil).order(updated_at: :desc)
         
-        @cn = @rinv.where("updated_at > ?", @user[:last_login_time]).count + @srequest.where.not(:status => 'Pending').where("updated_at > ?", @user[:last_login_time]).count
-        @gn = @rrequest.where("updated_at > ?", @user[:last_login_time]).count + @sinv.where.not(:status => 'Pending').where("updated_at > ?", @user[:last_login_time]).count
+        @cn = @rinv.where("updated_at > ?", @user[:last_login_time]).where(:status => 'Pending').count + @srequest.where.not(:status => 'Pending').where("updated_at > ?", @user[:last_login_time]).count
+        @gn = @rrequest.where("updated_at > ?", @user[:last_login_time]).where(:status => 'Pending').count + @sinv.where.not(:status => 'Pending').where("updated_at > ?", @user[:last_login_time]).count
 
         
     end

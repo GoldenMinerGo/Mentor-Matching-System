@@ -4,32 +4,36 @@
     <br/>
     <div class="Sign_Form">
     <%= form_for @group, :method => :put , :html => {:class => "form-horizontal"} do |f| %>
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
       <div class="form-group">
-        <label for="inputTitle" class="col-sm-4 control-label">Title:</label>
-        <div class="col-sm-8"><%= f.text_field :title, :class => 'form-control'%></div>
+        <label for="inputTitle" class="control-label edit-font">Title:</label>
+        <%= f.text_field :title, :class => 'form-control'%>
       </div>
       <br/>
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
       <div class='form-group'>
-        <label for="inputTime" class = "col-sm-4 control-label">Time Available:</label>
+        <label for="inputTime" class = "control-label edit-font">Time Available:</label>
         <div class='time-board time-board-input time-board-hover' value='<%= @group.time_slot%>' inputname='group[time_slot]'></div>
       </div>
-      <br/>
-      <div class="form-group">
-        <label for="inputCompetitions" class="col-sm-4 control-label">Competitions:</label>
-        <div class="col-sm-8">
-          <label class="radio-inline"><%= f.radio_button :competitions, 'FLL'%> FIRST LEGO League</label>
-          <label class="radio-inline"><%= f.radio_button :competitions, 'Junior FLL'%> FIRST LEGO League Jr.</label>
-        </div>
       </div>
       <br/>
       <div class="form-group">
-        <div class="col-sm-12">
+        <label for="inputCompetitions" class="control-label edit-font">Competitions:</label>
+        
+          <label class="radio-inline"><%= f.radio_button :competitions, 'FLL'%> FIRST LEGO League</label>
+          <label class="radio-inline"><%= f.radio_button :competitions, 'Junior FLL'%> FIRST LEGO League Jr.</label>
+        
+      </div>
+      <br/>
+      <div class="form-group">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
           <%= f.submit "Update" , :class => 'btn btn-success btn-block'%>
           <%= link_to "Back", group_path(@group) , :class => 'btn btn-default btn-block'%>
         </div>
       </div>
     <% end %>
   </div>
+</div>
 </div>
 </div>
 
