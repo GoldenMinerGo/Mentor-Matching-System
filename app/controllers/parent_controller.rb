@@ -22,19 +22,6 @@ class ParentController < ApplicationController
         #@mygroups = @parent.mygroups
         
         #invitation received from group
-        @rinv=Invitation.where(:receiver_id => @children).where(:sender_id => nil).where.not(:status => 'Pending')
-        #invitation sent from my group
-        @sinv=Invitation.where(:group_id => @groups).where(:sender_id => nil).where.not(:status => 'Pending')
-        #request received from other child
-        @rrequest = Invitation.where(:group_id => @groups).where(:receiver_id => nil).where.not(:status => 'Pending')
-        #request sent from my child
-        @srequest = Invitation.where(:sender_id => @children).where(:receiver_id => nil).where.not(:status => 'Pending')
-        
-        @cn = @rinv.count + @srequest.count
-        @gn =  @rrequest.count + @sinv.count
-        
-        ######under construction#######
-        #invitation received from group
         @rinv=Invitation.where(:receiver_id => @children, :sender_id => nil).order(updated_at: :desc)
         #invitation sent from my group
         @sinv=Invitation.where(:group_id => @groups, :sender_id => nil).order(updated_at: :desc)
@@ -45,7 +32,7 @@ class ParentController < ApplicationController
         
         @cn = @rinv.where("updated_at > ?", @user[:last_login_time]).count + @srequest.where.not(:status => 'Pending').where("updated_at > ?", @user[:last_login_time]).count
         @gn = @rrequest.where("updated_at > ?", @user[:last_login_time]).count + @sinv.where.not(:status => 'Pending').where("updated_at > ?", @user[:last_login_time]).count
-        ###############################
+
         
     end
     
