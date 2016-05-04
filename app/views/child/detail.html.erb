@@ -4,80 +4,82 @@
     <br>
     <br>
     <div class='col-sm-12'>
-      <table class='table'>
-        <tbody>
-          <tr>
-            <td>ID</td>
-            <td><%= @child.id %></td>
-          </tr>
-          <tr>
-            <td>Gender</td>
-            <td><i class='fa fa-<%= @child.gender.downcase %>'></i></td>
-          </tr>
-          <tr>
-            <td>Age</td>
-            <td><%= @child.age %></td>
-          </tr>
-          <tr>
-            <td>School</td>
-            <td><%= @child.school %></td>
-          </tr>
-          <tr>
-            <td>Grade</td>
-            <td><%= @child.grade %></td>
-          </tr>
-          <tr>
-            <td>Competition</td>
-            <td><%= @child.competitions %></td>
-          </tr>
-          <tr>
-            <td>Description</td>
-            <td><%= @child.description %></td>
-          </tr>
-          <% if @mychild %>
+      <div class="table-responsive">
+        <table class='table'>
+          <tbody>
             <tr>
-              <td>Visible</td>
-              <td><i class='fa fa-eye<%= "-slash" if !@child.visible %>'></i></td>
-            </tr>
-          <% else %>
-            <tr>
-              <td>Parent</td>
-              <td><%= @child.parent.name %></td>
+              <td>ID</td>
+              <td><%= @child.id %></td>
             </tr>
             <tr>
-              <td>Phone</td>
-              <td><%= @child.parent.phone %></td>
+              <td>Gender</td>
+              <td><i class='fa fa-<%= @child.gender.downcase %>'></i></td>
             </tr>
             <tr>
-              <td>Email</td>
-              <td><%= @child.parent.email %></td>
-            </tr>
-          <% end %>
-          <% if @child.group.nil? %>
-            <tr>
-              <td>Group</td>
-              <td></td>
+              <td>Age</td>
+              <td><%= @child.age %></td>
             </tr>
             <tr>
-              <td>Mentor</td>
-              <td></td>
-            </tr>
-          <% else %>
-            <tr>
-              <td>Group</td>
-              <td><%= @child.group.title %></td>
+              <td>School</td>
+              <td><%= @child.school %></td>
             </tr>
             <tr>
-              <td>Mentor</td>
-              <% if @child.group.mentor.nil? %>
+              <td>Grade</td>
+              <td><%= @child.grade %></td>
+            </tr>
+            <tr>
+              <td>Competition</td>
+              <td><%= @child.competitions %></td>
+            </tr>
+            <tr>
+              <td>Description</td>
+              <td><%= @child.description %></td>
+            </tr>
+            <% if @mychild %>
+              <tr>
+                <td>Visible</td>
+                <td><i class='fa fa-eye<%= "-slash" if !@child.visible %>'></i></td>
+              </tr>
+            <% else %>
+              <tr>
+                <td>Parent</td>
+                <td><%= @child.parent.name %></td>
+              </tr>
+              <tr>
+                <td>Phone</td>
+                <td><%= @child.parent.phone %></td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td><%= @child.parent.email %></td>
+              </tr>
+            <% end %>
+            <% if @child.group.nil? %>
+              <tr>
+                <td>Group</td>
                 <td></td>
-              <% else %>
-                <td><%= @child.group.mentor.name %></td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+              </tr>
+              <tr>
+                <td>Mentor</td>
+                <td></td>
+              </tr>
+            <% else %>
+              <tr>
+                <td>Group</td>
+                <td><%= @child.group.title %></td>
+              </tr>
+              <tr>
+                <td>Mentor</td>
+                <% if @child.group.mentor.nil? %>
+                  <td></td>
+                <% else %>
+                  <td><%= @child.group.mentor.name %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
       <div class='time-board time-board-hover' value = '<%=@child.time_slot%>' ></div>
       <hr>
       <%#= link_to "Back", child_index_path , :class => 'btn btn-block btn-default'%>

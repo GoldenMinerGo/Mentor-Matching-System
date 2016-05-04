@@ -178,7 +178,7 @@ class GroupController < ApplicationController
             rr.status = "Declined"
             rr.save!
         end
-        redirect_to parent_path
+        redirect_to group_path(@group)
         flash[:success] = "Your group is completed"
     end
     

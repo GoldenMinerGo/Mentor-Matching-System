@@ -1,15 +1,17 @@
 <h1>New administrator page</h1>
 <%if !@rglusers.empty?%>
-  <table>
-    <tr>
-      <th>Username</th>
-      <th>Promotion</th>
-    </tr>
-    <% @rglusers.each do |rgluser| %>
+  <div class="table-responsive">
+    <table class='table'>
       <tr>
-        <td><%= rgluser.user.username %></td>
-        <td><%= link_to "Become Administrator", administrators_create_path(rgluser.id)%></td>
+        <th>Username</th>
+        <th>Promotion</th>
       </tr>
-    <%end%>
-  </table>
+      <% @rglusers.each do |rgluser| %>
+        <tr>
+          <td><%= rgluser.user.username %></td>
+          <td><%= link_to "Become Administrator", administrators_create_path(rgluser.id)%></td>
+        </tr>
+      <%end%>
+    </table>
+  </div>
 <%end%>

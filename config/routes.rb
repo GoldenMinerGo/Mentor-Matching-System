@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "administrators/delete_one/:id" => "administrators#delete_one", as: :administrators_delete_one
   get "administrators/drop_table" => "administrators#drop_table"
   get "administrators/drop_all_mentor" => "administrators#drop_all_mentor"
+  get "welcome/faq_open" => "welcome#faq_open"
   
   get "welcome/index" => "welcome#index"
   get "welcome/parent_signin" => "welcome#parent_signin"

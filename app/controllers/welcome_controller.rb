@@ -55,6 +55,9 @@ class WelcomeController < ApplicationController
     
   end
   
+  def faq_open
+  end
+  
   def send_password_email
     user = Parent.find_by_email(params[:email]).user
   end

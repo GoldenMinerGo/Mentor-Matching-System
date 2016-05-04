@@ -1,10 +1,14 @@
 class MentorsController < ApplicationController
    
    def new 
-       @mentor = Mentor.new
+      @user=User.whois(session)
+      redirect_to root_path and return if @user.nil? or @user.role != "Mentor" or !@user.mentor.nil?
+      @mentor = Mentor.new
    end
    
   def create 
+      @user=User.whois(session)
+      redirect_to root_path and return if @user.nil? or @user.role != "Mentor"
       @mentor = Mentor.new(mentor_params)
       @mentor.user_id = session[:user_id]
       @mentor.visible = true
@@ -48,6 +52,9 @@ class MentorsController < ApplicationController
       @groups = @mentor.groups
       @sinvs = Groupinv.where(:mentor_id => @mentor.id).where(:send_by_mentor => true)
       @rinvs = Groupinv.where(:mentor_id => @mentor.id).where(:send_by_mentor => false)
+      @sinv= Groupinv.where(:mentor_id => @mentor.id).where(:send_by_mentor => false).where(:status => 'Pending')
+      
+      @gn = @sinv.count   
   end
   
   def update

@@ -2,35 +2,37 @@
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <h1>Group List</h1>
     <br/>
-    <table class='table table-hover'>
-      <thead>
-        <tr>
-          <th><%= link_to 'Title', {:controller => "group", :action => "index_for_parent", :sort => "title"}%></th>
-          <th>Competition</th>
-          <th>Coach</th>
-          <th>Phone</th>
-          <th>Email</th>
-          <th><%= link_to '#Members', {:controller => "group", :action => "index_for_parent", :sort => "num"}%></th>
-          <th><%= link_to 'Available Time',{:controller => "group", :action => "index_for_parent", :sort => "time"} %> </th>
-          <th>More</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @groups.each do |group| %>
+    <div class="table-responsive">
+      <table class='table'>
+        <thead>
           <tr>
-            <td><%= link_to group.title , group_detail_path(group)%></td>
-            <td><%= group.competitions %></td>
-            <td><%= group.admin.name %></td>
-            <td><%= group.admin.phone %></td>
-            <td><%= group.admin.email %></td>
-            <td><%= group.children.count%></td>
-            <%#= group.members.count %>
-            <td><%= group.time_compare(@child.time_slot) %>hr</td>
-            <td><%= link_to "Send Request", {:controller => "invitation", :action => "child_send_request_to_group", :id => group.id, :sender_id => @child.id }%></td>
+            <th><%= link_to 'Title', {:controller => "group", :action => "index_for_parent", :sort => "title"}%></th>
+            <th>Competition</th>
+            <th>Coach</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th><%= link_to '#Members', {:controller => "group", :action => "index_for_parent", :sort => "num"}%></th>
+            <th><%= link_to 'Available Time',{:controller => "group", :action => "index_for_parent", :sort => "time"} %> </th>
+            <th>More</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @groups.each do |group| %>
+            <tr>
+              <td><%= link_to group.title , group_detail_path(group)%></td>
+              <td><%= group.competitions %></td>
+              <td><%= group.admin.name %></td>
+              <td><%= group.admin.phone %></td>
+              <td><%= group.admin.email %></td>
+              <td><%= group.children.count%></td>
+              <%#= group.members.count %>
+              <td><%= group.time_compare(@child.time_slot) %>hr</td>
+              <td><%= link_to "Send Request", {:controller => "invitation", :action => "child_send_request_to_group", :id => group.id, :sender_id => @child.id }%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <%= link_to "Back", parent_path %>

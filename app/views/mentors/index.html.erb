@@ -1,27 +1,29 @@
 <h1>Mentor List</h1>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Gender</th>
-    <th>Age</th>
-    <th>School</th>
-    <th>Grade</th>
-    <th>Time</th>
-    <th>Competitions</th>
-    <th>Description</th>
-  </tr>
-  <% @mentors.each do |mentor| %>
+<div class="table-responsive">
+  <table class='table'>
     <tr>
-      <td><%= link_to mentor.id,  mentors_detail_path(mentor)%></td>
-      <td><%= mentor.gender %></td>
-      <td><%= mentor.age %></td>
-      <td><%= mentor.school %></td>
-      <td><%= mentor.grade %></td>
-      <td><%= @group.time_compare(mentor.time_slot)%>
-        <td><%= mentor.competitions %></td>
-        <td><%= mentor.description %></td>
-        <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => @group.id, :mentor_id => mentor.id, :send_by_mentor => false) %></td>
-      </tr>
-    <% end %>
-  </table>
+      <th>ID</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>School</th>
+      <th>Grade</th>
+      <th>Time</th>
+      <th>Competitions</th>
+      <th>Description</th>
+    </tr>
+    <% @mentors.each do |mentor| %>
+      <tr>
+        <td><%= link_to mentor.id,  mentors_detail_path(mentor)%></td>
+        <td><%= mentor.gender %></td>
+        <td><%= mentor.age %></td>
+        <td><%= mentor.school %></td>
+        <td><%= mentor.grade %></td>
+        <td><%= @group.time_compare(mentor.time_slot)%>
+          <td><%= mentor.competitions %></td>
+          <td><%= mentor.description %></td>
+          <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => @group.id, :mentor_id => mentor.id, :send_by_mentor => false) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
   <%= link_to "Back", group_path(@group) %>

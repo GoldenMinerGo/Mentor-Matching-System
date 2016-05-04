@@ -1,34 +1,36 @@
 <div class='row'>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <h1>Children List</h1>
-    <table class='table table-hover'>
-      <thead>
-        <tr>
-          <th><%= link_to 'ID', child_index_path(sort: 'id') %></th>
-          <th>Gender</th>
-          <th><%= link_to 'Age', child_index_path(sort: 'age')%></th>
-          <th>School</th>
-          <th>Grade</th>
-          <th>Competition</th>
-          <th><%= link_to 'Available Time', child_index_path(sort: 'time')%></th>
-          <th>More</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @children.each do |child| %>
+    <div class="table-responsive">
+      <table class='table'>
+        <thead>
           <tr>
-            <td><%= link_to child.id, child_detail_path(child) %></td>
-            <td><i class="fa fa-<%= child.gender.downcase %>"></i></td>
-            <td><%= child.age %></td>
-            <td><%= child.school %></td>
-            <td><%= child.grade %></td>
-            <td><%= child.competitions %></td>
-            <td><%= @group.time_compare(child.time_slot) %>hrs</td>
-            <td><%= link_to "Send invitation", {:controller => 'invitation', :action => 'group_send_inv_to_child', :id => @group.id, :rec_id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
+            <th><%= link_to 'ID', child_index_path(sort: 'id') %></th>
+            <th>Gender</th>
+            <th><%= link_to 'Age', child_index_path(sort: 'age')%></th>
+            <th>School</th>
+            <th>Grade</th>
+            <th>Competition</th>
+            <th><%= link_to 'Available Time', child_index_path(sort: 'time')%></th>
+            <th>More</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @children.each do |child| %>
+            <tr>
+              <td><%= link_to child.id, child_detail_path(child) %></td>
+              <td><i class="fa fa-<%= child.gender.downcase %>"></i></td>
+              <td><%= child.age %></td>
+              <td><%= child.school %></td>
+              <td><%= child.grade %></td>
+              <td><%= child.competitions %></td>
+              <td><%= @group.time_compare(child.time_slot) %>hrs</td>
+              <td><%= link_to "Send invitation", {:controller => 'invitation', :action => 'group_send_inv_to_child', :id => @group.id, :rec_id => child.id}, data: {:confirm => 'Are you sure?'}  %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <%= link_to "Back", group_path(@group) %>

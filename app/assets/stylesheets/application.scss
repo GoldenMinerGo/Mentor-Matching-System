@@ -23,13 +23,10 @@ th {
 	font-size: 14px;
 	text-transform: uppercase;
 	font-weight: bold;
-
 	margin-top: 5px; margin-bottom: 0px;
 	text-align: left;
     background-color: #6699FF;
     color: white;
-    width: 15%;
-    overflow: auto;
 }
 
 tr {
@@ -39,14 +36,12 @@ tr {
 	text-align: left;
     color: #222;
     font-weight: normal;
-    width: 20%;
-    overflow: auto;
 }
 
-
-table {
-    table-layout: fixed;
-    width: 120%;
+@media screen and (max-width: 767px) {
+  .table-responsive {
+    border: none;
+  }
 }
 
 .footer {
@@ -117,3 +112,5 @@ table {
  .alert{
      border-radius: 0px;
  }
+ 
+ 

@@ -1,16 +1,18 @@
 <h1>Manage Mentors</h1>
 <%if !@mentors.empty?%>
-  <table>
-    <tr>
-      <th>Name of Mentor</th>
-      <th>Delete</th>
-    </tr>
-    <% @mentors.each do |mentor| %>
+  <div class="table-responsive">
+    <table class='table'>
       <tr>
-        <td><%= mentor.name %></td>
-        <td><%= link_to "Delete this mentor", administrators_delete_one_path(mentor) %></td>
+        <th>Name of Mentor</th>
+        <th>Delete</th>
       </tr>
-    <%end%>
-  </table>
+      <% @mentors.each do |mentor| %>
+        <tr>
+          <td><%= mentor.name %></td>
+          <td><%= link_to "Delete this mentor", administrators_delete_one_path(mentor) %></td>
+        </tr>
+      <%end%>
+    </table>
+  </div>
   <%= link_to "Delete Whole Mentor Table", administrators_drop_all_mentor_path%>
 <%end%>

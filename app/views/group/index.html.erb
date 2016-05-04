@@ -1,29 +1,31 @@
 <h1>Group Information</h1>
 <h2>All Groups</h2>
-<table>
-  <tr>
-    <th><%= link_to 'Group ID', group_index_path(sort: 'id')%></th>
-    <th><%= link_to 'Title', group_index_path(sort: 'title')%></th>
-    <th>Admin</th>
-    <th><%= link_to '#Members', group_index_path(sort: 'num')%></th>
-    <th>Competition</th>
-    <th><%= link_to "Time", group_index_path(sort: 'time') %></th>
-    <th></th>
-  </tr>
-  <% @groups.each do |group| %>
+<div class="table-responsive">
+  <table class='table'>
     <tr>
-      <td><%= group.id %></td>
-      <td><%= link_to group.title, group_path(group) %></td>
-      <td><%= group.admin.name %></td>
-      <td><%= group.children.count %></td>
-      <td><%= group.competitions %></td>
-      <td><%= group.time_compare(@mentor.time_slot)%>hr</td>
-      <%if group.mentor.nil?%>
-        <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => group.id, :mentor_id => @mentor.id, :send_by_mentor => true) %></td>
-      <%end%>
+      <th><%= link_to 'Group ID', group_index_path(sort: 'id')%></th>
+      <th><%= link_to 'Title', group_index_path(sort: 'title')%></th>
+      <th>Admin</th>
+      <th><%= link_to '#Members', group_index_path(sort: 'num')%></th>
+      <th>Competition</th>
+      <th><%= link_to "Time", group_index_path(sort: 'time') %></th>
+      <th></th>
     </tr>
-  <% end %>
-</table>
+    <% @groups.each do |group| %>
+      <tr>
+        <td><%= group.id %></td>
+        <td><%= link_to group.title, group_path(group) %></td>
+        <td><%= group.admin.name %></td>
+        <td><%= group.children.count %></td>
+        <td><%= group.competitions %></td>
+        <td><%= group.time_compare(@mentor.time_slot)%>hr</td>
+        <%if group.mentor.nil?%>
+          <td><%= link_to "Send Invitation", groupinvs_send_inv_path(:id => group.id, :mentor_id => @mentor.id, :send_by_mentor => true) %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </table>
+</div>
 <br/>
 <% if User.whois(session).role == "Parent" %>
   <%= link_to "Back", parent_path %>
