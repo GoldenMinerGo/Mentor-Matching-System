@@ -52,6 +52,13 @@
     <%end%>
   </div>
 </div>
+       <div class='row'>
+    <div class='col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1'>
+      <h2><div style="color:#6699FF">Time Slot</div></h2>
+      <br/>
+      <div class='time-board time-board-hover' value = '<%=@group.time_slot%>' ></div>
+    </div>      
+  </div>
        
        <div class='row'>
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
@@ -95,28 +102,33 @@
     
     <% session[:group_id] = @group.id %>
     <% if @group.mentor.nil? and @group.need_mentor == true %>
-    <p align="right"><%= link_to 'Browse mentors',mentors_path , :class => 'btn btn-primary'%></p>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-6 col-lg-4 col-lg-offset-8">
+    <p align="right"><%= link_to 'Browse mentors',mentors_path , :class => 'btn btn-primary btn-block'%></p>
+    </div>
     <%end%>
     <% if @group.completed == false %>
-    <p align="right"><%= link_to 'Browse children',child_index_path , :class => 'btn btn-primary'%></p>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-6 col-lg-4 col-lg-offset-8">
+    <p align="right"><%= link_to 'Browse children',child_index_path , :class => 'btn btn-primary btn-block'%></p>
+    </div>
     <% end %>
     <% if @group.completed == false %>
-    <p align="right"><%= link_to "My group doesn't need any more members",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members.'},:class => 'btn btn-primary' %></p>  
+    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-6 col-lg-4 col-lg-offset-8">
+    <p align="right"><%= link_to "My group doesn't need any more members",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members.'},:class => 'btn btn-default btn-block' %></p>  
     
     <% else if @group.need_mentor == false%>
-      <p align="right"><%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors and mentors can find your group." },:class => 'btn btn-primary' %>
+      <p align="right"><%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors and mentors can find your group." },:class => 'btn btn-primary btn-block' %>
+    </div>
       <% end %>
     <% end %>
   
   <% end %>
+  <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-6 col-lg-4 col-lg-offset-8">
+  <p align="right"><%= link_to "Back", parent_path, :class => 'btn btn-default btn-block' %></p>
   </div>
   </div>
   </div>
-  <br/>
-  <div class='row'>
-    <div class='col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1'>
-      <div class='time-board time-board-hover' value = '<%=@group.time_slot%>' ></div>
-    <p align="right"><%= link_to "Back", parent_path, :class => 'btn btn-primary' %></p>
-    </div>      
   </div>
+  
+    
+   
        

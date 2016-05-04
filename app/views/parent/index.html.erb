@@ -187,7 +187,7 @@
                           <td></td>
                           <td></td>
                         <% else %>
-                          <td><%= inv.group.title %></td>
+                          <td><%= link_to inv.group.title, group_detail_path(:id => inv.group.id, :child_id => inv.receiver.id) %></td>
                           <% if inv.group.mentor.nil? %>
                             <td></td>
                           <% else %>
@@ -238,7 +238,7 @@
                           <td></td>
                           <td></td>
                         <% else %>
-                          <td><%= r.group.title %></td>
+                          <td><%= link_to r.group.title, group_detail_path(:id => r.group.id, :child_id => r.sender.id) %></td>
                           <% if r.group.mentor.nil? %>
                             <td></td>
                           <% else %>
@@ -289,7 +289,7 @@
                   <tbody>
                     <% @rrequest.each do |r| %>
                       <tr>
-                        <td><%= r.sender.name %></td>
+                        <td><%= link_to r.sender.id, child_detail_path(:id => r.sender.id, :group_id => r.group.id)  %></td>
                         <% if r.group.nil? %>
                           <td></td>
                           <td></td>
@@ -337,7 +337,7 @@
                   <tbody>
                     <% @sinv.each do |inv| %>
                       <tr>
-                        <td><%= inv.receiver.name %></td>
+                        <td><%= link_to inv.receiver.id, child_detail_path(:id => inv.receiver.id, :group_id => inv.group.id) %></td>
                         <% if inv.group.nil? %>
                           <td></td>
                           <td></td>

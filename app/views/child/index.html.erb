@@ -18,7 +18,7 @@
         <tbody>
           <% @children.each do |child| %>
             <tr>
-              <td><%= link_to child.id, child_detail_path(child) %></td>
+              <td><%= link_to child.id, child_detail_path(:id => child.id, :group_id => @group.id) %></td>
               <td><i class="fa fa-<%= child.gender.downcase %>"></i></td>
               <td><%= child.age %></td>
               <td><%= child.school %></td>

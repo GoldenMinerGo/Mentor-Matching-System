@@ -13,7 +13,7 @@ class InvitationsMailer < ApplicationMailer
       mail to: @group.admin.email, subject: "A child has shown interest in your group!"
     else
       @name = @invitation.receiver.name
-      mail to: @invitation.receiver.email, subject: "A group has sent you an invitation!"
+      mail to: @invitation.receiver.parent.email, subject: "A group has sent you an invitation!"
     end
   end
 
@@ -26,7 +26,7 @@ class InvitationsMailer < ApplicationMailer
     @invitation = invitation
     if @invitation.receiver_id.nil?
       @name = @invitation.sender.name
-      mail to: @invitation.sender.email, subject: "Your invitation has been accepted"
+      mail to: @invitation.sender.parent.email, subject: "Your invitation has been accepted"
     else
       @name = @invitation.group.admin.name
       mail to: @invitation.group.admin.name, subject: "Your invitation has been accepted"

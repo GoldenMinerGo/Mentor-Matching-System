@@ -45,6 +45,12 @@ class ChildController < ApplicationController
         redirect_to root_path and return if @user.nil?
         @child = Child.find_by_id(params[:id])
         @mychild = @child.parent.user_id == @user.id
+        if @user.role == 'Parent'
+            @group = Group.find_by_id(params[:group_id])
+            @time_slot = [@child.time_slot, @group.time_slot].join(',')
+        else
+            @time_slot = @child.time_slot
+        end
     end
     
     def message

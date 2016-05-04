@@ -83,7 +83,7 @@
             <tbody>
               <% @sinvs_to_children.each do |inv| %>
                 <tr>
-                  <td><%= link_to inv.receiver.name, child_detail_path(inv.receiver) %></td>
+                  <td><%= link_to inv.receiver.id, child_detail_path(:id => inv.receiver.id, :group_id => inv.group.id) %></td>
                   <% if inv.group.nil? %>
                     <td></td>
                     <td></td>
@@ -132,7 +132,7 @@
             <tbody>
               <% @rrequest.each do |r| %>
                 <tr>
-                  <td><%= link_to r.sender.name, child_detail_path(r.sender) %></td>
+                  <td><%= link_to r.sender.id, child_detail_path(:id => r.sender.id, :group_id => r.group.id) %></td>
                   <% if r.group.nil? %>
                     <td></td>
                     <td></td>
