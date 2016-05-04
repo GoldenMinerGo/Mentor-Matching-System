@@ -19,7 +19,7 @@
         <tbody>
           <% @groups.each do |group| %>
             <tr>
-              <td><%= link_to group.title , group_detail_path(group)%></td>
+              <td><%= link_to group.title , group_detail_path(:id => group.id, :child_id => @child.id)%></td>
               <td><%= group.competitions %></td>
               <td><%= group.admin.name %></td>
               <td><%= group.admin.phone %></td>

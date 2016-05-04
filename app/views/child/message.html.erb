@@ -18,7 +18,7 @@
           <tbody>
             <% @rinv.each do |inv| %>
               <tr>
-                <td><%= link_to inv.group.title, group_detail_path(inv.group) %></td>
+                <td><%= link_to inv.group.title, group_detail_path(:id => inv.group.id, :child_id => @child.id) %></td>
                 <td><%= inv.group.competitions %></td>
                 <td><%= inv.group.members %></td>
                 <td></td>
@@ -55,7 +55,7 @@
           <tbody>
             <% @srequest.each do |r| %>
               <tr>
-                <td><%= link_to r.group.title, group_detail_path(r.group) %></td>
+                <td><%= link_to r.group.title, group_detail_path(:id => r.group.id, :child_id => @child.id) %></td>
                 <td><%= r.group.competitions %></td>
                 <td><%= r.group.members %></td>
                 <td></td>

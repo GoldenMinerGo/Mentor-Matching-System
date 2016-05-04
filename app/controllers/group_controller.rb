@@ -79,11 +79,13 @@ class GroupController < ApplicationController
         @user = User.whois(session)
         redirect_to root_path and return if @user.nil?
         @group = Group.find_by_id(params[:id])
-        child = Child.find_by_id(session[:child_id])
-        mentor = Mentor.find_by_id(session[:mentor_id])
-        if !child.nil?
+        #child = Child.find_by_id(session[:child_id])
+        #mentor = Mentor.find_by_id(session[:mentor_id])
+        if @user.role == 'Parent'
+            child = Child.find_by_id(params[:child_id])
             @time_slot = [@group.time_slot, child.time_slot].join(',')
-        elsif !mentor.nil?
+        elsif @user.role == 'Mentor'
+            mentor = Mentor.find_by_id(params[:mentor_id])
             @time_slot = [@group.time_slot, mentor.time_slot].join(',')
         else
             @time_slot = @group.time_slot
