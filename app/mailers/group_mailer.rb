@@ -52,7 +52,7 @@ class GroupMailer < ApplicationMailer
   #
   def new_child_added(invitation, new_child)
     @group = invitation.group
-    @name = child.name
+    @name = new_child.name
     
     children = @group.children
     maillist = Array.new
