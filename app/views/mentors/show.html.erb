@@ -91,7 +91,7 @@
                     <tbody>
                       <% @groups.each do |group| %>
                         <tr>
-                          <td><%= group.title %></td>
+                          <td><%= link_to group.title, group_detail_path(:id => group.id, :mentor_id => @mentor.id) %></td>
                           <td><%= link_to "Quit the group", mentor_quit_group_path(group), :class => 'btn btn-default',  data: {:confirm => 'Are you sure?'} %></td>
                         </tr>
                       <% end %>

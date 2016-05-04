@@ -14,7 +14,7 @@
     <% @groups.each do |group| %>
       <tr>
         <td><%= group.id %></td>
-        <td><%= link_to group.title, group_path(group) %></td>
+        <td><%= link_to group.title, group_detail_path(:id => group.id, :mentor_id => @mentor.id) %></td>
         <td><%= group.admin.name %></td>
         <td><%= group.children.count %></td>
         <td><%= group.competitions %></td>
