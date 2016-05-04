@@ -41,8 +41,8 @@ class GroupMailer < ApplicationMailer
       end
     end
     if !maillist.empty?
-      maillist.each do |each_child|
-        mail to: each_child.parent.email, subject: "A new mentor has joined your group"
+      maillist.each do |each_email|
+        mail to: each_email, subject: "A new mentor has joined your group"
       end
     end
   end
@@ -60,12 +60,12 @@ class GroupMailer < ApplicationMailer
     maillist = Array.new
     children.each do |child|
       if !maillist.include?(child.parent.email) && !(child.parent.email == @group.admin.email) && !(child.id == new_child.id)
-        maillist << child
+        maillist << child.parent.email
       end
     end
     if !maillist.empty?
-      maillist.each do |each_child|
-        mail to: each_child.parent.email, subject: "A new child has joined your group"
+      maillist.each do |each_email|
+        mail to: each_email, subject: "A new child has joined your group"
       end
     end
     
