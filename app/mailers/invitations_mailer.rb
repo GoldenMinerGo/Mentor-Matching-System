@@ -8,8 +8,9 @@ class InvitationsMailer < ApplicationMailer
   def new_invitation(invitation)
     @invitation = invitation
     if @invitation.receiver_id.nil?
-      @name = @invitation.group.admin.name
-      mail to: @invitaion.group.admin.email, subject: "A child has shown interest in your group!"
+      @group = Group.find_by_id(@invitation.group_id)
+      @name = @group.admin.name
+      mail to: @group.admin.email, subject: "A child has shown interest in your group!"
     else
       @name = @invitation.receiver.name
       mail to: @invitation.receiver.email, subject: "A group has sent you an invitation!"
