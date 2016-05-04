@@ -16,7 +16,7 @@ class GroupinvsController < ApplicationController
       @groupinv.status = "Pending"
       if @groupinv.save
         flash[:success] = "Invitation susccessfully sent!"
-        GroupinvMailer.groupinv_received(@groupinv)
+        GroupinvMailer.groupinv_received(@groupinv).deliver_now
         if User.whois(session).role == "Parent"
           redirect_to group_path(params[:id]) and return
         elsif User.whois(session).role == "Mentor"
@@ -42,8 +42,8 @@ class GroupinvsController < ApplicationController
     @groupinv.group.update(:need_mentor => false, :visible => false)
     if @groupinv.save
       changed_by_mentor = true
-      GroupinvMailer.groupinv_changed(@groupinv, changed_by_mentor)
-      GroupMailer.new_mentor_added(@groupinv)
+      GroupinvMailer.groupinv_changed(@groupinv, changed_by_mentor).deliver_now
+      GroupMailer.new_mentor_added(@groupinv).deliver_now
       flash[:success] = "You joined the group!"
       redirect_to mentor_path(@groupinv.mentor_id) and return
     else
@@ -63,8 +63,8 @@ class GroupinvsController < ApplicationController
     @groupinv.group.update(:visible => false, :need_mentor => false)
     if @groupinv.save
       changed_by_mentor = false
-      GroupinvMailer.groupinv_changed(@groupinv, changed_by_mentor)
-      GroupMailer.new_mentor_added(@groupinv)
+      GroupinvMailer.groupinv_changed(@groupinv, changed_by_mentor).deliver_now
+      GroupMailer.new_mentor_added(@groupinv).deliver_now
       flash[:success] = "You have a mentor now!"
       redirect_to group_path(@groupinv.group_id) and return
     else

@@ -135,7 +135,7 @@ class ChildController < ApplicationController
     def quit_group
         
         @child = Child.find_by_id(params[:id])
-        GroupMailer.child_quit_request(@child)
+        GroupMailer.child_quit_request(@child).deliver_now
         redirect_to parent_path
         flash[:success] = "An email has been sent to the coach"
     end
