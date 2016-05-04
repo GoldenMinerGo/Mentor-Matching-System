@@ -28,7 +28,7 @@ class InvitationsMailer < ApplicationMailer
       mail to: @invitation.sender.parent.email, subject: "Your invitation has been accepted"
     else
       @name = @invitation.receiver.name
-      mail to: @invitation.group.admin.name, subject: "Your invitation has been accepted"
+      mail to: @invitation.group.admin.email, subject: "Your invitation has been accepted"
     end
   end
 end
