@@ -15,7 +15,7 @@ class InvitationController < ApplicationController
         @invitation.receiver_id = params[:rec_id]
         @invitation.status = "Pending"
         if @invitation.save
-            InvitationsMailer.new_invitation(@invitation)
+            InvitationsMailer.new_invitation(@invitation).deliver_now
             flash[:success] = "Invitation sent successfully!"
             #session[:child_id] = @invitation.sender_id
             redirect_to group_path(@invitation.group) and return
@@ -33,7 +33,7 @@ class InvitationController < ApplicationController
         
         @invitation.status = "Pending"
         if @invitation.save
-            InvitationsMailer.new_invitation(@invitation)
+            InvitationsMailer.new_invitation(@invitation).deliver_now
             flash[:success] = "Request sent successfully!"
             
             redirect_to parent_path and return
@@ -53,8 +53,8 @@ class InvitationController < ApplicationController
         
         if @invitation.save!
             @invitation.receiver.save!
-            InvitationsMailer.invitation_accepted(@invitation)
-            GroupMailer.new_child_added(@invitation, @invitation.receiver)
+            InvitationsMailer.invitation_accepted(@invitation).deliver_now
+            GroupMailer.new_child_added(@invitation, @invitation.receiver).deliver_now
             flash[:success] = "You have a group now!"
             #decline invitation from other groups
             @others_received = Invitation.where(:receiver_id => @invitation.receiver_id).where.not(:group_id => @invitation.group_id)
@@ -85,8 +85,8 @@ class InvitationController < ApplicationController
         
         if @invitation.save!
             @invitation.sender.save!
-            InvitationsMailer.invitation_accepted(@invitation)
-            GroupMailer.new_child_added(@invitation, @invitation.sender)
+            InvitationsMailer.invitation_accepted(@invitation).deliver_now
+            GroupMailer.new_child_added(@invitation, @invitation.sender).deliver_now
             flash[:success] = "Your group have a new member now!"
             #Cancel other request from that child
             @others_received = Invitation.where(:sender_id => @invitation.sender_id).where.not(:group_id => @invitation.group_id)
