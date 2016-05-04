@@ -159,7 +159,7 @@ class GroupController < ApplicationController
     def change
         @child = Child.find_by_id(params[:id])
         @group = @child.group
-        @child.group_id = 0
+        @child.group_id = nil
         @child.visible = true
         @child.save!
         redirect_to group_path(@group)

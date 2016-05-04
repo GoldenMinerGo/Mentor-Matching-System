@@ -14,11 +14,11 @@ class ChildController < ApplicationController
         if !@user.nil? && @user.role == "Parent"
             case params[:sort]
             when 'age'
-                @children=Child.where(:visible => true, :group => nil).order(date_of_birth: :desc)
+                @children=Child.where(:visible => true, :group_id => nil).order(date_of_birth: :desc)
             when 'time'
-                @children=Child.where(:visible => true, :group => nil).sort_by{|c| @group.time_compare(c.time_slot)}.reverse
+                @children=Child.where(:visible => true, :group_id => nil).sort_by{|c| @group.time_compare(c.time_slot)}.reverse
             else
-                @children = Child.where(:visible => true, :group => nil)
+                @children = Child.where(:visible => true, :group_id => nil)
             end
         else
             flash[:warning] = "Invalid user!"

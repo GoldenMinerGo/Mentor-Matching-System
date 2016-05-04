@@ -25,10 +25,10 @@ class InvitationsMailer < ApplicationMailer
   def invitation_accepted(invitation)
     @invitation = invitation
     if @invitation.receiver_id.nil?
-      @name = @invitation.sender.name
+      @name = @invitation.group.title
       mail to: @invitation.sender.parent.email, subject: "Your invitation has been accepted"
     else
-      @name = @invitation.group.admin.name
+      @name = @invitation.receiver.name
       mail to: @invitation.group.admin.name, subject: "Your invitation has been accepted"
     end
   end
