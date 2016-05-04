@@ -130,7 +130,7 @@
                     <tbody>
                       <% @rinvs.each do |rinv| %>
                        <tr>
-                       <td><%= link_to rinv.group_id, group_detail_path(rinv.group)%></td>
+                       <td><%= link_to rinv.group_id, group_detail_path(:id => rinv.group.id, :mentor_id => @mentor.id)%></td>
                        <td><%= rinv.status %></td>
                       <% if rinv.status == 'Pending' %>
                        <td><%= link_to "Accept", groupinvs_accept_inv_mentor_path(rinv)%></td>
@@ -168,7 +168,7 @@
                     <tbody>
                       <% @sinvs.each do |sinv| %>
                         <tr>
-                          <td><%= link_to sinv.group_id, group_detail_path(sinv.group) %></td>
+                          <td><%= link_to sinv.group_id, group_detail_path(:id => sinv.group.id, :mentor_id => @mentor.id) %></td>
                           <td><%= sinv.status %></td>
                           <% if sinv.status == "Pending" %>
                             <td><%= link_to "Cancel Invitation", groupinvs_cancel_inv_path(sinv)%></td>
