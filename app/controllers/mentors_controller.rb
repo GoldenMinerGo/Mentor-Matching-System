@@ -54,7 +54,7 @@ class MentorsController < ApplicationController
       @rinvs = Groupinv.where(:mentor_id => @mentor.id).where(:send_by_mentor => false)
       @sinv= Groupinv.where(:mentor_id => @mentor.id).where(:send_by_mentor => false).where(:status => 'Pending')
       
-      @gn = @sinv.count   
+      @gn = @rinvs.where("updated_at > ?", @user[:last_login_time]).count + @sinvs.where.not(:status => 'Pending').where("updated_at > ?", @user[:last_login_time]).count  
   end
   
   def update
