@@ -102,28 +102,24 @@
         </tbody>
       </table>
     </div>
-    <% if @user.parent.id == @group.admin_id %>
     
-    <% session[:group_id] = @group.id %>
     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-6 col-lg-4 col-lg-offset-8">
+    <% if @user.parent.id == @group.admin_id %>
+    <% session[:group_id] = @group.id %>
     <% if @group.mentor.nil? and @group.need_mentor == true %>
     <p align="right"><%= link_to 'Browse mentors',mentors_path , :class => 'btn btn-primary btn-block'%></p>
     <%end%>
     
     <% if @group.completed == false %>
     <p align="right"><%= link_to 'Browse children',child_index_path , :class => 'btn btn-primary btn-block'%></p>
-    <% end %>
-    
-    <% if @group.completed == false %>
     <p align="right"><%= link_to "My group no longer need members",{:controller => "group", :action => "set_complete", :id => @group.id}, data: {:confirm => 'Once you click OK, your group cannot add members. You could find mentors after group formation is done.'},:class => 'btn btn-success btn-block' %></p>  
     <% else if @group.need_mentor == false%>
-    <p align="right"><%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors and mentors can find your group." },:class => 'btn btn-success btn-block' %>
+    <p align="right"><%= link_to "My group need a mentor",{:controller => "group", :action => "set_need_mentor", :id => @group.id}, data: {:confirm => "if you click OK, you can browse mentors list and send invitation to mentors." },:class => 'btn btn-success btn-block' %>
      <% end %>
-    <p align="right"><%= link_to "Back", parent_path, :class => 'btn btn-default btn-block' %></p>
-    </div>
     <% end %>
-  
   <% end %>
+  <p align="right"><%= link_to "Back", parent_path, :class => 'btn btn-default btn-block' %></p>
+  </div>
   
   
   </div>

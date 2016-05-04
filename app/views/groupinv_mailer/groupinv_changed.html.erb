@@ -1,8 +1,8 @@
 <h1>Invitaion Accepted</h1>
 <% if @changed_by_mentor == false %>
-  <p>Group <% @name %> has accepted your invitation</p>
+  <p>Group <%= @name %> has accepted your invitation</p>
 <% else %>
-  <p>Mentor <% @name %> has accepted your invitation</p>
+  <p>Mentor <%= @name %> has accepted your invitation</p>
 <% end %>
 <p> Log in and have a LOOK!</p>
 <%= link_to "Log in", welcome_index_url %>

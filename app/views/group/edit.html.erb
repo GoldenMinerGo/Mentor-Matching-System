@@ -10,6 +10,16 @@
         <%= f.text_field :title, :class => 'form-control'%>
       </div>
       <br/>
+      <div class="form-group">
+        <label for="inputCompetitions" class="control-label edit-font">Competitions:</label>
+        <br/>
+          <label class="radio-inline"><%= f.radio_button :competitions, 'FLL'%> FIRST LEGO League</label>
+          <label class="radio-inline"><%= f.radio_button :competitions, 'Junior FLL'%> FIRST LEGO League Jr.</label>
+      </div>  
+      </div>
+      <br/>
+      <br/>
+    
       <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
       <div class='form-group'>
         <label for="inputTime" class = "control-label edit-font">Time Available:</label>
@@ -17,13 +27,6 @@
       </div>
       </div>
       <br/>
-      <div class="form-group">
-        <label for="inputCompetitions" class="control-label edit-font">Competitions:</label>
-        
-          <label class="radio-inline"><%= f.radio_button :competitions, 'FLL'%> FIRST LEGO League</label>
-          <label class="radio-inline"><%= f.radio_button :competitions, 'Junior FLL'%> FIRST LEGO League Jr.</label>
-        
-      </div>
       <br/>
       <div class="form-group">
         <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
@@ -32,7 +35,7 @@
         </div>
       </div>
     <% end %>
-  </div>
+  
 </div>
 </div>
 </div>

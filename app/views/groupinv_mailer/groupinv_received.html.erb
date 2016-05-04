@@ -1,8 +1,8 @@
 <h1>Invitaion received</h1>
 <% if @groupinv.send_by_mentor == false %>
-  <p>Group <% @name %> is currently interested in you</p>
+  <p>Group <%= @name %> is currently interested in you</p>
 <% else %>
-  <p>Mentor <% @name %> is currently interested in you</p>
+  <p>Mentor <%= @name %> is currently interested in you</p>
 <% end %>
 <p> Log in and have a LOOK!</p>
 <%= link_to "Log in", welcome_index_url %>

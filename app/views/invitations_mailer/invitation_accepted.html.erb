@@ -1,8 +1,8 @@
 <h1>Invitaion Accepted</h1>
 <% if @invitation.receiver_id.nil? %>
-  <p>Group <% @name %> has accepted your invitation</p>
+  <p>Group <%= @name %> has accepted your invitation</p>
 <% else %>
-  <p>Child <% @name %> has accepted your invitation</p>
+  <p>Child <%= @name %> has accepted your invitation</p>
 <% end %>
 <p> Log in and have a LOOK!</p>
 <%= link_to "Log in", welcome_index_url %>
