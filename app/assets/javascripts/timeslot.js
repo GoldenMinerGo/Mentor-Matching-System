@@ -14,7 +14,9 @@ function slotunit(color, value, clickable) {
   if (clickable) wrapper += ' time-slot-click';
   wrapper += '" value="' + value + '" ';
   if (clickable) wrapper += 'onclick="timeslotclick.call(this)" ';
-  wrapper += 'style="width: 3%" data-toggle="tooltip" data-placement="top" title="'+formattime(value)+'"></div>';
+  wrapper += 'style="width: 3%" data-toggle="tooltip" data-placement="top" title="'+formattime(value)+'">';
+  if(color=='warning') wrapper += '<i class="fa fa-times" aria-hidden="true"></i>';
+  wrapper += '</div>';
   return wrapper;
 };
 

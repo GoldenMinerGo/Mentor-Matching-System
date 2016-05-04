@@ -79,7 +79,12 @@ class GroupController < ApplicationController
         @user = User.whois(session)
         redirect_to root_path and return if @user.nil?
         @group = Group.find_by_id(params[:id])
-        
+        child = Child.find_by_id(session[:child_id])
+        if !child.nil?
+            @time_slot = [@group.time_slot, child.time_slot].join(',')
+        else
+            @time_slot = @group.time_slot
+        end
     end
     
     
