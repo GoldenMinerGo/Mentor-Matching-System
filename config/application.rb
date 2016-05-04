@@ -27,3 +27,5 @@ module MentorMatchingSystem
     config.action_mailer.default_url_options = { host: "http://csce-606-wangtjwork.c9users.io/" }
   end
 end
+
+ActionMailer::Base.delivery_method = :smtp
